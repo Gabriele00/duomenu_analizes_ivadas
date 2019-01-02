@@ -1,0 +1,17 @@
+\frametitle{R paketai}
+\begin{itemize}
+\item dauguma R paketų saugomi CRAN (Comprehensive R Archive Network), iš kur atsisiunčiamas ir pats R
+\item basinė R versija turi tik keletą naudingų paketų
+\item available.packages() funkcija, kuri surenką visą informaciją apie ezistuojančius R paketus @CRAN
+\begin{lstlisting}
+a <- available.packages()
+length(a)
+\end{lstlisting}
+\item Šiuo metu : 228140 paketai
+\item taip pat galima ir iš github
+\item install.packages("ggplot")
+\item  install.packages(c("ggplot", "dplyr"))
+\item iš R
+\item library(ggplot) čia nebereikia kabučių!
+\item search() parodo visus įjungtus paketus
+\end{itemize}
