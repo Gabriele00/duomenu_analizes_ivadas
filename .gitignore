@@ -5,5 +5,5 @@
 *.snm
 *.gz
 *.toc
-*.vsb
 *.vrb
+/knygos

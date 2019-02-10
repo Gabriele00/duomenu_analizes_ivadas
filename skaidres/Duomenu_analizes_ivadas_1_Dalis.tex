@@ -61,10 +61,11 @@
 
 \author{Justas Mundeikis}
 \title{Duomenų analizės įvadas}
+\subtitle{1. Dalis}
 %\setbeamercovered{transparent} 
 %\setbeamertemplate{navigation symbols}{} 
 %\logo{} 
-%\institute{} 
+%\institute{Vilniaus Universitetas, EVAF} 
 %\date{} 
 %\subject{} 
 
@@ -73,73 +74,316 @@
 %----------------------------------------------------------
 \begin{document}
 %----------------------------------------------------------
-\section{Apie kursą}
-%----------------------------------------------------------
 
 \begin{frame}
 \titlepage
 \end{frame}
+
 %----------------------------------------------------------
-\begin{frame}{Šio kurso turinys:}
+
+\begin{frame}{1 Dalies turinys}
+Šioje dalyje susipažinsime su
+\tableofcontents
+\end{frame}
+
+%----------------------------------------------------------
+\section{Įvadas į duomenų analizę}
+%----------------------------------------------------------
+%----------------------------------------------------------
+\subsection{Duomenų analizės menas}
+%----------------------------------------------------------
+
+\begin{frame}{Duomenų analizės menas}
+\begin{center}
+\includegraphics[width=.15\linewidth]{mona_lisa_1.jpg}\quad\includegraphics[width=.15\linewidth]{mona_lisa_2.jpg}
+\\[\baselineskip]% adds vertical line spacing
+\includegraphics[width=.15\linewidth]{mona_lisa_3.jpg}\quad\includegraphics[width=.15\linewidth]{mona_lisa_4.jpg}
+\end{center}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Duomenų analizės menas}
+\includegraphics[scale=0.17]{raw_data.png}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Duomenų analizės menas}
+\includegraphics[scale=0.45]{Tax_GDP_2017_EU.jpeg}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Duomenų analizės menas}
+\begin{itemize}
+\item "Science is knowledge which we understand so 
+\\well that we can teach it yo a computer. 
+\\ Everything else is art" 
+\\Donald Knuth (1974) (\href{http://www.paulgraham.com/knuth.html}{\color{blue}{Knuth: Computer Programming as an Art}})
+\item Neegzistuoja jokio formalaus apraymo, kaip reikia atlikti "duomenų analizę"
+\item Nors yra žinomi tam tikri įrankiai, statistiniai, ekonometriniai metodai, kuriais galima naudotis...
+\item kiekvieno "tyrėjo" (ekonomisto, duomenų analitiko, studento...) asmeninių pasirinkimų aibė nulemia atliekamos analizės kokybę bei naudą
+\end{itemize}
+\end{frame}
+
+
+
+%----------------------------------------------------------
+\subsection{Duomenų analizės epiciklai}
+%----------------------------------------------------------
+
+\begin{frame}{Mokslinio tyrimo žingsniai}
+\begin{itemize}
+\item {\color{blue}{Išvystyti klausimą / hipotezę}}
+\item Nuspręsti kokia metodika bus taikoma
+\item Parengti duomenų surinkimo procesą (tyrimo protokolas)
+\item Surinkti duomenis
+\item {\color{blue}{Atlikti tiriamąją statistiką}}
+\item Atlikti aprašomąją statistiką
+\item {\color{blue}{Modeliuoti, atlikti prognozes
+\item Interpretuoti rezultatus
+\item Aprašyti tyrimo eigą bei rezultatus}}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}{Duomenų analizės žingsnių epiciklai}
+% Please add the following required packages to your document preamble:
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[]
+\caption{The Art of Data Science, Roger D. Peng \& Elizabeth Matsui}
+\label{my-label}
+\scalebox{0.7}{
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Epycicles of analysis} & \textbf{Set expectations} & \textbf{Collect information} & \textbf{\begin{tabular}[c]{@{}l@{}}Revise\\ expectations\end{tabular}} \\ \hline
+Question & \begin{tabular}[c]{@{}l@{}}Question is of interest\\ to audience\end{tabular} & \begin{tabular}[c]{@{}l@{}}Literature search\\ / Experts\end{tabular} & Sharpen question \\ \hline
+EDA & \begin{tabular}[c]{@{}l@{}}Data are appropriate \\ for question\end{tabular} & \begin{tabular}[c]{@{}l@{}}Make exploratory \\ plots of data\end{tabular} & \begin{tabular}[c]{@{}l@{}}Refine question or \\ collect more data\end{tabular} \\ \hline
+Formal modeling & \begin{tabular}[c]{@{}l@{}}Primary model \\ answers question\end{tabular} & \begin{tabular}[c]{@{}l@{}}Fit secondary models,\\ sensitivity analysis\end{tabular} & \begin{tabular}[c]{@{}l@{}}Revise formal model\\ to include \\ more predictors\end{tabular} \\ \hline
+Interpretation & \begin{tabular}[c]{@{}l@{}}Interpretation of analyses\\ provides a specific \&\\ \\ meaningful answer to the\\ question\end{tabular} & \begin{tabular}[c]{@{}l@{}}Interpret totality of \\ analyses with focus \\ on effect sizes \& \\ uncertainty\end{tabular} & \begin{tabular}[c]{@{}l@{}}Revise EDA and / or\\ models to provide\\ specific \& \\ interpretable answer\end{tabular} \\ \hline
+Communication & \begin{tabular}[c]{@{}l@{}}Process \& results of\\ analysis are understood, \\ complete \& meaningful\\ to audiance\end{tabular} & Seek feedback & \begin{tabular}[c]{@{}l@{}}Revise analyses or\\ approach to\\ presentation\end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Duomenų analizės žingsnių epiciklai}
+\begin{figure}
+\caption{The Art of Data Science, Roger D. Peng \& Elizabeth Matsui}
+\includegraphics[scale=0.5]{Epicycles-of-Analysis.png}
+\end{figure}
+
+\end{frame}
+
+
+%----------------------------------------------------------
+\subsection{Duomenų analizės klausimai}
+%----------------------------------------------------------
+
+\begin{frame}{6 Klausimų tipai}
+Remiantis R.Peng ir J.Leek (\href{www.sciencemag.org/content/347/6228/1314.short}{\color{blue}{Science 2015}}) egzistuoja 6 klausimų tipai:
+\begin{itemize}
+\item Aprašomieji
+\item Tiriamieji
+\item Inferenciniai
+\item Progozuojamieji
+\item Pražastinių ryšių
+\item Mechanistiniai
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+\begin{frame}{6 Klausimų tipai}
+Aprašomieji klausimai:
+\begin{itemize}
+\item Kuriais siekiama gauti duomenų aprašymą, arba charakteristikų santraukas
+\item Nedaromos jokios išvados ar prognozės, nes patys rezultatai yra išvados per se
+\item Pvz., Moterų ir vyrų dalis tyrimo imtyje, vidutinis tiriamųjų amžius, vidutinė metinė infliacija, medianinės pajamos ir t.t.
+\item \href{https://osp.stat.gov.lt/pagrindiniai-salies-rodikliai}{\color{blue}{LSD šalies rodikliai}}
+\item \href{https://osp.stat.gov.lt/statistika-vizualiai}{\color{blue}{LSD statistika vizualiai}}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{6 Klausimų tipai}
+Tiriamieji klausimai
+\begin{itemize}
+\item Klausimai, kuriais siekiama nustatyti sąsajas bei trendus
+\item Padeda rasti kelią kuriuo galima judėti tyrime pirmyn, pvz., generuoti hipotezes
+\item Dažniausiai tokių klausimų atsakymui braižomi grafikai, padedantys surpasti duomenis
+\item Tačiau "Correlation does not imply causation" (žr sekanti skaidrė!!!)
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}{6 Klausimų tipai}
+\begin{figure}
+\caption{Šokolado vartojimas ir Nobelio prizai (\href{https://www.nejm.org/doi/full/10.1056/NEJMon1211064}{\color{blue}{Franz H. Messerli, M.D., 2012}})}
+\includegraphics[scale=0.28]{schockolade_nobel.jpg}
+\end{figure}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{6 Klausimų tipai}
+Inferenciniai klausimai:
+\begin{itemize}
+\item Klausimai, kuriais siekiama atsakyti klausimus apie bendrą populiaciją, tiriant tik imtį
+\item Pvz., Ekonomikos kurso 1 gr. baigiamasis pažymys 8. Ar visas 1 kursas gavo 8?
+\item Taikant inferencinę analizę siekiama nustatyti dominantį kiekį bei su prognoze susijusią paklaidą
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}{6 Klausimų tipai}
+Prognozuojamieji klausimai
+\begin{itemize}
+\item Klausimai, kuriais siekiama "atspėti" ateitį 
+\item Naudojant turimą informaciją apie tam tikrus objektus prognozuoti reikšmes kitiems objektams
+\item Svarbu: Jeigu X prognozuoja Y nereiškia, kad X iššaukia Y
+\item Prognozavimo taiklumas priklauso nuo teisingo matuojamų kintamųjų pasirinkimo
+\item Kuo daugiau duomenų ir kuo paprastesnis modelis!
+\item \href{https://fivethirtyeight.com/}{\color{blue}{https://fivethirtyeight.com/}}
+\item \href{https://www.amazon.com/Lenovo-ThinkPad-Performance-Business-fingerprint/dp/B077GP6G9M/ref=sr_1_fkmr1_1?keywords=ibm+thinkpad+t460&qid=1549818100&s=gateway&sr=8-1-fkmr1}{\color{blue}{AMAZON IBM E570}}
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+\begin{frame}{6 Klausimų tipai}
+Priežastinių ryšių klausimai:
+
+\begin{itemize}
+\item Klausimai, norint sužinoti, ar pakeitus viena faktorių, kinta kitas faktorius
+\item \href{http://psyking.net/HTMLobj-4363/Effects_of_Sleep_Deprivation-Schumacher_and_Sipes-Final.pdf}{\color{blue}{How  does  a  lack  of  sleep  impact  memory,  problem  solvingand  critical  thinking  skills  amongstcollege students?}}
+\item Reikalingos randomizuotos studijos
+\item Yra būdų kaip tai apeiti (ekonometrika magistre / PhD)
+\item Dažniausiai gaunami vidutiniai efektai
+\item Siekiama atsakyti "ar" bet ne "kaip"
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+\begin{frame}{6 Klausimų tipai}
+Mechanistiniai klausimai
+\begin{itemize}
+\item Klausimai, kuriais siekiama nustatyti "kaip"
+\item Kaip ir kokie būtent pokyčiai vieno kintamojo keičia daro įtaką kitiems kintamiesiems (fizikos/inžinerijos sritis)
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{6 Klausimų tipai}
+\begin{itemize}
+\item Svarbu suprasti, jog pvz., iškėlus prognozuojamąjį klausimą, tyrimo eigoje   bus atsakyti ir į aprašomuosius, tiriamuosius, inferencinius klausimus 
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}{Koks yra geras klausimas?}
+Geras klausimas pasižymi šiomis savybėmis:
 \begin{enumerate}
-\item Įvadas: apie kursą, CLI,  Git ir GitHub, R ir RStudio
-\item R programavimo pagrindai
-\item Tiriamoji duomenų analizė (angl.: exploratory data analysis)
-\item Atkartojami tyrimai (angl.: reproducible research) su LaTex, RMarkdown, Jupyter
+\item Klausimas turi būti įdomus tikslinei auditorijai
+\item Klausimas dar neturi būti atsakytas
+\item Klausimas turi būti logiškas / prasmingas (pagrįstas teorija)
+\item Klausimas turi būti atsakomas (netinka: "Kokia yra gyvenimo prasmė?/ Ar egzistuoja dievas?"), kitaip tariant, turi egzistuoti duomenys ir metodikos, kurių pagalba būtų galima atsakyti į klausimą
+\item Klausimas turi būti labai konkretus
+\begin{itemize}
+\item Blogas klausimas: ar sveika mityba skatina ilgesnį gyvenimą
+\item Geras klausimas: ar 250gr daržovių kasdien suaugusiam asmeniui padidina tikėtiną gyvenimo trukmę 10 metų?
+\item Blogas klausimas: kas ekonomikos nuosmukio laikotarpiu nukenčia labiausiai
+\item Geras klausimas: Kurioms iš soc grupių: bedarbiai, pensininkai, daugiavaikės šeimos per ekonominę 2008-2009 krizę labiausiai padidėjo rizika patirti santykinį skurdą 
+\end{itemize}
 \end{enumerate}
 \end{frame}
-%----------------------------------------------------------
-\begin{frame}{Kurso tikslas}
 
-{\Large In God we trust, all others bring data}\\ 
-{\scriptsize - W. Edwards Deming }
 
-\begin{itemize}
-\item Suteikti pagrindines reikalingas kompetencijas darbui su duomenimis
-\item Šis kursas labiau taikomasis, nėra aiškios takoskyros tarp paskaitų ir seminarų
-\item Kursas yra "lengvas", tačiau reikalauja daug praktinio darbo pastangų
-\item Dirbama tik su R, RStudio, Git ir Github, Jupyter?
-\item Neliesime Matlab, Python, Julia, Eviews
-\item Laikas \textbf{savistudijoms}
-\item Vietiniai PC vs. nuosavi notebook'ai
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}{Kurso vertinimo strategija}
 
-\begin{itemize}
-\item Savaitiniai namų darbai - 30\%
-\\Savaitinių namų darbų tikslas parodyti studentams kokio pobūdžio uždavinius studentai turi gebėti savarankiškai spręsti. Namų darbų vertinimas: maksimumas iš leidžiamų 3 bandymų
-\item Neanonsuoti testai - 30\%
-\\Neanonsuoti trumpi testai skirti užtikrinti, jog studentai nuolatos skirtų deramą dėmesį ir laiku įdėtų reikalingas pastangas studijoms
-\item Baigiamasis egzaminas - 40\%
-\\Egzamine tikrinamos tiek teorijos tiek įgytos praktinės žinios 
-\item $BP=ceiling(mean(SND)*0.3+mean(NT)*0.3+BE*0.4)$
-\end{itemize}
-\end{frame}
+
 %----------------------------------------------------------
-\begin{frame}{Sando pristatymas}
+\subsection{Duomenys, matavimo skalės}
+%----------------------------------------------------------
+
+\begin{frame}{Duomenys, matavimo skalės}
 \begin{itemize}
-\item Sando pristatymas
-\item Klausimai?
+\item Duomenys yra faktai arba skaičiai, kurie yra renkami, analizuojami bei apibendrinami pristatymo ar interpretavimo tikslais
+\item Duomenys surinkti tam tikro tyrimo metu vadinami duomenų set'u arba duomenų masyvu
+\item "Elementai" - subjektai, apie kurios renkami duomenys
+\item Kintamasis - elemento charakteristika
+\item Tyrimo metu surinkti matavimai apie visus dominančius elementus ir jų kintamuosius ir yra duomenys / duomenų set'as
+\item Duomenų set'as vieno elemento vadinamas obzervacija
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
-\section{Įvadas}
-\begin{frame}{Įvadas į duomenų analizę, Git ir GitHub, R ir RStudio}
-Šioje dalyje susipažinsime su
+
+\begin{frame}{Duomenys, matavimo skalės}
+Kintamųjų tipas apibrėžia informacijos kiekį slypinti duomenyse:
 \begin{itemize}
-\item CLI
-\item Git 
-\item Github
-\item R 
-\item RStudio
+\item Kategoriniai duomenys
+\begin{itemize}
+\item Nominalūs kintamieji: Lytis, Spalva
+\\ Galima tik suskaičiuoti vienetus
+\item Ranginiai kintamieji: Dydžiai S,M,L; Kredito reitingai F - AAA 
+\\ Juos galima prasmingai suranguoti!
+\end{itemize}
+\item Kiekybiniai kintamieji:
+\begin{itemize}
+\item Intervaliniai kintamieji: pažymiai (neturi 0)
+\\ +,-, yra prasmingi, bet daugyba, dalyba nėra prasmingi
+\item Santykiniai kintamieji: svoris, ūgis, atstumas  (turi 0)
+\\ +,-, daugyba, dalyba yra prasmingi
+\end{itemize}
 \end{itemize}
 \end{frame}
+
 %----------------------------------------------------------
-\section{CLI}
+
+\begin{frame}{Duomenys, matavimo skalės}
+\begin{itemize}
+\item 'Tarpsekciniai' duomenys (angl.: cross-sectional data): vienu ar panašiu metu užfiksuoti skirtingų elementų matavimai: pvz Europos šalių 2018m. BVP €
+\item Laiko eilučių duomenys (angl.: Time series data): Matavimai surinkti per du ar daugiau laikotarpių vienam elementui
+\item 'Tarpsekcinės' laiko eilutės (n elementų, t laikotarpiį, taigi $n \times t $ matavimų)
+\end{itemize}
+\end{frame}
+
 %----------------------------------------------------------
+\begin{frame}{Big Data}
+\begin{itemize}
+\item Lietuvoje dauguma įmonių nelabai supranta ką reiškia "big-data"
+\item Big-data be AI perteklinis duomenų kaupimas
+\item Problema su AI - nieks nesuprantana AI, rezulatai bet ne sąsajos
+\item Tačiau su laiku AI keis ir ekonomikos mokslą
+\item \href{https://www.aeaweb.org/webcasts/2019/aea-afa-joint-luncheon-impact-of-machine-learning}{\color{blue}{Video: AEA AFA Joint Luncheon - The Impact of Machine Learning on Econometrics and Economics}}
+\item John Tukey: "The data may not contain the answer. The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data" 
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Apibendrinant:}
+\begin{itemize}
+\item Svarbiausias duomenų analizės / tyrimo aspektas - klausimas!
+\item Antras pagal svarbumą - duomenys
+\item Dažnai duomenys apribos arba išlaisvins Jus, bet tik duomenys be klausimo, neišgelbės :D
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+\section{Command line interface}
+%----------------------------------------------------------
+
+\begin{frame}
+\includegraphics[scale=0.5]{cat_pc.jpeg}
+\end{frame}
+
+%----------------------------------------------------------
+\subsection{Intro}
+%----------------------------------------------------------
+
 \begin{frame}{Command Line interface (CLI)}
 Kiekviena operacinė sistema turi CLI:
 \begin{itemize}
@@ -153,6 +397,9 @@ Su CLI galima:
 \item Startuoti programas
 \end{itemize}
 \end{frame}
+
+
+
 
 %----------------------------------------------------------
 \begin{frame}{Intarpas GIT Bash instaliavimas}
@@ -180,6 +427,9 @@ Su CLI galima:
 \end{frame}
 
 %----------------------------------------------------------
+\subsection{Direktorijos}
+%----------------------------------------------------------
+
 \begin{frame}[fragile]{Direktorijos}
 \begin{itemize}
 \item startavus matosi daug maž toks tekstas:
@@ -202,8 +452,11 @@ $ pwd
 \end{itemize}
 \end{frame}
 
+
 %----------------------------------------------------------
-\begin{frame}[fragile]{Direktorijos}
+\subsection{CLI komandos}
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos}
 \begin{itemize}
 \item komanda gali būti iššaukiama su tam tikra programa
 \item \colorbox{listinggray}{\lstinline|git init|}
@@ -270,6 +523,11 @@ $ pwd
 %----------------------------------------------------------
 \section{Git ir GitHub}
 %----------------------------------------------------------
+
+%----------------------------------------------------------
+\subsection{Intro}
+%----------------------------------------------------------
+
 \begin{frame}{Trumpas įvadas į Git}
 \begin{quote}
 "Git is a version-control system for tracking changes in computer files and coordinating work on those files among multiple people. It is primarily used for source-code management in software development,but it can be used to keep track of changes in any set of files. As a distributed revision-control system, it is aimed at speed, data integrity, and support for distributed, non-linear workflows"
@@ -282,7 +540,6 @@ $ pwd
 "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency"
 \end{quote}
 \href{https://git-scm.com/}{\textcolor{blue}{https://git-scm.com/}}
-%----------------------------------------------------------
 \begin{itemize}
 \item Sukurta Linux kurėjo Linus Torvalds
 \item Populiariausias VCS
@@ -335,7 +592,9 @@ Initialized empty Git repository in C:/Users/USER/Desktop/Duomenu analizes ivada
 \item direktorijoje sukuriamas nematomas failas .git
 \end{itemize}
 \end{frame}
+
 %----------------------------------------------------------
+
 \begin{frame}{Git kaip foto sesija}
 \begin{itemize}
 \item GIT daro tarsi nuotraukas, pasirinktos direktorijos
@@ -348,7 +607,8 @@ Initialized empty Git repository in C:/Users/USER/Desktop/Duomenu analizes ivada
 \includegraphics[scale=0.4]{photo_session.png}
 \end{frame}
 
-
+%----------------------------------------------------------
+\subsection{Darbas su Git}
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Git}
@@ -735,7 +995,7 @@ change7
 \end{frame}
 
 %----------------------------------------------------------
-\section{Markdown sintaksė}
+\subsection{Markdown sintaksė}
 %----------------------------------------------------------
 \begin{frame}[fragile]{Markdown sintaksė}
 \begin{itemize}
@@ -746,11 +1006,14 @@ change7
 \item Vėliau mes susipažinsime su RMarkdown
 \end{itemize}
 \end{frame}
+
 %----------------------------------------------------------
-
-
 \section{R}
 %----------------------------------------------------------
+
+%----------------------------------------------------------
+\subsection{Įvadas i R}
+%---------------------------------------------------------
 
 \begin{frame}[fragile]{R paketai}
 \begin{itemize}
@@ -782,105 +1045,12 @@ length(a)
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
-
-\begin{frame}
+\begin{frame}{Literatūra}
 \begin{itemize}
-\item Aprašomoji 
-\item Tiriamoji
-\item Inferencinė
-\item Progozuojamoji
-\item Pražastiniai ryšiai
-\item Mechanistinė
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}
-Aprašyti duomenis
-\begin{itemize}
-\item Įprastai pirma statistinė analizė, kuri atliekama
-\item Nedaromos jokios išvados ar prognozės
-\item https://osp.stat.gov.lt/pagrindiniai-salies-rodikliai
-\item https://osp.stat.gov.lt/statistika-vizualiai
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}
-Tiriamoji analizė
-\begin{itemize}
-\item Naudojama aptikti sąsajoms tarp duomenų
-\item Padeda rasti kelią kuriuo galima judėti tyrime pirmyn
-\item EDA nenaudojama generalizuojant ar prognozuojant
-\item "Correlation does not imply causation"
+\item The Art of Data Science, R.Peng, E.Matsui 1-3 skyriai
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-Tikslas: naudojant maža dalį duomenų daryti išvadas apie bendrą populiaciją
-\begin{itemize}
-\item Inferencinė analizė - statistikos pagrindas
-\item Taikant inferencinę analizę siekiama nustatyti dominantį kiekį bei su prognoze susijusią paklaidą
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-
-\begin{frame}
-Naudojant turimą informaciją apie tam tikrus opbjektus prognozuoti reikmšes kitiems objektams
-\begin{itemize}
-\item Jeigu X prognozuoja Y nereiškia, kad X iššaukia Y
-\item Prognozavimo taiklumas priklauso nuo teisingo matuojamų kintamųjų pasirinkimo
-\item Kuo daugiau duomenų ir kuo paprastesnis modelis!
-\item Fivethirthyeigh.blogs.nytimes.com 
-\item AMAZON pirkiniai
-\item Reklama
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}
-Kas nutika vienam kitntamajam, kai pakeičiamas kitas kintamasis
-\begin{itemize}
-\item Reikalingos randomizuotos studijos
-\item Yra būdų kaip tai apeiti (ekonometrika magistre / PhD)
-\item Dažniausiai gaunami vidutiniai efektai
-\item Aksinis standartas
-\item MMA ....
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}
-Mechanistinė analizė: kaip ir kokie būtent pokyčiai vieno kintamojo keičia daro įtaką kitiems kintamiesiems (fizikos/inžinerijos sritis)
-\end{frame}
-%----------------------------------------------------------
-
-\begin{frame}{Duomenys}
-\begin{quote}
-"Data are values of qualitative or quantitative variables, belonging to a set of items"
-\end{quote}
-wiki/data
-Kokybiniai: Šalis, lytis, vardas
-Kiekybiniai: Aukštis, svoris, spaudimas, kiekis
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}{Kaip atrodo duomenys?}
-PAV, html, csv
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}
-\begin{itemize}
-\item Svarbiausias aspektas - klausimas
-\item Antras pagal svarbumą - duomenys
-\item Dažnai duomenys apribos arba išlaisvins Jus, bet tik duomenys be klausimo, neišgelbės
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-\begin{frame}{Big Data}
-\begin{itemize}
-\item Travers and Milgram 1696 Sociometry
-\item Leskovec and Horvitz WWW'08
-\item Dont use hadoo your data isnt that big
-\item "The data may not contain the asnwer. The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data.." -  John Tukey
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
 
 %----------------------------------------------------------
 \end{document}
