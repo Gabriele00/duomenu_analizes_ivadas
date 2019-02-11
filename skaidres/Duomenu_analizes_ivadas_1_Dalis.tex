@@ -70,7 +70,7 @@
 %\subject{} 
 
 
-
+\setbeamerfont{subsection in toc}{size=\scriptsize}
 %----------------------------------------------------------
 \begin{document}
 %----------------------------------------------------------
@@ -81,8 +81,7 @@
 
 %----------------------------------------------------------
 
-\begin{frame}{1 Dalies turinys}
-Šioje dalyje susipažinsime su
+\begin{frame}{1. Dalies turinys}
 \tableofcontents
 \end{frame}
 
@@ -117,11 +116,9 @@
 
 \begin{frame}{Duomenų analizės menas}
 \begin{itemize}
-\item "Science is knowledge which we understand so 
-\\well that we can teach it yo a computer. 
-\\ Everything else is art" 
+\item \textit{"Science is knowledge which we understand so well that we can teach it to a computer; and if we don't fully understand something, it is an art to deal with it."}
 \\Donald Knuth (1974) (\href{http://www.paulgraham.com/knuth.html}{\color{blue}{Knuth: Computer Programming as an Art}})
-\item Neegzistuoja jokio formalaus apraymo, kaip reikia atlikti "duomenų analizę"
+\item Neegzistuoja jokio formalaus aprašymo, kaip reikia atlikti "duomenų analizę"
 \item Nors yra žinomi tam tikri įrankiai, statistiniai, ekonometriniai metodai, kuriais galima naudotis...
 \item kiekvieno "tyrėjo" (ekonomisto, duomenų analitiko, studento...) asmeninių pasirinkimų aibė nulemia atliekamos analizės kokybę bei naudą
 \end{itemize}
@@ -135,6 +132,7 @@
 
 \begin{frame}{Mokslinio tyrimo žingsniai}
 \begin{itemize}
+\item {\color{red}{Labai daug skaityti}}
 \item {\color{blue}{Išvystyti klausimą / hipotezę}}
 \item Nuspręsti kokia metodika bus taikoma
 \item Parengti duomenų surinkimo procesą (tyrimo protokolas)
@@ -256,9 +254,10 @@ Prognozuojamieji klausimai
 Priežastinių ryšių klausimai:
 
 \begin{itemize}
-\item Klausimai, norint sužinoti, ar pakeitus viena faktorių, kinta kitas faktorius
+\item Klausimai, norint sužinoti, ar pakeitus vieną faktorių, kinta kitas faktorius
 \item \href{http://psyking.net/HTMLobj-4363/Effects_of_Sleep_Deprivation-Schumacher_and_Sipes-Final.pdf}{\color{blue}{How  does  a  lack  of  sleep  impact  memory,  problem  solvingand  critical  thinking  skills  amongstcollege students?}}
 \item Reikalingos randomizuotos studijos
+\item Ekspertimentų galimybė ekonomikos šakoje ribota
 \item Yra būdų kaip tai apeiti (ekonometrika magistre / PhD)
 \item Dažniausiai gaunami vidutiniai efektai
 \item Siekiama atsakyti "ar" bet ne "kaip"
@@ -310,19 +309,19 @@ Geras klausimas pasižymi šiomis savybėmis:
 \begin{itemize}
 \item Duomenys yra faktai arba skaičiai, kurie yra renkami, analizuojami bei apibendrinami pristatymo ar interpretavimo tikslais
 \item Duomenys surinkti tam tikro tyrimo metu vadinami duomenų set'u arba duomenų masyvu
-\item "Elementai" - subjektai, apie kurios renkami duomenys
-\item Kintamasis - elemento charakteristika
-\item Tyrimo metu surinkti matavimai apie visus dominančius elementus ir jų kintamuosius ir yra duomenys / duomenų set'as
-\item Duomenų set'as vieno elemento vadinamas obzervacija
+\item \textbf{Elementai} - subjektai, apie kurios renkami duomenys
+\item \textbf{Kintamasis} - elemento charakteristika
+\item Tyrimo metu surinkti \textbf{matavimai} apie visus dominančius elementus ir jų kintamuosius ir yra duomenys / duomenų set'as
+\item Duomenų set'as vieno elemento vadinamas \textbf{obzervacija}
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}{Duomenys, matavimo skalės}
-Kintamųjų tipas apibrėžia informacijos kiekį slypinti duomenyse:
+Kintamųjų tipas apibrėžia informacijos kiekį slypinti duomenyse, bet kartu ir apriboja galimus taikyti statistinius metodus jų analizei.
 \begin{itemize}
-\item Kategoriniai duomenys
+\item Kategoriniai kintamieji:
 \begin{itemize}
 \item Nominalūs kintamieji: Lytis, Spalva
 \\ Galima tik suskaičiuoti vienetus
@@ -354,8 +353,8 @@ Kintamųjų tipas apibrėžia informacijos kiekį slypinti duomenyse:
 \begin{itemize}
 \item Lietuvoje dauguma įmonių nelabai supranta ką reiškia "big-data"
 \item Big-data be AI perteklinis duomenų kaupimas
-\item Problema su AI - nieks nesuprantana AI, rezulatai bet ne sąsajos
-\item Tačiau su laiku AI keis ir ekonomikos mokslą
+\item Problema su AI - niekas nesupranta AI
+\item Tačiau su laiku AI keis ir ekonomikos mokslą:
 \item \href{https://www.aeaweb.org/webcasts/2019/aea-afa-joint-luncheon-impact-of-machine-learning}{\color{blue}{Video: AEA AFA Joint Luncheon - The Impact of Machine Learning on Econometrics and Economics}}
 \item John Tukey: "The data may not contain the answer. The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data" 
 \end{itemize}
@@ -377,6 +376,7 @@ Kintamųjų tipas apibrėžia informacijos kiekį slypinti duomenyse:
 %----------------------------------------------------------
 
 \begin{frame}
+\center
 \includegraphics[scale=0.5]{cat_pc.jpeg}
 \end{frame}
 
@@ -440,7 +440,7 @@ $
 \end{lstlisting}
 
 \item \$ ženklas reiškia: "gali rašyti komandą"
-\item tipinis įrašas: "command flag argument"
+\item tipinis įrašas susideda iš: "command flag argument"
 \item komandos pvz: komanda liepianti atspausdinti kurioje direktorijoje esama: "pwd"
 
 \begin{lstlisting}
@@ -527,6 +527,17 @@ $ pwd
 %----------------------------------------------------------
 \subsection{Intro}
 %----------------------------------------------------------
+\begin{frame}{VCS - Version Control System}
+\begin{itemize}
+\item Kai darbuojatės ir rašote dokumentus, darote juose pakeitimus, dažnai turite 10-20 dokumentų pvz., \colorbox{listinggray}{\lstinline|bakalaurinis.doc|}, \colorbox{listinggray}{\lstinline|bakalaurinis2.doc|}, \colorbox{listinggray}{\lstinline|bakalaurinis2019_01_02.doc|}, \colorbox{listinggray}{\lstinline|bakalaurinis2019_01_02(1).doc|} ir t.t. 
+\item dar panašiai tiek pat .xls failų, kiek mažiau skirtingų .ppt failų
+\item Galų gale tai veda link chaoso!
+\item Todėl labai svarbu, ypač dirbant tu tekstiniais dokumentais (ne Word'iniais), pvz., R skriptais, LaTex failais, turėti vieną failą, bet būti išsisaugojus kartu visas jo ankstesnes formas, galėti atstatyti.
+\item Bendradarbiaujant su kitais, taip pat svarbu galėti dalintis turimu dokumentu, kodu, leisti kitiems jį keisti, ir galų galų integruoti pakeitimus į motininį failą
+\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}{Trumpas įvadas į Git}
 \begin{quote}
@@ -542,10 +553,10 @@ $ pwd
 \href{https://git-scm.com/}{\textcolor{blue}{https://git-scm.com/}}
 \begin{itemize}
 \item Sukurta Linux kurėjo Linus Torvalds
-\item Populiariausias VCS
+\item Populiariausia VCS
 \item Viskas išsaugoma lokaliai
-\item GIT naudojamas naudojant CLI
-\item http://git-scm.com/downloads
+\item GIT naudojamas naudojant CLI, nors Windows yra ir GUI
+\item \href{http://git-scm.com/downloads}{\color{blue}Dowload GIT}
 \end{itemize}
 \end{frame}
 
@@ -553,11 +564,12 @@ $ pwd
 \begin{frame}[fragile]{Git pagrdiniai nustatymai}
 \begin{itemize}
 \item Kiekvienas išsaugojimas bus susietas su išsaugotu "user.name" ir "user.email"
-\item Tai reikia padaryti tik vieną kartą (dirbant su savo PC), arba pasikeisti kaskart prisėdus prie svetimo pc
+\item Tai reikia padaryti tik vieną kartą (dirbant su savo PC), arba pasikeisti kaskart prisėdus prie svetimo PC
+\item Bendradarbiaujant tai padeda atpažinti kas padarė kokius pakeitimus
 \end{itemize}
 \begin{lstlisting}
 $ git config --global user.name "Justas Mundeikis"
-$ git config --global user.email mundeikis@gmx.de
+$ git config --global user.email justas.mundeikis@evaf.vu.lt
 $ git config --list
 $ git config --global -l
 $ git config --global core.pager cat 
@@ -582,12 +594,19 @@ $ git config --global core.pager cat
 %----------------------------------------------------------
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item Su Git-Bash nueiname į "Desktop", kur sukuriame direktoriją "Duomenu analizes ivadas Sxxxxx" kur Sxxxx pažymi studento ID (šiuo kompiuteriu naudosis ir kiti studentai..)
-\item Šioje direktorijoje sukuriame dar vieną direktoriją "1 Ivadas"
+\item Su Git-Bash nueiname į "Desktop",
+\item Mūsų tikslas sukurti aplanką "Sxxx" (stud.nr), o jame aplanką "test"
+\item Arba galima kurti pirmąjį aplanką, pereiti į jį ir tada kurti anrąjį, arba
+\item \colorbox{listinggray}{\lstinline|mkdir -p s175/test|}
+\item \colorbox{listinggray}{\lstinline|cd s175/test|}
 \item Inicializuojame git
 \begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/s175/test
 $ git init
-Initialized empty Git repository in C:/Users/USER/Desktop/Duomenu analizes ivadas Sxxx/1 Ivadas/.git/
+Initialized empty Git repository in C:/Users/USER/Desktop/s175/test/.git/
+
+USER@PC MINGW64 ~/Desktop/s175/test (master)
+
 \end{lstlisting}
 \item direktorijoje sukuriamas nematomas failas .git
 \end{itemize}
@@ -597,11 +616,11 @@ Initialized empty Git repository in C:/Users/USER/Desktop/Duomenu analizes ivada
 
 \begin{frame}{Git kaip foto sesija}
 \begin{itemize}
-\item GIT daro tarsi nuotraukas, pasirinktos direktorijos
+\item GIT daro "pasirinktos direktorijos nuotraukas" 
 \item inicializavimas, tai tarsi foto kambario pasirinkimas, kuriame gali būti daug "veikėjų"
-\item "git add failas" yra tarsi "veikėjo" užvedimas ant foto scenos
-\item "git commit" yra pačios nuotraukos darymas
-\item tam kad nuotraukoje nebūtų tam tikrų asmenų galia naudoti sąrašą kuris slepiasi ".gitignore" faile
+\item \colorbox{listinggray}{\lstinline|git add failas|} yra tarsi "veikėjo" užvedimas ant foto scenos
+\item \colorbox{listinggray}{\lstinline|git commit|} yra pačios nuotraukos darymas
+\item tam kad nuotraukoje nebūtų tam tikrų asmenų galima naudoti sąrašą kuris slepiasi ".gitignore" faile
 \end{itemize}
 \center
 \includegraphics[scale=0.4]{photo_session.png}
@@ -614,8 +633,18 @@ Initialized empty Git repository in C:/Users/USER/Desktop/Duomenu analizes ivada
 \begin{frame}[fragile]{Git}
 \begin{itemize}
 \item su komanda touch sukuriame failą readme.txt
-\item "notepad readme.txt" įrašome change1, išsaugome 
-\item šis failas egzistuoja direktorijoje, tačiau nėra "sekamas"
+\item \colorbox{listinggray}{\lstinline|touch readme.txt|}
+\item atidarysime failą su Notepad
+\item \colorbox{listinggray}{\lstinline|notepad readme.txt|}
+\item įrašome "change1" ir išsaugome failą "ctrl+s", uždarome failą
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git}
+\begin{itemize}
+\item šis failas egzistuoja \textit{repo}, tačiau nėra "sekamas"
 \begin{lstlisting}
 $ git status
 On branch master
@@ -629,7 +658,7 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 \end{lstlisting}
-\item Taigi failas readme.txt yra "untracked"
+\item Taigi failas readme.txt yra "untracked" kitaip tariant ne ant "scenos"
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
@@ -637,7 +666,8 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item su komanda "git add readme.txt" įkeliama readme.txt į staging area
+\item su \colorbox{listinggray}{\lstinline|git add readme.txt|} įkeliame readme.txt į staging area
+\item patikriname statusą:
 \begin{lstlisting}
 $ git status
 On branch master
@@ -650,7 +680,7 @@ Changes to be committed:
         new file:   readme.txt
 
 \end{lstlisting}
-\item Taigi failas reamde.txt yra staged bet dar ne "commited"
+\item Taigi failas readme.txt yra \textit{staged} bet dar ne \textit{commited}
 \item Ką reiškia, jog failas yra staged?
 \end{itemize}
 \end{frame}
@@ -659,7 +689,8 @@ Changes to be committed:
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item notepad kitoje eilutėje įrašome "change2", išsaugome
+\item \colorbox{listinggray}{\lstinline|notepad readme.txt|}
+\item Notepad kitoje eilutėje įrašome "change2", išsaugome
 \begin{lstlisting}
 $ git status
 On branch master
@@ -676,19 +707,20 @@ Changes not staged for commit:
         modified:   readme.txt
 \end{lstlisting}
 \item dabar matome, jog readme.txt yra "tracked" ir "untracked"
-\item Staging area esantis failas "readme.txt" yra išsaugotas tik su įrašu "change1", bet be su įrašu "change2"
+\item Staging area esantis failas "readme.txt" yra išsaugotas tik su įrašu "change1", bet ne su įrašu "change2"
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item norint išsaugoti naujausią versiją: "git add readme.txt"
+\item norint išsaugoti naujausią versiją:
+\item \colorbox{listinggray}{\lstinline|git add readme.txt|}
 \item norint perduoti failą repozitorijai
 \begin{lstlisting}
-$ git commit -m "sukurtas failas readme.txt"
+$ git commit -m "sukuriamas failas readme.txt"
 
-[master (root-commit) 30cd9e9] sukurtas failas readme.txt
+[master (root-commit) 30cd9e9] sukuriamas failas readme.txt
  1 file changed, 1 insertion(+)
  create mode 100644 readme.txt
 \end{lstlisting}
@@ -701,17 +733,37 @@ nothing to commit, working tree clean
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
+\begin{frame}{Git}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|git commit -m "...."|}
+\item -m reiškia "message"
+\item turime apie 72 ženklus, bet galima ir daugiau
+\item geriausia naudoti esamąjį laiką
+\end{itemize}
+\center
+\begin{figure}
+\includegraphics[scale=0.5]{git_commit.png}
+\caption{\href{https://m.xkcd.com/1296/}{\color{blue}{https://m.xkcd.com/1296/}}}
+\end{figure}
+\end{frame}
+
+%----------------------------------------------------------
 
 \begin{frame}[fragile]{Git}
+Toliau keičiame naudojamą failą:
 \begin{itemize}
-\item readme.txt prirašome "change3", stagindam ir commitiname su -m "sukurtas change3"
+\item readme.txt prirašome "change3"
+\item \colorbox{listinggray}{\lstinline|git add readme.txt|}
+\item \colorbox{listinggray}{\lstinline|git commit -m "pridedamas change 3"|}
+\item Taigi jau padarėme 2 \textit{commit} (= 2 nuotraukas)
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item norint žinoti kas kada kaip keitė failą: "git log"
+\item Norint žinoti kas, kada ir kaip keitė failą: 
+\item \colorbox{listinggray}{\lstinline|git log|}
 \item pateiktas log'as kiekvienam atrodys kitaip, bet esmė ta pati:
 \begin{lstlisting}
 $ git log
@@ -719,15 +771,16 @@ commit 1077a8e2e27424339d56a2dfd20b4aec56b0d3fb (HEAD -> master)
 Author: Justas Mundeikis <mundeikis@gmx.de>
 Date:   Tue Jan 1 07:19:02 2019 -0800
 
-    sukurtas failas readme.txt
+    pridedamas change3
 
 commit 30cd9e9503f37bc748de35ff66d2fae8d01e3d72
 Author: Justas Mundeikis <mundeikis@gmx.de>
 Date:   Tue Jan 1 07:16:54 2019 -0800
 
-    sukurtas change3
+    sukuriamas failas readme.txt
 
 \end{lstlisting}
+\item \textit{hash} (Secure Hash - SHA 'shah'): 1077a8e2e27424339d56a2dfd20b4aec56b0d3fb
 \end{itemize}
 \end{frame}
 
@@ -735,34 +788,34 @@ Date:   Tue Jan 1 07:16:54 2019 -0800
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item su touch sukuriame kitą failą "basic.R"
-\item o readme.txt įrašome "change4"
-\item "git status" parodo, jog pkaeistas readme.txt failas, ir untracked basic.R failas
-\item su komanda "git add ." staginame visus failus
-\item galimi kiti variantai : git stage -A, git stage -u (naudojamas tik update'inti esamus failus)
-\item tada git commit -m "sukurtas change4 ir sukurtas faials basic.R"
+\item Dabar sukursime naują failą \textit{basic.R} ir \textit{readme.txt} pridėsime change4
+\item \colorbox{listinggray}{\lstinline|touch basic.R|}
+\item \colorbox{listinggray}{\lstinline|notepad readme.txt|}
+\item readme.txt įrašome "change4", išsaugome, uždarome
+\item \colorbox{listinggray}{\lstinline|git status|} parodo, jog pakeistas \textit{readme.txt} failas, ir untracked \textit{basic.R} failas
+\item su komanda \colorbox{listinggray}{\lstinline|git add .|} staginame visus failus
+\item galimi kiti variantai : \colorbox{listinggray}{\lstinline|git add -A|},\colorbox{listinggray}{\lstinline|git add -u|} (pastarasis naudojamas tik update'inti esamus failus)
+\item tada \colorbox{listinggray}{\lstinline|git commit -m "pridedamas change4 ir sukuriamas failas basic.R|}
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item kartais yra tam tikri failai, kurių nenorime sekti (pvz duomenys, nereikalingi LaTex failai ir t.t.)
-\item touch data.csv
-\item git status parodo failą kaip untracked
-\item todėl sukuriame faila .gitignoe ir jame įrašome failų pavadinimus, arba galūnes kurių nenorime trackinti
-\begin{lstlisting}
-git touch .gitignore
-notepad .gitignore
-\end{lstlisting}
-\item atsidariusme editoriuje įrašome 
-\begin{lstlisting}
-*.csv 
-\end{lstlisting}
+\item Kartais yra tam tikri failai, kurių nenorime sekti (pvz duomenys, nereikalingi LaTex failai ir t.t.)
+\item Sukuriame duomenų failą
+\item \colorbox{listinggray}{\lstinline|touch data.csv|} 
+\item \colorbox{listinggray}{\lstinline|git status|} parodo failą kaip \textit{untracked}
+\item todėl sukuriame failą \colorbox{listinggray}{\lstinline|touch .gitignore|}, kuriame galima surašyti failų pavadinimus, arba failų tipą/galūnes, kurių nenorime trackinti
+\item \colorbox{listinggray}{\lstinline|notepad .gitignore|} 
+\item \textit{Notepad} įrašome:  \colorbox{listinggray}{\lstinline|*.csv|} 
 \item * reiškia bet kokį pavadinimą, po kurio seka taškas ir csv, alternatyviai galima specifikuoti konkretų failą "data.csv"
 \item "git status" neberodo failo "data.csv" bet rodo ".gitignore", todėl staginame ir commitiname pakeitimus
 \end{itemize}
 \end{frame}
+
+%----------------------------------------------------------
+\subsection{Git branch}
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Git branch'inimas}
@@ -770,7 +823,7 @@ notepad .gitignore
 \item Bazinis scenarijus:
 \begin{itemize}
 \item A kuria projektą, B nori prisidėti, tačiau ir A dirba tuo pat metu...
-\item B atsiskelia atšaką (brach'ina) A projektą, padaro savo pakeitimus ir pateikia A juos sujungti
+\item B atsiskelia atšaką (branch'ina) A projektą, padaro savo pakeitimus ir pateikia A juos sujungti
 \item A peržiūri pakeitimus, priima/atmeta
 \end{itemize}
 \end{itemize}
@@ -778,45 +831,52 @@ notepad .gitignore
 
 \begin{frame}[fragile]{Git branch'inimas}
 \begin{itemize}
-\item "git branch NewBranch" sukuria naują atšaką pavadinimu NewBranch
-\item "git checkout NewBranch" išmeta iš "master" į "NewBranch"
-\item atitinkmai "git choeckout master" visada sugrąžina atgal į master atšaką
+
+\item \colorbox{listinggray}{\lstinline|git branch NewBranch|}  sukuria naują atšaką pavadinimu \textit{NewBranch}
+\item \colorbox{listinggray}{\lstinline|git checkout NewBranch|} išmeta iš "master" į \textit{NewBranch}
+\item \colorbox{listinggray}{\lstinline|git checkout master|} visada sugrąžina atgal į \textit{master} šaką
 
 \begin{lstlisting}
-USER@PC MINGW64 ~/Desktop/Duomenu analizes ivadas Sxxx/1 Ivadas (master)
+USER@PC MINGW64 ~/Desktop/s175/test (master)
 $ git branch NewBranch
 
-USER@PC MINGW64 ~/Desktop/Duomenu analizes ivadas Sxxx/1 Ivadas (master)
+USER@PC MINGW64 ~/Desktop/s175/test (master)
 $ git checkout NewBranch
 Switched to branch 'NewBranch'
 
-USER@PC MINGW64 ~/Desktop/Duomenu analizes ivadas Sxxx/1 Ivadas (NewBranch)
+USER@PC MINGW64 ~/Desktop/s175/test (NewBranch)
 
 \end{lstlisting}
 
-\item dabar visi pakeitimai vyks tik šioje atšakoje ir nepaveiks master šakos
+\item dabar visi pakeitimai vyks tik šioje atšakoje ir nepaveiks \textit{master} šakos
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
 
 \begin{frame}{Darbas Git atšakoje}
+Tarkime dabar asmuo B darbuojasi NewBranch atšakoje tobulindamas projektą
 \begin{itemize}
-\item sukuriame naują faila "touch advanced.R"
-\item readme.txt įrašome papildomą eilutę "change5"
-\item staginti ir commitinti pakeitimus
-sugrįžtame į master atšaką "git chekcout master"
-\item Rezultatas: trūksta advanced.R failo, readme.txt turi tik 4 įrašus!
-\item norint sujungti naują atšaką į master "git merge NewBranch"
+\item \colorbox{listinggray}{\lstinline|touch advanced.R|}
+\item \colorbox{listinggray}{\lstinline|notepad readme.txt|} įrašome papildomą eilutę "change5"
+\item staginam ir commitinam pakeitimus:
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|git add .|}
+\item \colorbox{listinggray}{\lstinline|git commit -m "sukuriamas advanced.R ir pridedmas change5"|}
+\end{itemize}
+\item sugrįžtame į master atšaką su \colorbox{listinggray}{\lstinline|git checkout master|}
+\item Rezultatas: trūksta \textit{advanced.R} failo, \textit{readme.txt} turi tik 4 įrašus!
+\item Norint sujungti naują atšaką į \textit{master} \colorbox{listinggray}{\lstinline|git merge NewBranch|}
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Merge problemos}
-\begin{itemize}
-\item master branch readme.txt sukuriame eilute "change6", addinam ir commitiname (jeigu nesukurti nauji failai: git add -a -m "...")
-\item nueiname į atšaką NewBranch, ir ten esančiame faile sukuriame change7, addinam ir commitiniame
-\item grįžtame į master branch "git chekckout master"
-\item ir bandome sujungti "git merge NewBranch"
+\begin{enumerate}
+\item \textit{master} atšakoje \textit{readme.txt} sukuriame eilutę "change6", stage'inam ir commit'iname 
+\item nueiname į atšaką \textit{NewBranch} ir ten esančiame \textit{readme.txt} sukuriame "change7", stage'inam ir commit'iname 
+\item grįžtame į \textit{master} atšaką \colorbox{listinggray}{\lstinline|git chekckout master|}
+\item ir bandome sujungti \colorbox{listinggray}{\lstinline|git merge NewBranch|}
+\end{enumerate}
 
 \begin{lstlisting}
 $ git merge NewBranch
@@ -824,7 +884,8 @@ Auto-merging readme.txt
 CONFLICT (content): Merge conflict in readme.txt
 Automatic merge failed; fix conflicts and then commit the result.
 \end{lstlisting}
-\item git negalėjo automatiškai sutvarkyti failų, todėl atsidarome readme.txt failą ir tvarkome patys
+\begin{itemize}
+\item gGchanget negalėjo automatiškai sutvarkyti failų, todėl atsidarome readme.txt failą ir tvarkome patys
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
@@ -865,21 +926,21 @@ change5
 change6
 change7
 \end{lstlisting}
-\item saviname, ir tada "git commit -a -m "sujungtas failas iš NewBranch bei pašalintas konfliktas"
+\item išsaugome pakeitimus ir tada 
+\item \colorbox{listinggray}{\lstinline|git commit -a -m "sujungtas failas is NewBranch bei pasalintas konfliktas|}
+\item  \colorbox{listinggray}{\lstinline|git commit -a -m "..."|} galima naudoti, jeigu nėra sukurtų naujų failų
 \item Yra papildomų įrankių, kurie padeda atlikti merge'inimo darbus, nes dažniausiai konfliktų visada bus
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
 
-\begin{frame}[fragile]{Konfliktinio failo tvarkymas}
+\begin{frame}[fragile]{Git stash}
 \begin{itemize}
-\item master atšakoje sukuriame failą "touch markdnwon.md", 
-\item readme.txt papildome įrašu "error entry"
-\item jeigu failo nestaginame ir necommitiname (nes pvz reikia trumpam kažką pakeisti kitoje atšakoje), ir periname į kitą atšaką, failas lieka o tai gali sukurti ateityje daug problemų
-\item todėl  "git add ."
-\item "git stach" nukelia ne commitintą failą į stached area. Failo neberodo darbalaukyje
-\item dabar galime darbuotis kitose atšakose ir vėl grįžus: "git stach apply" ir markdown.md failas vėl atsiranda baigus ji taisyti, galima commitinti.
-\item tai ir padarome
+\item master atšakoje sukuriame failą \textit{markdown.md} 
+\item jeigu failo necommitiname (nes pvz reikia trumpam kažką pakeisti kitoje atšakoje) ir periname į kitą atšaką, failas lieka o tai gali sukurti ateityje daug problemų
+\item todėl \colorbox{listinggray}{\lstinline|git add .|}, tada
+\item \colorbox{listinggray}{\lstinline|git stash|}, kas nukelia ne commitintą failą į \textit{stashed area}. Failo neberodo darbalaukyje
+\item dabar galime darbuotis kitose atšakose ir vėl grįžus: \colorbox{listinggray}{\lstinline|git stash apply|} ir \textit{markdown.md} failas vėl atsiranda baigus ji taisyti, galima commitinti.
 \end{itemize}
 \end{frame}
 
@@ -888,8 +949,8 @@ change7
 \begin{frame}[fragile]{Git atsatatymas 1}
 \begin{itemize}
 \item Na štai po vidurnakčio pasidarbavus, padarėme klaidą:
-\item readme.txt papildome įrašu "error entry" 
-\item \colorbox{listinggray}{\lstinline|git commit -a -m "padarme klaida|}
+\item \textit{readme.txt} papildome įrašu "error entry"
+\item \colorbox{listinggray}{\lstinline|git commit -a -m "padareme klaida|}
 \item Tarkime kažką sugadinome, bet žinome, jog versija prieš tai veikė gerai
 \item su "git log" susirandame "blogo" commit hashą  pvz 123456
 \item \colorbox{listinggray}{\lstinline|git log --oneline|} pateikia logą trumpąją versiją
@@ -901,11 +962,13 @@ change7
 %----------------------------------------------------------
 
 
-\begin{frame}[fragile]{Git atsatatymas 2}
+\begin{frame}[fragile]{Git atstatymas 2}
 \begin{itemize}
 \item Tarkime jus labai daug darbavotės, turite n commit padarę ir surpatote, kad pirmas commit buvo geras, o po to viskas ne.
-\item "git reset --hard hash" komanda padaro hard-reset, t.y. resetina į pasirinktą commitą, tačiau ištrina viską, kas buvo daryta po to!
+\item \colorbox{listinggray}{\lstinline|git revert HASH|} palieka buvusias versijas, bet šiuo atveju, jos nebereikalingos
+\item \colorbox{listinggray}{\lstinline|git reset --hard HASH|} komanda padaro hard-reset, t.y. resetina į pasirinktą commitą, tačiau ištrina viską, kas buvo daryta po to! 
 \item revert'inti \colorbox{listinggray}{\lstinline|git reset --hard HASH|} neįmanoma, priešingai nei paties revert.
+\item Taigi geriau su hard-reset nesižaist :D
 \end{itemize}
 \end{frame}
 
@@ -920,18 +983,18 @@ change7
 
 %----------------------------------------------------------
 
-\begin{frame}
+\begin{frame}{Git repo klonavimas}
 \begin{itemize}
 \item Nueiname kiekvienas į savo github ir ten susikuriame repo:
 \begin{itemize}
-\item pavadinimas: test-repo
-\item Description paliekam tučią
-\item inicializuojame su 
+\item pavadinimas: test2
+\item Description paliekam tuščia
+\item inicializuojame su Readme.md
 \end{itemize}
-\item Git Bash lange pakylame viena direktorija aukščiau, lauk iš "1 Įvadas" folderio su \colorbox{listinggray}{\lstinline|cd ..|}
+\item Git Bash lange pakylame viena direktorija aukščiau, lauk iš "test" folderio su \colorbox{listinggray}{\lstinline|cd ..|}
 \item GitHub nusikopijuojame sukurtos repo HTPPS adresą
 \item Git Bash  įrašome \colorbox{listinggray}{\lstinline| git clone HTTPS|}
-\item Dabartinėje direktorijoje atsirado test-repo folderis, keliaujame į jį \colorbox{listinggray}{\lstinline| cd "test-repo"|} 
+\item Dabartinėje direktorijoje atsirado test-repo folderis, keliaujame į jį \colorbox{listinggray}{\lstinline| cd "test2"|} 
 \item \colorbox{listinggray}{\lstinline|git remote|}
 \item \colorbox{listinggray}{\lstinline|git remote -v|} parodo HTTPS
 \end{itemize}
@@ -942,7 +1005,7 @@ change7
 \begin{frame}{Git repo klonavimas}
 \begin{itemize}
 \item Klonavimas reiškia, jog mes sukuriame remote repo kloną savo kompiuteryje, su visa Git istorija.
-\item Tarkime tai ne mūsų remote repo ir po klonavimo me skurį laiką nieko nedarėme. Galbūt tuo metu  originalo autorius kažką pakeite, tada galima
+\item Tarkime tai ne mūsų remote repo ir po klonavimo mes kurį laiką nieko nedarėme. Galbūt tuo metu  originalo autorius kažką pakeitė, tada galima
 \item \colorbox{listinggray}{\lstinline|git fetch origin|}
 \item Tai persiunčia pakeitimus, bet nemerge'ina
 \item \colorbox{listinggray}{\lstinline|git remote pull origin|}
@@ -972,12 +1035,12 @@ change7
 \begin{itemize}
 \item Nueiname kiekvienas į savo GitHub ir ten susikuriame repo:
 \begin{itemize}
-\item pavadinimas: test-repo2
+\item pavadinimas: test
 \item Description paliekam tučią
 \item NE inicializuojame su README!!!!
 \end{itemize}
-\item keliaujame į savo "1 Įvadas" direktopriją
-\item \colorbox{listinggray}{\lstinline|git remote add origin HTPPS"|}
+\item keliaujame į savo "test" direktoriją
+\item \colorbox{listinggray}{\lstinline|git remote add origin HTPPS|}
 \item \colorbox{listinggray}{\lstinline|git push origin master|}
 \end{itemize}
 \end{frame}
@@ -1015,6 +1078,28 @@ change7
 \subsection{Įvadas i R}
 %---------------------------------------------------------
 
+\begin{frame}{Įvadas į R}
+\begin{itemize}
+\item R istorija
+\item R instaliavimas
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{R ir RStudio instaliavimas}
+\begin{itemize}
+\item R reikia instaliuoti iš CRAN
+\item \href{https://cran.r-project.org/}{\textcolor{blue}{https://cran.r-project.org/}}
+\item Paleidžiame R 
+\item Tam kad būtų lengviau dirbti su R, turėti aibę papildomų funkcijų, instaliuojame RStudio
+\item \href{https://www.rstudio.com/products/rstudio/download/}{\textcolor{blue}{https://www.rstudio.com/products/rstudio/download/}}
+\item Startuojame RStudio
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
 \begin{frame}[fragile]{R paketai}
 \begin{itemize}
 \item dauguma R paketų saugomi CRAN (Comprehensive R Archive Network), iš kur atsisiunčiamas ir pats R
@@ -1033,17 +1118,7 @@ length(a)
 \item search() parodo visus įjungtus paketus
 \end{itemize}
 \end{frame}
-%----------------------------------------------------------
-\begin{frame}{R ir RStudio instaliavimas}
-\begin{itemize}
-\item R reikia instaliuoti iš CRAN
-\item \href{https://cran.r-project.org/}{\textcolor{blue}{https://cran.r-project.org/}}
-\item Paleidžiame R 
-\item Tam kad būtų lengviau dirbti su R, turėti aibę papildomų funkcijų, instaliuojame RStudio
-\item \href{https://www.rstudio.com/products/rstudio/download/}{\textcolor{blue}{https://www.rstudio.com/products/rstudio/download/}}
-\item Startuojame RStudio
-\end{itemize}
-\end{frame}
+
 %----------------------------------------------------------
 \begin{frame}{Literatūra}
 \begin{itemize}
