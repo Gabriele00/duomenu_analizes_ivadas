@@ -42,8 +42,8 @@
         columns=fixed,
         showstringspaces=false,
         extendedchars=false,
-        breaklines=true,
-        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
         frame=single,
         showtabs=false,
         showspaces=false,
@@ -94,21 +94,22 @@
 
 \begin{frame}{Duomenų analizės menas}
 \begin{center}
-\includegraphics[width=.15\linewidth]{mona_lisa_1.jpg}\quad\includegraphics[width=.15\linewidth]{mona_lisa_2.jpg}
-\\[\baselineskip]% adds vertical line spacing
-\includegraphics[width=.15\linewidth]{mona_lisa_3.jpg}\quad\includegraphics[width=.15\linewidth]{mona_lisa_4.jpg}
+\includegraphics[width=.2\linewidth]{mona_lisa_1.jpg}\quad\includegraphics[width=.2\linewidth]{mona_lisa_2.jpg}\quad \includegraphics[width=.2\linewidth]{mona_lisa_3.jpg}\quad
+\includegraphics[width=.2\linewidth]{mona_lisa_4.jpg}\quad
 \end{center}
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}{Duomenų analizės menas}
+\center
 \includegraphics[scale=0.17]{raw_data.png}
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}{Duomenų analizės menas}
+\center
 \includegraphics[scale=0.45]{Tax_GDP_2017_EU.jpeg}
 \end{frame}
 
@@ -120,7 +121,7 @@
 \\Donald Knuth (1974) (\href{http://www.paulgraham.com/knuth.html}{\color{blue}{Knuth: Computer Programming as an Art}})
 \item Neegzistuoja jokio formalaus aprašymo, kaip reikia atlikti "duomenų analizę"
 \item Nors yra žinomi tam tikri įrankiai, statistiniai, ekonometriniai metodai, kuriais galima naudotis...
-\item kiekvieno "tyrėjo" (ekonomisto, duomenų analitiko, studento...) asmeninių pasirinkimų aibė nulemia atliekamos analizės kokybę bei naudą
+\item Kiekvieno "tyrėjo" (ekonomisto, duomenų analitiko, studento...) asmeninių pasirinkimų aibė nulemia atliekamos analizės kokybę bei naudą
 \end{itemize}
 \end{frame}
 
@@ -151,7 +152,7 @@
 % \usepackage[normalem]{ulem}
 % \useunder{\uline}{\ul}{}
 \begin{table}[]
-\caption{The Art of Data Science, Roger D. Peng \& Elizabeth Matsui}
+\caption{The Art of Data Science (Roger D. Peng \& Elizabeth Matsui)}
 \label{my-label}
 \scalebox{0.7}{
 \begin{tabular}{|l|l|l|l|}
@@ -171,8 +172,8 @@ Communication & \begin{tabular}[c]{@{}l@{}}Process \& results of\\ analysis are 
 
 \begin{frame}{Duomenų analizės žingsnių epiciklai}
 \begin{figure}
-\caption{The Art of Data Science, Roger D. Peng \& Elizabeth Matsui}
-\includegraphics[scale=0.5]{Epicycles-of-Analysis.png}
+\caption{The Art of Data Science (Roger D. Peng \& Elizabeth Matsui)}
+\includegraphics[scale=0.49]{Epicycles-of-Analysis.png}
 \end{figure}
 
 \end{frame}
@@ -419,7 +420,8 @@ Su CLI galima:
 \item "Directory" yra tiesiog kitas pavadinimas žodžiui aplankas
 \item Direktorijos kompiuteryje organizuotos kaip medžio šakos
 \item CLI padeda naviguoti tarp šių direktorijų
-\item "/" yra root directory Linux, C: yra root directory Windows
+\item "/" yra root directory Linux, 
+\item Windows root directory yra C:
 \item root directory talpina visas kitas direktorijas
 \end{itemize}
 \center
@@ -439,7 +441,7 @@ USER@PC MINGW64 ~
 $ 
 \end{lstlisting}
 
-\item \$ ženklas reiškia: "gali rašyti komandą"
+\item \$ ženklas (angl.: promt) reiškia: "gali rašyti komandą"
 \item tipinis įrašas susideda iš: "command flag argument"
 \item komandos pvz: komanda liepianti atspausdinti kurioje direktorijoje esama: "pwd"
 
@@ -471,12 +473,122 @@ $ pwd
 \end{frame}
 
 %----------------------------------------------------------
-\begin{frame}{CLI komandos}
+
+\begin{frame}[fragile]{CLI komandos}
+\begin{figure}
+\caption{komanda}
+\includegraphics[scale=0.7]{command.png}
+\end{figure}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos}
 \begin{itemize}
-\item "ls" nurodo visus failus ir folderius esančius direktorijoje
-\item "ls -a" nurodo visus matomus ir paslėptus failus ir folderius
-\item "ls -al" nurodo visų matomų ir paslėptų failų ir folderių detales
-\item "clear" išvalo CLI
+\item Pirmosios komandos
+\begin{lstlisting}
+USER@PC MINGW64 ~
+$ echo "hello world"
+hello world
+$ echo 'hello world'
+hello world
+$ echo hello world
+hello world
+$ echo "hello world
+>
+\end{lstlisting}
+\item arba šiuo atveju padėti "
+\item CRTL+C
+\item ESC
+\item q
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+\begin{frame}{Klaviatūros trumpiniai ir CLI komandos}
+\begin{itemize}
+\item ctrl+a peršoka į eilutės pradžią (HOME)
+\item ctrl+e peršoka į eilutės pabaigą (END)
+\item ctrl+u ištrina viską į dešinę nuo \textit{cursor} 
+\item \colorbox{listinggray}{\lstinline|clear|} arba ctrl+L išvalo langą
+\item  arba ctrl+d išjungia CLI
+
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos}
+
+\begin{itemize}
+\item echo delfi antraštę
+
+\begin{lstlisting}
+USER@PC MINGW64 ~
+$ echo "Eilinis siūlymas mažinti Seimo narių skaičių"
+Eilinis siūlymas mažinti Seimo narių skaičių
+\end{lstlisting}
+
+\item po teksto naudojam redirektoriaus  simbolį \colorbox{listinggray}{\lstinline|>|} ir parašome į kur pirmą komandą nusiųsti, šiuo atveju sukuriam tekstinį failą pavadinimu delfi 
+
+\begin{lstlisting}
+USER@PC MINGW64 ~
+$ echo "Eilinis siūlymas mažinti Seimo narių skaičių" > delfi.txt
+Eilinis siūlymas mažinti Seimo narių skaičių
+\end{lstlisting}
+
+\item jeigu padarysim taip, perrašysime delfi.txt failą
+\begin{lstlisting}
+USER@PC MINGW64 ~
+$ echo "nėra naujienų" > delfi.txt
+Eilinis siūlymas mažinti Seimo narių skaičių
+\end{lstlisting}
+
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos}
+
+\begin{itemize}
+
+\item jeigu norime prisegti vieną eilutę naudojame \colorbox{listinggray}{\lstinline|>>|}
+\begin{lstlisting}
+USER@PC MINGW64 ~
+$ echo "Eilinis siūlymas mažinti Seimo narių skaičių" > delfi.txt
+$ echo "Vargšė demokratija" >> delfi.txt
+Eilinis siūlymas mažinti Seimo narių skaičių
+\end{lstlisting}
+
+\item \colorbox{listinggray}{\lstinline|cat|} (conCATonate) parodo failo turinį arba apjungia kelis failus
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop
+$ cat delfi.txt
+Eilinis siūlymas mažinti Seimo narių skaičių
+Vargse demoakratija
+\end{lstlisting}
+
+
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+\begin{frame}{CLI komandos - Listing}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|ls|} nurodo visus failus ir folderius esančius direktorijoje
+\item \colorbox{listinggray}{\lstinline|ls -a|}nurodo visus matomus ir paslėptus failus ir folderius
+\item \colorbox{listinggray}{\lstinline|ls -al|} nurodo visų matomų ir paslėptų failų ir folderių detales
+\item \colorbox{listinggray}{\lstinline|ls -rtlh|} tas pats kaip \colorbox{listinggray}{\lstinline|ls -r -t -l -h|}
+\item \colorbox{listinggray}{\lstinline|ls *.txt|}
+\item \colorbox{listinggray}{\lstinline|ls --help|} 
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}{CLI komandos - nematomi failai}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|ls|} nurodo visus failus ir folderius esančius direktorijoje
+\item \colorbox{listinggray}{\lstinline|ls -a|}nurodo visus matomus ir paslėptus failus ir folderius
+\item \colorbox{listinggray}{\lstinline|ls -al|} nurodo visų matomų ir paslėptų failų ir folderių detales
+\item \colorbox{listinggray}{\lstinline|ls -rtlh|} tas pats kaip \colorbox{listinggray}{\lstinline|ls -r -t -l -h|}
+\item \colorbox{listinggray}{\lstinline|ls *.txt|}
+\item \colorbox{listinggray}{\lstinline|ls --help|} 
 \end{itemize}
 \end{frame}
 
@@ -484,39 +596,51 @@ $ pwd
 
 \begin{frame}{CLI komandos}
 \begin{itemize}
-\item "cd"  reiškia "change directory"
-\item "cd"  be argumentų sugrąžins į home directory
-\item "cd .." pakels viena direktorija aukščiau
-\item \textcolor{green}{Uždavinys: su cd nueiti and "Desktop"}
+\item \colorbox{listinggray}{\lstinline|cd|}  reiškia "change directory"
+\item \colorbox{listinggray}{\lstinline|cd|}  be argumentų sugrąžins į home directory
+\item \colorbox{listinggray}{\lstinline|cd..|} pakels viena direktorija aukščiau
+\item (einame ant Desktop)
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
 \begin{frame}{CLI komandos}
 \begin{itemize}
-\item "mkdir" "make directory"  sukuria folderį pvz: "Duomenų analizės įvadas"
-\item "rmdir" "remove directory", bet tik, jeigu folderis yra tuščias
-\item \textcolor{green}{Nueiti į sukrtą direktoriją}
+\item \colorbox{listinggray}{\lstinline|mkdir|}  "make directory"  sukuria folderį pvz: "Duomenų analizės įvadas"
+\item \colorbox{listinggray}{\lstinline|rmdir|} "remove directory", bet tik, jeigu folderis yra tuščias
+\item \colorbox{listinggray}{\lstinline|mkdir -p s175/test|} sukuria direktoriją s175 (parent) ir jos viduje direktoriją test 
+\item (sukuriam S.... pvz S175)
+\item (Nueiti į sukurtą direktoriją)
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}{CLI komandos}
+\begin{itemize}
 \item "touch" sukuria failą, pvz., "touch info.txt"
-\item \textcolor{green}{Sukurti dvi direktorijas folder1 ir folder2}
-\item "cp" kopijuoja failus (cp failas direktorija)
-\item "cp failas failas" padaro failo kopiją
-\item "cp info.txt folder1"
-\item "cp -r" folderis direktorija (-r recursive t.y. įtraukia viską, kas yra folderio viduje)
-\item "cp -r folder1 folder2"
+\item (Sukuriam dvi direktorijas folder1 ir folder2)
+\item \colorbox{listinggray}{\lstinline|cp|}  kopijuoja failą \colorbox{listinggray}{\lstinline|cp filenameold filenamenew|} 
+\item \colorbox{listinggray}{\lstinline|cp info.txt info2.txt|} 
+\item \colorbox{listinggray}{\lstinline|cp info.txt folder1|} 
+\item \colorbox{listinggray}{\lstinline|cp -r foldername directory|} 
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
-\begin{frame}{CLI komandos}
+\begin{frame}[fragile]{CLI komandos}
 \begin{itemize}
-\item "rm" "remove" su argumentu failo pavadinimu
-\item "rm -r" su direktorijos pavadinimu viskam kas direktorijoje
-\item "mw failas direktorija" perkelia failą (Cut+Paste)
-\item "mv" failassenas failasnaujas (pakeičia pavadinimą) (Rename)
-\item "echo" atspausdina tekstą (echo Labas; echo date)
-\item "nano failas" startuoja nano editorių 
-\item "exit" uždaro CLI 
+\item \colorbox{listinggray}{\lstinline|rm|}  "remove" su argumentu failo pavadinimu
+\item \colorbox{listinggray}{\lstinline|rm -r|}  su direktorijos pavadinimu viskam kas direktorijoje
+\item \colorbox{listinggray}{\lstinline|mw failas direktorija |} perkelia failą (Cut+Paste)
+\item pabandom perkelti sublime.zip iš Downloads į S175
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175
+$ mv /c/Users/USER/Downloads/sublime.zip /c/Users/USER/Desktop/S175
+
+\end{lstlisting}
+
+\item \colorbox{listinggray}{\lstinline|mw failold failnew |} (pakeičia pavadinimą) (Rename)
+\item \colorbox{listinggray}{\lstinline|nano failname |} atidaro faila su nano editoriumi
 \end{itemize}
 \end{frame}
 
@@ -637,6 +761,7 @@ USER@PC MINGW64 ~/Desktop/s175/test (master)
 \item atidarysime failą su Notepad
 \item \colorbox{listinggray}{\lstinline|notepad readme.txt|}
 \item įrašome "change1" ir išsaugome failą "ctrl+s", uždarome failą
+\item nors geriau būti failą atsidarius su \textit{Sublime}
 \end{itemize}
 \end{frame}
 
@@ -950,7 +1075,7 @@ change7
 \begin{itemize}
 \item Na štai po vidurnakčio pasidarbavus, padarėme klaidą:
 \item \textit{readme.txt} papildome įrašu "error entry"
-\item \colorbox{listinggray}{\lstinline|git commit -a -m "padareme klaida|}
+\item \colorbox{listinggray}{\lstinline|git commit -a -m "padareme klaida"|}
 \item Tarkime kažką sugadinome, bet žinome, jog versija prieš tai veikė gerai
 \item su "git log" susirandame "blogo" commit hashą  pvz 123456
 \item \colorbox{listinggray}{\lstinline|git log --oneline|} pateikia logą trumpąją versiją
@@ -1041,7 +1166,7 @@ change7
 \end{itemize}
 \item keliaujame į savo "test" direktoriją
 \item \colorbox{listinggray}{\lstinline|git remote add origin HTPPS|}
-\item \colorbox{listinggray}{\lstinline|git push origin master|}
+\item \colorbox{listinggray}{\lstinline|git push - u origin master|}
 \end{itemize}
 \end{frame}
 
@@ -1071,61 +1196,27 @@ change7
 \end{frame}
 
 %----------------------------------------------------------
-\section{R}
+\section{Google Scholar}
 %----------------------------------------------------------
-
-%----------------------------------------------------------
-\subsection{Įvadas i R}
-%---------------------------------------------------------
-
-\begin{frame}{Įvadas į R}
+\begin{frame}{Google Scholar}
 \begin{itemize}
-\item R istorija
-\item R instaliavimas
+\item Viskas prasideda nuo daug skaitymo, tarkime aptinkate  \href{https://www.economist.com/graphic-detail/2019/02/13/a-no-deal-brexit-would-affect-more-than-just-british-trade-with-the-eu}{\color{blue}{"The Economist"}} straipsnį apie \textit{"Brexit"}
+\item Nusprendžiate kad esė tema galėtų būti "Kaip Brexit paveiks Lietuvos ekonomiką"
+\item Dabar reikia eiti ieškoti moklsinių straipsnių, geriausiai tam tinka...
+\item \href{https://scholar.google.lt/}{\color{blue}{https://scholar.google.lt/}}
+\item Funkcijos
+\begin{itemize}
+\item Laikotarpis
+\item Kurti įspėjjimą
+\item citavimas
+\item Cituoja
+\item Visos versijos
+\item AND OR 
+\item Išplėstinė paieška
+\end{itemize}
+\item Dabar galime kartoti temos pavadinimo / klausimo epiciklą
+
 \end{itemize}
 \end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}{R ir RStudio instaliavimas}
-\begin{itemize}
-\item R reikia instaliuoti iš CRAN
-\item \href{https://cran.r-project.org/}{\textcolor{blue}{https://cran.r-project.org/}}
-\item Paleidžiame R 
-\item Tam kad būtų lengviau dirbti su R, turėti aibę papildomų funkcijų, instaliuojame RStudio
-\item \href{https://www.rstudio.com/products/rstudio/download/}{\textcolor{blue}{https://www.rstudio.com/products/rstudio/download/}}
-\item Startuojame RStudio
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}[fragile]{R paketai}
-\begin{itemize}
-\item dauguma R paketų saugomi CRAN (Comprehensive R Archive Network), iš kur atsisiunčiamas ir pats R
-\item basinė R versija turi tik keletą naudingų paketų
-\item available.packages() funkcija, kuri surenką visą informaciją apie ezistuojančius R paketus @CRAN
-\begin{lstlisting}
-a <- available.packages()
-length(a)
-\end{lstlisting}
-\item Šiuo metu : 228140 paketai
-\item taip pat galima ir iš github
-\item install.packages("ggplot")
-\item  install.packages(c("ggplot", "dplyr"))
-\item iš R 
-\item library(ggplot) čia nebereikia kabučių!
-\item search() parodo visus įjungtus paketus
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-\begin{frame}{Literatūra}
-\begin{itemize}
-\item The Art of Data Science, R.Peng, E.Matsui 1-3 skyriai
-\end{itemize}
-\end{frame}
-
-
 %----------------------------------------------------------
 \end{document}
