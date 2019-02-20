@@ -24,7 +24,6 @@
 
 \usepackage{forest}
 
-
 \usepackage{listings}
 \usepackage{color}
 \usepackage{textcomp}
@@ -34,7 +33,7 @@
 	backgroundcolor=\color{lbcolor},
 	tabsize=4,
 	rulecolor=,
-	language=matlab,
+	language=bash,
         basicstyle=\scriptsize,
         upquote=true,
         aboveskip={0.5\baselineskip},
@@ -51,7 +50,9 @@
         identifierstyle=\ttfamily,
         keywordstyle=\color[rgb]{0,0,1},
         commentstyle=\color[rgb]{0.133,0.545,0.133},
-        stringstyle=\color[rgb]{0.627,0.126,0.941}
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+                numbers=left,
+        numbersep=5pt
 }
 
 
@@ -94,24 +95,34 @@
 
 \begin{frame}{Duomenų analizės menas}
 \begin{center}
+\begin{figure}
+\caption{To paties matymas kitaip}
 \includegraphics[width=.2\linewidth]{mona_lisa_1.jpg}\quad\includegraphics[width=.2\linewidth]{mona_lisa_2.jpg}\quad \includegraphics[width=.2\linewidth]{mona_lisa_3.jpg}\quad
 \includegraphics[width=.2\linewidth]{mona_lisa_4.jpg}\quad
+\end{figure}
 \end{center}
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}{Duomenų analizės menas}
-\center
+\begin{figure}
+\caption{Taip atrodo "duomenys"}
 \includegraphics[scale=0.17]{raw_data.png}
+\end{figure}
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}{Duomenų analizės menas}
-\center
+\begin{figure}
+\caption{Taip atrodo, ką galima padaryti su duomenimis}
 \includegraphics[scale=0.45]{Tax_GDP_2017_EU.jpeg}
+\end{figure}
+Trumpa diskusija: ar Lietuvos Tax/GDP (29.6 \%) yra gerai, ar blogai?
+Gal verta perimti Airijos modelį?
 \end{frame}
+
 
 %----------------------------------------------------------
 
@@ -133,7 +144,7 @@
 
 \begin{frame}{Mokslinio tyrimo žingsniai}
 \begin{itemize}
-\item {\color{red}{Labai daug skaityti}}
+\item {\color{red}{Labai daug skaityti}} (Savaitiniai skaitiniai: 3-6 straipsnius per savaitę, žinių (testo) dalis!)
 \item {\color{blue}{Išvystyti klausimą / hipotezę}}
 \item Nuspręsti kokia metodika bus taikoma
 \item Parengti duomenų surinkimo procesą (tyrimo protokolas)
@@ -322,18 +333,18 @@ Geras klausimas pasižymi šiomis savybėmis:
 \begin{frame}{Duomenys, matavimo skalės}
 Kintamųjų tipas apibrėžia informacijos kiekį slypinti duomenyse, bet kartu ir apriboja galimus taikyti statistinius metodus jų analizei.
 \begin{itemize}
-\item Kategoriniai kintamieji:
+\item \textbf{Kategoriniai} kintamieji:
 \begin{itemize}
-\item Nominalūs kintamieji: Lytis, Spalva
+\item \textbf{Nominalūs} kintamieji: Lytis, Spalva
 \\ Galima tik suskaičiuoti vienetus
-\item Ranginiai kintamieji: Dydžiai S,M,L; Kredito reitingai F - AAA 
+\item \textbf{Ranginiai} kintamieji: Dydžiai S,M,L; Kredito reitingai F - AAA 
 \\ Juos galima prasmingai suranguoti!
 \end{itemize}
-\item Kiekybiniai kintamieji:
+\item \textbf{Kiekybiniai} kintamieji:
 \begin{itemize}
-\item Intervaliniai kintamieji: pažymiai (neturi 0)
+\item \textbf{Intervaliniai} kintamieji: pažymiai (neturi 0)
 \\ +,-, yra prasmingi, bet daugyba, dalyba nėra prasmingi
-\item Santykiniai kintamieji: svoris, ūgis, atstumas  (turi 0)
+\item \textbf{Santykiniai} kintamieji: svoris, ūgis, atstumas  (turi 0)
 \\ +,-, daugyba, dalyba yra prasmingi
 \end{itemize}
 \end{itemize}
@@ -367,7 +378,8 @@ Kintamųjų tipas apibrėžia informacijos kiekį slypinti duomenyse, bet kartu 
 \begin{itemize}
 \item Svarbiausias duomenų analizės / tyrimo aspektas - klausimas!
 \item Antras pagal svarbumą - duomenys
-\item Dažnai duomenys apribos arba išlaisvins Jus, bet tik duomenys be klausimo, neišgelbės :D
+\item Dažnai duomenys apribos arba išlaisvins Jus, 
+\\bet tik duomenys be klausimo, neišgelbės :D
 \end{itemize}
 \end{frame}
 
@@ -399,9 +411,6 @@ Su CLI galima:
 \end{itemize}
 \end{frame}
 
-
-
-
 %----------------------------------------------------------
 \begin{frame}{Intarpas GIT Bash instaliavimas}
 \begin{itemize}
@@ -409,20 +418,23 @@ Su CLI galima:
 \item \href{https://git-scm.com/}{\textcolor{blue}{https://git-scm.com/}}
 \item Windows 32/64, Linux žr. komandą
 \item Perimti teikiamus standartinius siūlymus, nebent antrame Setup lange pasirinkti, jog Git Bash rodytų ir "Addditional icons: On the desktop"
-\item startuojam Git Bash
+\item Startuojam Git Bash
+\item Nuspaudus dešinį pelės mygtuką atsidaro meniu, einame ant \textit{Options..}
+\begin{itemize}
+\item Looks: pasirenkame Curser - Block (bent jau pradžiai, vėliau pasikeikite į \textit{line})
+\item Keys: Ctrl+Shift+letter shortcuts pastarasis apsirinkimas leidžia daryti  naudoti Crtl+C, Crtl+V tačiau reikia kartu nuspausti ir Shift!
+\end{itemize} 
 \end{itemize}
-\center
-\includegraphics[scale=0.15]{Git_Bash_1.png}
 \end{frame}
 %----------------------------------------------------------
 \begin{frame}{Direktorijos}
 \begin{itemize}
-\item "Directory" yra tiesiog kitas pavadinimas žodžiui aplankas
+\item \textit{Directory} yra tiesiog kitas pavadinimas žodžiui aplankas
 \item Direktorijos kompiuteryje organizuotos kaip medžio šakos
 \item CLI padeda naviguoti tarp šių direktorijų
-\item "/" yra root directory Linux, 
-\item Windows root directory yra C:
-\item root directory talpina visas kitas direktorijas
+\item "/" yra \textit{root directory} Linux, 
+\item Windows \textit{root directory} yra C:
+\item \textit{Root directory} talpina visas kitas direktorijas
 \end{itemize}
 \center
 \includegraphics[scale=1.5]{diagram_directory_win.png}
@@ -434,7 +446,7 @@ Su CLI galima:
 
 \begin{frame}[fragile]{Direktorijos}
 \begin{itemize}
-\item startavus matosi daug maž toks tekstas:
+\item Startavus matosi daug maž toks tekstas (priklausomai nuo kompiuterio jis gali skirtis!)
 
 \begin{lstlisting}
 USER@PC MINGW64 ~
@@ -442,8 +454,8 @@ $
 \end{lstlisting}
 
 \item \$ ženklas (angl.: promt) reiškia: "gali rašyti komandą"
-\item tipinis įrašas susideda iš: "command flag argument"
-\item komandos pvz: komanda liepianti atspausdinti kurioje direktorijoje esama: "pwd"
+\item Tipinis įrašas susideda iš: "command flag argument"
+\item Komandos pvz: komanda liepianti atspausdinti kurioje direktorijoje esama: \colorbox{listinggray}{\lstinline|pwd|}
 
 \begin{lstlisting}
 USER@PC MINGW64 ~
@@ -453,6 +465,17 @@ $ pwd
 
 \end{itemize}
 \end{frame}
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Direktorijos}
+Universiteto kompiuteriuose pwd atsako:
+\\/c/Users/studentas
+
+\begin{figure}
+\caption{Kur mes esame direktorijų medyje}
+
+\end{figure}
+\end{frame}
 
 
 %----------------------------------------------------------
@@ -460,14 +483,14 @@ $ pwd
 %----------------------------------------------------------
 \begin{frame}[fragile]{CLI komandos}
 \begin{itemize}
-\item komanda gali būti iššaukiama su tam tikra programa
-\item \colorbox{listinggray}{\lstinline|git init|}
-\item \colorbox{listinggray}{\lstinline|python get-pip.py|}
+\item Komanda gali būti iššaukiama su tam tikra programa
+\item \colorbox{listinggray}{\lstinline|git init|} {\color{red}{šitos komandos dabar nenaudot!}}
+\item \colorbox{listinggray}{\lstinline|python get-pip.py|}{\color{red}{šitos komandos dabar nenaudot!}}
 \item flag: tam tikri nustatymai, galimi priklausomai nuo komandos ir visada su "-"
 \item argument - kiti nustatymai, pakeitimai ar panašūs dalykai
-\item \colorbox{listinggray}{\lstinline|git commit -m "this is the initial commit"|}
+\item \colorbox{listinggray}{\lstinline|git commit -m "this is the initial commit"|} {\color{red}{šitos komandos dabar nenaudot!}}
 \item jeigu flag yra žodis , tada naudojami du brūkšniai -\/- 
-\item \colorbox{listinggray}{\lstinline|git reset --hard HASH|}
+\item \colorbox{listinggray}{\lstinline|git reset --hard HASH|} {\color{red}{šitos komandos dabar nenaudot!}}
 
 \end{itemize}
 \end{frame}
@@ -482,7 +505,7 @@ $ pwd
 \end{frame}
 
 %----------------------------------------------------------
-\begin{frame}[fragile]{CLI komandos}
+\begin{frame}[fragile]{CLI komandos - echo}
 \begin{itemize}
 \item Pirmosios komandos
 \begin{lstlisting}
@@ -496,73 +519,113 @@ hello world
 $ echo "hello world
 >
 \end{lstlisting}
-\item arba šiuo atveju padėti "
+\item arba šiuo atveju padėti ", tada Enter arba
 \item CRTL+C
 \item ESC
 \item q
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
-\begin{frame}{Klaviatūros trumpiniai ir CLI komandos}
-\begin{itemize}
-\item ctrl+a peršoka į eilutės pradžią (HOME)
-\item ctrl+e peršoka į eilutės pabaigą (END)
-\item ctrl+u ištrina viską į dešinę nuo \textit{cursor} 
-\item \colorbox{listinggray}{\lstinline|clear|} arba ctrl+L išvalo langą
-\item  arba ctrl+d išjungia CLI
+\begin{frame}[fragile]{Klaviatūros trumpiniai ir CLI komandos}
 
+\begin{lstlisting}
+USER@PC MINGW64 ~
+$ echo "hello world, what a beautiful day it is"
+\end{lstlisting}
+
+\begin{itemize}
+\item Ctrl+A peršoka į eilutės pradžią (HOME)
+\item Crtl+E peršoka į eilutės pabaigą (END)
+\item Ctrl+U ištrina viską į kairę nuo \textit{cursor} 
+\item \colorbox{listinggray}{\lstinline|clear|} arba Ctrl+L išvalo langą
+\item  arba Ctrl+D išjungia CLI
+
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{CLI komandos - cd}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|cd|}  reiškia \textit{change directory}
+\item \colorbox{listinggray}{\lstinline|cd|}  be argumentų sugrąžins į \textit{home directory}
+\item \colorbox{listinggray}{\lstinline|cd..|} pakels viena direktorija aukščiau
+\item su komanda \colorbox{listinggray}{\lstinline|pwd|} pasitikriname kur esame ir periname į \textit{Desktop}
+\colorbox{listinggray}{\lstinline|cd Desktop|}. Su komanda \colorbox{listinggray}{\lstinline|pwd|}  įsitikiname, kad esame ant \textit{Desktop}
+\begin{lstlisting}
+USER@PC MINGW64 ~
+$ pwd
+/c/Users/USER
+
+USER@PC MINGW64 ~
+$ cd Desktop
+
+USER@PC MINGW64 ~/Desktop
+$ pwd
+/c/Users/USER/Desktop
+
+\end{lstlisting}
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
-\begin{frame}[fragile]{CLI komandos}
+\begin{frame}[fragile]{CLI komandos >}
 
 \begin{itemize}
 \item echo delfi antraštę
 
 \begin{lstlisting}
-USER@PC MINGW64 ~
-$ echo "Eilinis siūlymas mažinti Seimo narių skaičių"
-Eilinis siūlymas mažinti Seimo narių skaičių
+USER@PC MINGW64 ~/Desktop
+$ echo "Seimas proposes a reduction of MPs"
+Seimas proposes a reduction of MPs
 \end{lstlisting}
 
-\item po teksto naudojam redirektoriaus  simbolį \colorbox{listinggray}{\lstinline|>|} ir parašome į kur pirmą komandą nusiųsti, šiuo atveju sukuriam tekstinį failą pavadinimu delfi 
+\item Po argumento naudojam redirektoriaus simbolį \colorbox{listinggray}{\lstinline|>|} ir parašome į kur pirmą komandą nusiųsti, šiuo atveju sukuriam tekstinį failą pavadinimu delfi.txt 
 
 \begin{lstlisting}
-USER@PC MINGW64 ~
-$ echo "Eilinis siūlymas mažinti Seimo narių skaičių" > delfi.txt
-Eilinis siūlymas mažinti Seimo narių skaičių
+USER@PC MINGW64 ~/Desktop
+$ echo "Seimas proposes a reduction of MPs" > delfi.txt
 \end{lstlisting}
+Ant \textit{Desktop} atsiranda delfi.txt failas (atsidarom failą su \textit{Sublime})
 
-\item jeigu padarysim taip, perrašysime delfi.txt failą
+\item Jeigu padarysim taip, perrašysime delfi.txt failą
 \begin{lstlisting}
-USER@PC MINGW64 ~
-$ echo "nėra naujienų" > delfi.txt
-Eilinis siūlymas mažinti Seimo narių skaičių
+USER@PC MINGW64 ~/Desktop
+$ echo "There are more news" > delfi2.txt
+
 \end{lstlisting}
+(atsidarom failą su \textit{Sublime})
 
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
-\begin{frame}[fragile]{CLI komandos}
+\begin{frame}[fragile]{CLI komandos >> ir cat}
 
 \begin{itemize}
 
-\item jeigu norime prisegti vieną eilutę naudojame \colorbox{listinggray}{\lstinline|>>|}
+\item Jeigu norime ne perrašyti failą, o prisegti vieną eilutę, naudojame \colorbox{listinggray}{\lstinline|>>|}
 \begin{lstlisting}
-USER@PC MINGW64 ~
-$ echo "Eilinis siūlymas mažinti Seimo narių skaičių" > delfi.txt
-$ echo "Vargšė demokratija" >> delfi.txt
-Eilinis siūlymas mažinti Seimo narių skaičių
+USER@PC MINGW64 ~/Desktop
+$ echo "Seimas proposes a reduction of MPs" > delfi.txt
+$ echo "A topic heatedly discussed in public" >> delfi.txt
 \end{lstlisting}
 
 \item \colorbox{listinggray}{\lstinline|cat|} (conCATonate) parodo failo turinį arba apjungia kelis failus
 \begin{lstlisting}
 USER@PC MINGW64 ~/Desktop
+$ echo "There are more news" > delfi2.txt
+
+USER@PC MINGW64 ~/Desktop
 $ cat delfi.txt
-Eilinis siūlymas mažinti Seimo narių skaičių
-Vargse demoakratija
+Seimas proposes a reduction of MPs
+A topic heatedly discussed in public
+
+USER@PC MINGW64 ~/Desktop
+$ cat delfi.txt delfi2.txt
+Seimas proposes a reduction of MPs
+A topic heatedly discussed in public
+There are more news
+
 \end{lstlisting}
 
 
@@ -581,68 +644,225 @@ Vargse demoakratija
 \end{frame}
 
 %----------------------------------------------------------
-\begin{frame}{CLI komandos - nematomi failai}
+\begin{frame}[fragile]{CLI komandos - nematomi failai}
 \begin{itemize}
-\item \colorbox{listinggray}{\lstinline|ls|} nurodo visus failus ir folderius esančius direktorijoje
-\item \colorbox{listinggray}{\lstinline|ls -a|}nurodo visus matomus ir paslėptus failus ir folderius
-\item \colorbox{listinggray}{\lstinline|ls -al|} nurodo visų matomų ir paslėptų failų ir folderių detales
-\item \colorbox{listinggray}{\lstinline|ls -rtlh|} tas pats kaip \colorbox{listinggray}{\lstinline|ls -r -t -l -h|}
-\item \colorbox{listinggray}{\lstinline|ls *.txt|}
-\item \colorbox{listinggray}{\lstinline|ls --help|} 
-\end{itemize}
-\end{frame}
+\item Kai kurie failai yra "nematomi", tai gali būti sisteminiai failai, arba nustatymo failai.
+\item Pasigaminam paslėptą failą .gitignore ir palyginame rezultatus 
 
-%----------------------------------------------------------
-
-\begin{frame}{CLI komandos}
-\begin{itemize}
-\item \colorbox{listinggray}{\lstinline|cd|}  reiškia "change directory"
-\item \colorbox{listinggray}{\lstinline|cd|}  be argumentų sugrąžins į home directory
-\item \colorbox{listinggray}{\lstinline|cd..|} pakels viena direktorija aukščiau
-\item (einame ant Desktop)
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-\begin{frame}{CLI komandos}
-\begin{itemize}
-\item \colorbox{listinggray}{\lstinline|mkdir|}  "make directory"  sukuria folderį pvz: "Duomenų analizės įvadas"
-\item \colorbox{listinggray}{\lstinline|rmdir|} "remove directory", bet tik, jeigu folderis yra tuščias
-\item \colorbox{listinggray}{\lstinline|mkdir -p s175/test|} sukuria direktoriją s175 (parent) ir jos viduje direktoriją test 
-\item (sukuriam S.... pvz S175)
-\item (Nueiti į sukurtą direktoriją)
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-\begin{frame}{CLI komandos}
-\begin{itemize}
-\item "touch" sukuria failą, pvz., "touch info.txt"
-\item (Sukuriam dvi direktorijas folder1 ir folder2)
-\item \colorbox{listinggray}{\lstinline|cp|}  kopijuoja failą \colorbox{listinggray}{\lstinline|cp filenameold filenamenew|} 
-\item \colorbox{listinggray}{\lstinline|cp info.txt info2.txt|} 
-\item \colorbox{listinggray}{\lstinline|cp info.txt folder1|} 
-\item \colorbox{listinggray}{\lstinline|cp -r foldername directory|} 
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-\begin{frame}[fragile]{CLI komandos}
-\begin{itemize}
-\item \colorbox{listinggray}{\lstinline|rm|}  "remove" su argumentu failo pavadinimu
-\item \colorbox{listinggray}{\lstinline|rm -r|}  su direktorijos pavadinimu viskam kas direktorijoje
-\item \colorbox{listinggray}{\lstinline|mw failas direktorija |} perkelia failą (Cut+Paste)
-\item pabandom perkelti sublime.zip iš Downloads į S175
 \begin{lstlisting}
-USER@PC MINGW64 ~/Desktop/S175
-$ mv /c/Users/USER/Downloads/sublime.zip /c/Users/USER/Desktop/S175
+USER@PC MINGW64 ~/Desktop
+$ echo "secrets" > .gitignore
+
+USER@PC MINGW64 ~/Desktop
+$ ls
+...
+
+USER@PC MINGW64 ~/Desktop
+$ ls -a
+...
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos - mkdir}
+\begin{itemize}
+\item su \colorbox{listinggray}{\lstinline|rm|}  ištriname ant Desktop sukurtus failus
+\item Pasitikriname ar nepalikome nieko ant \textit{Desktop} su \colorbox{listinggray}{\lstinline|ls -a|} 
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop
+$ rm delfi.txt
+
+USER@PC MINGW64 ~/Desktop
+$ rm delfi2.txt
+
+USER@PC MINGW64 ~/Desktop
+$ rm .gitignore
+
+USER@PC MINGW64 ~/Desktop
+$ ls -a
+...
+
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos - mkdir}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|mkdir|}  \textit{make directory} sukuria direktoriją / folderį pvz: "S175"
+\item \colorbox{listinggray}{\lstinline|rmdir|} \textit{remove directory} ištrina, bet tik, jeigu folderis yra tuščias
+\item \colorbox{listinggray}{\lstinline|mkdir -p s175/test|} sukuria direktoriją s175 (parent) ir jos viduje direktoriją test. 
+\item Su komanda \colorbox{listinggray}{\lstinline|cd|} pereiname į sukurtą subfolderį test ir su komanda \colorbox{listinggray}{\lstinline|pwd|} įsitikiname ar tikrai esame ten :D
+
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop
+$ mkdir -p S175/test
+
+USER@PC MINGW64 ~/Desktop
+$ cd S175/test
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ pwd
+/c/Users/USER/Desktop/S175/test
 
 \end{lstlisting}
 
-\item \colorbox{listinggray}{\lstinline|mw failold failnew |} (pakeičia pavadinimą) (Rename)
-\item \colorbox{listinggray}{\lstinline|nano failname |} atidaro faila su nano editoriumi
+
 \end{itemize}
 \end{frame}
+%----------------------------------------------------------
+\begin{frame}{CLI komandos - touch}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|touch|} sukuria failą
+\item \colorbox{listinggray}{\lstinline|touch info.txt|}
+\item Sukuriam dvi direktorijas folder1 ir folder2
+\item \colorbox{listinggray}{\lstinline|mkdir folder1|}
+\item \colorbox{listinggray}{\lstinline|mkdir folder 2|}
+
+\begin{figure}
+\caption{Windows Explorer}
+\fbox{\includegraphics[scale=0.3]{CLI_touch.png}}
+\end{figure}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos - cp}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|cp|}  kopijuoja failą
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test
+$ cp info.txt info2.txt
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ cp info.txt folder1
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ cp -r folder1 folder2
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ cp -r folder1 /c/Users/USER/Desktop/S175
+
+\end{lstlisting}
+\item \colorbox{listinggray}{\lstinline|cp -r folder folder|} arba \colorbox{listinggray}{\lstinline|cp -r folder directory|} -r reiškia, jog kartu kopijuojamas ir folderio turinys
+\item Dabar folderyje S175 turime: folder1 ir test
+
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos - rm}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|rm|} \textit{remove} trina (ne į šiukšliadėžę!!!)
+\item \colorbox{listinggray}{\lstinline|rm -r|}  su direktorijos pavadinimu viskam kas direktorijoje
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test
+$ rm info2.txt
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ rm -r folder2
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ rm -r /c/Users/USER/Desktop/S175/folder1
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI komandos - mw}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|mw|} perkelia failą (Cut+Paste), arba pervadine failą
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test
+$ mv info.txt folder1
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ mkdir folderx
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ mv folderx folder2
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{CLI editoriai}
+\begin{itemize}
+\item Geriausia naudoti \textit{Sublime}
+\item \textit{Windows} turi standartinį \textit{Notepad} (tragedija!)
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test
+$ echo "This is the new text" > info.txt
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ notepad info.txt
+\end{lstlisting}
+\item Kol neuždarytas Notepad , GitBash "laukimo" būsenoje! tad norint dirbti toliau, pirma reikia uždaryti editorių
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{CLI editoriai}
+\begin{itemize}
+\item GitBash turi \textit{Nano}, bet reikia labai įprasti!
+\begin{figure}
+\caption{Nano editorius}
+\fbox{\includegraphics[scale=0.3]{nano_editor_1.png}}
+\end{figure}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{CLI editoriai}
+\begin{itemize}
+\item GitBash turi \textit{Nano}, bet reikia labai įprasti!
+\item Atidarome su Nano
+\item Įrašome papildomą eilutę
+\item Uždarome su Crtl+X, Nano klausia: "Save modified buffer? .."
+\item Spaudžiama Y klavišą
+\begin{figure}
+\caption{Nano editorius}
+\fbox{\includegraphics[scale=0.22]{nano_editor_2.png}}
+\end{figure}
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{CLI editoriai}
+\begin{itemize}
+\item Nano klausia, ar pavadinimas lieka tas pats?
+\item Spaudžiam \textit{Enter} klavišą
+
+\begin{figure}
+\caption{Nano editorius}
+\fbox{\includegraphics[scale=0.3]{nano_editor_3.png}}
+\end{figure}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Wrap-up}
+\begin{itemize}
+\item Iki dabar išmokome pagrindinių komandų, kuriomis galime naviguoti sistemoje
+\item Taip pat išmokome svarbiausias komandas, kurios ledižia dirbti su failais ir folderiais
+\item Tam kad būtų švarus S175/test, belieka tik ištrinti test esančius failus: 
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test
+$ rm -r folder1
+USER@PC MINGW64 ~/Desktop/S175/test
+$ rm -r folder2
+USER@PC MINGW64 ~/Desktop/S175/test
+$ rm info.txt
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
 
 %----------------------------------------------------------
 \section{Git ir GitHub}
@@ -656,8 +876,8 @@ $ mv /c/Users/USER/Downloads/sublime.zip /c/Users/USER/Desktop/S175
 \item Kai darbuojatės ir rašote dokumentus, darote juose pakeitimus, dažnai turite 10-20 dokumentų pvz., \colorbox{listinggray}{\lstinline|bakalaurinis.doc|}, \colorbox{listinggray}{\lstinline|bakalaurinis2.doc|}, \colorbox{listinggray}{\lstinline|bakalaurinis2019_01_02.doc|}, \colorbox{listinggray}{\lstinline|bakalaurinis2019_01_02(1).doc|} ir t.t. 
 \item dar panašiai tiek pat .xls failų, kiek mažiau skirtingų .ppt failų
 \item Galų gale tai veda link chaoso!
-\item Todėl labai svarbu, ypač dirbant tu tekstiniais dokumentais (ne Word'iniais), pvz., R skriptais, LaTex failais, turėti vieną failą, bet būti išsisaugojus kartu visas jo ankstesnes formas, galėti atstatyti.
-\item Bendradarbiaujant su kitais, taip pat svarbu galėti dalintis turimu dokumentu, kodu, leisti kitiems jį keisti, ir galų galų integruoti pakeitimus į motininį failą
+\item Todėl labai svarbu, ypač dirbant tu tekstiniais dokumentais (ne Word'iniais), pvz., R skriptais, LaTex failais, turėti vieną failą, bet būti išsisaugojus kartu visas jo ankstesnes formas ir galėti atstatyti ankstesnes jų \textbf{versijas}
+\item Bendradarbiaujant su kitais, taip pat svarbu galėti dalintis turimu dokumentu, kodu, leisti kitiems jį keisti ir galų galų integruoti pakeitimus į motininį failą
 \end{itemize}
 \end{frame}
 
@@ -690,14 +910,14 @@ $ mv /c/Users/USER/Downloads/sublime.zip /c/Users/USER/Desktop/S175
 \item Kiekvienas išsaugojimas bus susietas su išsaugotu "user.name" ir "user.email"
 \item Tai reikia padaryti tik vieną kartą (dirbant su savo PC), arba pasikeisti kaskart prisėdus prie svetimo PC
 \item Bendradarbiaujant tai padeda atpažinti kas padarė kokius pakeitimus
+\item Konfikuruokite Git su savo vardu ir pavarde, bei universiteto email
 \end{itemize}
 \begin{lstlisting}
 $ git config --global user.name "Justas Mundeikis"
 $ git config --global user.email justas.mundeikis@evaf.vu.lt
-$ git config --list
-$ git config --global -l
 $ git config --global core.pager cat 
-# core.pager is made to cat (cat=content, printed on CLI)
+$ git config -l
+$ git config --global -l
 \end{lstlisting}
 \end{frame}
 %----------------------------------------------------------
@@ -711,26 +931,31 @@ $ git config --global core.pager cat
 \item "push" ir "pull" tarp lokalių ir internetinių repozitorijų
 \item suteikia homepage vartotojo repozitorijoms
 \item GitHub atlieka back-up funkciją lokalioms repozitorijoms
-\item leidžia bendradarbiauti, dalintis projektais, gerinti kitų kodą ir t.t.
-\item GitHub paskyros susikūrimas...
+\item Leidžia bendradarbiauti, dalintis projektais, gerinti kitų kodą ir t.t.
+\item GitHub paskyros susikūrimas su VardasPavard (rekomenduotina) ir VU email
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item Su Git-Bash nueiname į "Desktop",
-\item Mūsų tikslas sukurti aplanką "Sxxx" (stud.nr), o jame aplanką "test"
-\item Arba galima kurti pirmąjį aplanką, pereiti į jį ir tada kurti anrąjį, arba
-\item \colorbox{listinggray}{\lstinline|mkdir -p s175/test|}
-\item \colorbox{listinggray}{\lstinline|cd s175/test|}
-\item Inicializuojame git
+\item Pirma pasitikriname ar esame .../S175/test ir ar direktorija tuščia
+\item tada Inicializuojame git
 \begin{lstlisting}
-USER@PC MINGW64 ~/Desktop/s175/test
+USER@PC MINGW64 ~/Desktop/S175/test
+$ pwd
+/c/Users/USER/Desktop/S175/test
+
+USER@PC MINGW64 ~/Desktop/S175/test
+$ ls -a
+./  ../
+
+USER@PC MINGW64 ~/Desktop/S175/test
 $ git init
-Initialized empty Git repository in C:/Users/USER/Desktop/s175/test/.git/
+Initialized empty Git repository in C:/Users/USER/Desktop/S175/test/.git/
 
-USER@PC MINGW64 ~/Desktop/s175/test (master)
-
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ ls -a
+./  ../  .git/
 \end{lstlisting}
 \item direktorijoje sukuriamas nematomas failas .git
 \end{itemize}
@@ -738,13 +963,13 @@ USER@PC MINGW64 ~/Desktop/s175/test (master)
 
 %----------------------------------------------------------
 
-\begin{frame}{Git kaip foto sesija}
+\begin{frame}{Git = foto sesija}
 \begin{itemize}
-\item GIT daro "pasirinktos direktorijos nuotraukas" 
-\item inicializavimas, tai tarsi foto kambario pasirinkimas, kuriame gali būti daug "veikėjų"
-\item \colorbox{listinggray}{\lstinline|git add failas|} yra tarsi "veikėjo" užvedimas ant foto scenos
+\item Git daro "pasirinktos direktorijos nuotraukas" 
+\item \textbf{Inicializavimas}, tai tarsi foto kambario pasirinkimas, kuriame gali būti daug "veikėjų"
+\item \colorbox{listinggray}{\lstinline|git add failname|} yra tarsi "veikėjo" užvedimas ant foto scenos
 \item \colorbox{listinggray}{\lstinline|git commit|} yra pačios nuotraukos darymas
-\item tam kad nuotraukoje nebūtų tam tikrų asmenų galima naudoti sąrašą kuris slepiasi ".gitignore" faile
+\item Tam kad nuotraukoje nebūtų tam tikrų asmenų galima naudoti sąrašą kuris slepiasi ".gitignore" faile
 \end{itemize}
 \center
 \includegraphics[scale=0.4]{photo_session.png}
@@ -756,21 +981,30 @@ USER@PC MINGW64 ~/Desktop/s175/test (master)
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item su komanda touch sukuriame failą readme.txt
+\item Su komanda touch sukuriame failą readme.txt
 \item \colorbox{listinggray}{\lstinline|touch readme.txt|}
-\item atidarysime failą su Notepad
-\item \colorbox{listinggray}{\lstinline|notepad readme.txt|}
-\item įrašome "change1" ir išsaugome failą "ctrl+s", uždarome failą
-\item nors geriau būti failą atsidarius su \textit{Sublime}
+\item Su \textit{Sublime} atsidarome readme.txt
+\item Įrašome "change1" ir išsaugome failą "Ctrl+S" (uždaryti \textit{Sublime} nereikia)
 \end{itemize}
 \end{frame}
+
+%----------------------------------------------------------
+\begin{frame}{Viskas turėtų atrodyti taip}
+\begin{figure}
+\caption{Pirmas žingsnis}
+\fbox{\includegraphics[scale=0.18]{git_flow_1.png}}
+\end{figure}
+\end{frame}
+
+
 
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item šis failas egzistuoja \textit{repo}, tačiau nėra "sekamas"
+\item Šis failas egzistuoja \textit{repo} (nes jau sekame folderį o to kai parašėme komandą \colorbox{listinggray}{\lstinline|git init|}), tačiau nėra "sekamas"
 \begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
 $ git status
 On branch master
 
@@ -782,6 +1016,7 @@ Untracked files:
         readme.txt
 
 nothing added to commit but untracked files present (use "git add" to track)
+
 \end{lstlisting}
 \item Taigi failas readme.txt yra "untracked" kitaip tariant ne ant "scenos"
 \end{itemize}
@@ -791,9 +1026,13 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item su \colorbox{listinggray}{\lstinline|git add readme.txt|} įkeliame readme.txt į staging area
+\item su \colorbox{listinggray}{\lstinline|git add readme.txt|} įkeliame readme.txt į \textit{staging area}
 \item patikriname statusą:
 \begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git add readme.txt
+
+USER@PC MINGW64 ~/Desktop/S175/test (master)
 $ git status
 On branch master
 
@@ -803,23 +1042,24 @@ Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
         new file:   readme.txt
-
 \end{lstlisting}
 \item Taigi failas readme.txt yra \textit{staged} bet dar ne \textit{commited}
-\item Ką reiškia, jog failas yra staged?
 \end{itemize}
 \end{frame}
-%----------------------------------------------------------
 
+%----------------------------------------------------------
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item \colorbox{listinggray}{\lstinline|notepad readme.txt|}
-\item Notepad kitoje eilutėje įrašome "change2", išsaugome
+\item Su Sublime prirašome vieną eilutė "change2", tada Ctrl+S
+\item Ką rodo \colorbox{listinggray}{\lstinline|git status|}?
 \begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
 $ git status
 On branch master
+
 No commits yet
+
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
@@ -831,44 +1071,61 @@ Changes not staged for commit:
 
         modified:   readme.txt
 \end{lstlisting}
-\item dabar matome, jog readme.txt yra "tracked" ir "untracked"
-\item Staging area esantis failas "readme.txt" yra išsaugotas tik su įrašu "change1", bet ne su įrašu "change2"
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Git}
 \begin{itemize}
-\item norint išsaugoti naujausią versiją:
+\item Norint išsaugoti naujausią versiją turime ją pervesti į \textit{staging area}
 \item \colorbox{listinggray}{\lstinline|git add readme.txt|}
-\item norint perduoti failą repozitorijai
 \begin{lstlisting}
-$ git commit -m "sukuriamas failas readme.txt"
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git status
+On branch master
 
-[master (root-commit) 30cd9e9] sukuriamas failas readme.txt
- 1 file changed, 1 insertion(+)
- create mode 100644 readme.txt
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   readme.txt
 \end{lstlisting}
-\item dabar patikrinus statusą
+\item "changes to be commited" reiškia, kad galime fotografuoti
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Git}
+\begin{itemize}
+
+\item norint perduoti failą repozitorijai (= fotografuoti)
 \begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git commit -m "sukurtas readme.txt, papildytas change1 ir change2"
+[master (root-commit) ca5eddb] sukurtas readme.txt, papildytas change1 ir change2
+ 1 file changed, 2 insertions(+)
+ create mode 100644 readme.txt
+ 
+USER@PC MINGW64 ~/Desktop/S175/test (master)
 $ git status
 On branch master
 nothing to commit, working tree clean
 \end{lstlisting}
+\item "working tree clean" reiškia, jog esame išsaugoję nuotrauk su visais naujausiais pakeitimais
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
-\begin{frame}{Git}
+\begin{frame}{Git commit -m "..."}
 \begin{itemize}
 \item \colorbox{listinggray}{\lstinline|git commit -m "...."|}
 \item -m reiškia "message"
-\item turime apie 72 ženklus, bet galima ir daugiau
-\item geriausia naudoti esamąjį laiką
+\item Turime apie 72 ženklus, bet galima ir daugiau
+\item Aprašas turi būti aiškus, jog būtų prasmingas
 \end{itemize}
-\center
 \begin{figure}
-\includegraphics[scale=0.5]{git_commit.png}
 \caption{\href{https://m.xkcd.com/1296/}{\color{blue}{https://m.xkcd.com/1296/}}}
+\includegraphics[scale=0.5]{git_commit.png}
 \end{figure}
 \end{frame}
 
@@ -879,33 +1136,46 @@ Toliau keičiame naudojamą failą:
 \begin{itemize}
 \item readme.txt prirašome "change3"
 \item \colorbox{listinggray}{\lstinline|git add readme.txt|}
-\item \colorbox{listinggray}{\lstinline|git commit -m "pridedamas change 3"|}
+\item \colorbox{listinggray}{\lstinline|git commit -m "pridetas change 3"|}
 \item Taigi jau padarėme 2 \textit{commit} (= 2 nuotraukas)
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
-\begin{frame}[fragile]{Git}
+\begin{frame}[fragile]{Git log}
 \begin{itemize}
 \item Norint žinoti kas, kada ir kaip keitė failą: 
 \item \colorbox{listinggray}{\lstinline|git log|}
-\item pateiktas log'as kiekvienam atrodys kitaip, bet esmė ta pati:
 \begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
 $ git log
-commit 1077a8e2e27424339d56a2dfd20b4aec56b0d3fb (HEAD -> master)
+commit 030210bb490f45400a706ea69385e8fccc18c65a (HEAD -> master)
 Author: Justas Mundeikis <mundeikis@gmx.de>
-Date:   Tue Jan 1 07:19:02 2019 -0800
+Date:   Thu Feb 14 13:28:03 2019 -0800
 
-    pridedamas change3
+    pridetas change3
 
-commit 30cd9e9503f37bc748de35ff66d2fae8d01e3d72
+commit ca5eddb5fa492038cb3c3d07f483542502bb1e90
 Author: Justas Mundeikis <mundeikis@gmx.de>
-Date:   Tue Jan 1 07:16:54 2019 -0800
+Date:   Thu Feb 14 13:24:27 2019 -0800
 
-    sukuriamas failas readme.txt
+    sukurtas readme.txt, papildytas change1 ir change2
 
 \end{lstlisting}
-\item \textit{hash} (Secure Hash - SHA 'shah'): 1077a8e2e27424339d56a2dfd20b4aec56b0d3fb
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Git log --oneline}
+\begin{itemize}
+\item Norint žinoti kas, kada ir kaip keitė failą, bet gauti mažiau info
+\item \colorbox{listinggray}{\lstinline|git log --oneline|}
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git log --oneline
+030210b (HEAD -> master) pridetas change3
+ca5eddb sukurtas readme.txt, papildytas change1 ir change2
+\end{lstlisting}
 \end{itemize}
 \end{frame}
 
@@ -915,12 +1185,11 @@ Date:   Tue Jan 1 07:16:54 2019 -0800
 \begin{itemize}
 \item Dabar sukursime naują failą \textit{basic.R} ir \textit{readme.txt} pridėsime change4
 \item \colorbox{listinggray}{\lstinline|touch basic.R|}
-\item \colorbox{listinggray}{\lstinline|notepad readme.txt|}
-\item readme.txt įrašome "change4", išsaugome, uždarome
+\item readme.txt įrašome "change4", išsaugome
 \item \colorbox{listinggray}{\lstinline|git status|} parodo, jog pakeistas \textit{readme.txt} failas, ir untracked \textit{basic.R} failas
 \item su komanda \colorbox{listinggray}{\lstinline|git add .|} staginame visus failus
-\item galimi kiti variantai : \colorbox{listinggray}{\lstinline|git add -A|},\colorbox{listinggray}{\lstinline|git add -u|} (pastarasis naudojamas tik update'inti esamus failus)
-\item tada \colorbox{listinggray}{\lstinline|git commit -m "pridedamas change4 ir sukuriamas failas basic.R|}
+\item galimi kiti variantai : \colorbox{listinggray}{\lstinline|git add -A|},\colorbox{listinggray}{\lstinline|git add -u|} (pastarasis naudojamas tik update'inti jau sekamus failus)
+\item tada \colorbox{listinggray}{\lstinline|git commit -m "pridedamas change4 ir sukuriamas failas basic.R"|}
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
@@ -932,10 +1201,10 @@ Date:   Tue Jan 1 07:16:54 2019 -0800
 \item \colorbox{listinggray}{\lstinline|touch data.csv|} 
 \item \colorbox{listinggray}{\lstinline|git status|} parodo failą kaip \textit{untracked}
 \item todėl sukuriame failą \colorbox{listinggray}{\lstinline|touch .gitignore|}, kuriame galima surašyti failų pavadinimus, arba failų tipą/galūnes, kurių nenorime trackinti
-\item \colorbox{listinggray}{\lstinline|notepad .gitignore|} 
-\item \textit{Notepad} įrašome:  \colorbox{listinggray}{\lstinline|*.csv|} 
+\item \textit{Sublime} įrašome:  \colorbox{listinggray}{\lstinline|*.csv|} 
 \item * reiškia bet kokį pavadinimą, po kurio seka taškas ir csv, alternatyviai galima specifikuoti konkretų failą "data.csv"
 \item "git status" neberodo failo "data.csv" bet rodo ".gitignore", todėl staginame ir commitiname pakeitimus
+\item \colorbox{listinggray}{\lstinline|git add .|} ir  \colorbox{listinggray}{\lstinline|git commit -m "sukurtas gitignore sarasas"|}  
 \end{itemize}
 \end{frame}
 
@@ -968,9 +1237,6 @@ $ git branch NewBranch
 USER@PC MINGW64 ~/Desktop/s175/test (master)
 $ git checkout NewBranch
 Switched to branch 'NewBranch'
-
-USER@PC MINGW64 ~/Desktop/s175/test (NewBranch)
-
 \end{lstlisting}
 
 \item dabar visi pakeitimai vyks tik šioje atšakoje ir nepaveiks \textit{master} šakos
@@ -982,7 +1248,7 @@ USER@PC MINGW64 ~/Desktop/s175/test (NewBranch)
 Tarkime dabar asmuo B darbuojasi NewBranch atšakoje tobulindamas projektą
 \begin{itemize}
 \item \colorbox{listinggray}{\lstinline|touch advanced.R|}
-\item \colorbox{listinggray}{\lstinline|notepad readme.txt|} įrašome papildomą eilutę "change5"
+\item \colorbox{listinggray}{\lstinline|notepad readme.txt|} įrašome papildomą eilutę "change5", tada Crtl+S
 \item staginam ir commitinam pakeitimus:
 \begin{itemize}
 \item \colorbox{listinggray}{\lstinline|git add .|}
@@ -993,24 +1259,62 @@ Tarkime dabar asmuo B darbuojasi NewBranch atšakoje tobulindamas projektą
 \item Norint sujungti naują atšaką į \textit{master} \colorbox{listinggray}{\lstinline|git merge NewBranch|}
 \end{itemize}
 \end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Git merge}
+\begin{itemize}
+\item \colorbox{listinggray}{\lstinline|git merge NewBranch|}
+\item \colorbox{listinggray}{\lstinline|git log --oneline|}
+
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git merge NewBranch
+Updating b8940f7..407d27c
+Fast-forward
+ advanced.R | 0
+ readme.txt | 3 ++-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+ create mode 100644 advanced.R
+ 
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git log --oneline
+407d27c (HEAD -> master, NewBranch) sukuriamas advanced.R ir pridedmas change5
+b8940f7 sukurtas gitignore sarasas
+ebff561 pridedamas change4 ir sukuriamas failas basic.R
+030210b pridetas change3
+ca5eddb sukurtas readme.txt, papildytas change1 ir change2
+
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Merge problemos}
+\begin{itemize}
+\item Kartais nutinka taip, kad atšakoje esantys failai ne visai atitinka su master šakoje esančiais failais, todėl juos jungiant kyla problemų, kurias reikia pašalinti "ranka"
+\item \textit{master} atšakoje \textit{readme.txt} sukuriame eilutę "change5",Ctrl+S, stage'inam ir commit'iname 
+\item Nueiname į atšaką \textit{NewBranch} ir ten esančiame \textit{readme.txt} sukuriame "change7", stage'inam ir commit'iname 
+\item grįžtame į \textit{master} atšaką \colorbox{listinggray}{\lstinline|git chekckout master|}
+\item ir bandome sujungti \colorbox{listinggray}{\lstinline|git merge NewBranch|}
+\end{itemize}
+\end{frame}
+
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Merge problemos}
-\begin{enumerate}
-\item \textit{master} atšakoje \textit{readme.txt} sukuriame eilutę "change6", stage'inam ir commit'iname 
-\item nueiname į atšaką \textit{NewBranch} ir ten esančiame \textit{readme.txt} sukuriame "change7", stage'inam ir commit'iname 
-\item grįžtame į \textit{master} atšaką \colorbox{listinggray}{\lstinline|git chekckout master|}
-\item ir bandome sujungti \colorbox{listinggray}{\lstinline|git merge NewBranch|}
-\end{enumerate}
-
+\begin{itemize}
 \begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
 $ git merge NewBranch
 Auto-merging readme.txt
 CONFLICT (content): Merge conflict in readme.txt
 Automatic merge failed; fix conflicts and then commit the result.
 \end{lstlisting}
-\begin{itemize}
-\item gGchanget negalėjo automatiškai sutvarkyti failų, todėl atsidarome readme.txt failą ir tvarkome patys
+
+\item Git negalėjo automatiškai sutvarkyti failų (kaip pirmą kartą), nes dabar toje pačioje readme.txt failo vietoje vienur yra "change6" kitur "change7". Todėl atsidarome readme.txt failą ir tvarkome patys
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
@@ -1018,19 +1322,11 @@ Automatic merge failed; fix conflicts and then commit the result.
 \begin{frame}[fragile]{Konfliktinio failo tvarkymas}
 \begin{itemize}
 \item Atsidarius readme.txt matome
+\begin{figure}
+\caption{Merge problema}
+\includegraphics[scale=0.2]{git_flow_2}
+\end{figure}
 
-\begin{lstlisting}
-change1
-change2
-change3
-change4
-change5
-<<<<<<< HEAD
-change6
-=======
-change7
->>>>>>> NewBranch
-\end{lstlisting}
 \item $<<<<<HEAD$ yra tai kas yra aktyvioje atšakoje
 \item $>>>>NewBranch$ yra kas ateina iš sujungiamos atšakos
 \item atskirta ======
@@ -1051,21 +1347,10 @@ change5
 change6
 change7
 \end{lstlisting}
-\item išsaugome pakeitimus ir tada 
+\item Išsaugome pakeitimus Ctrl+S, tada
 \item \colorbox{listinggray}{\lstinline|git commit -a -m "sujungtas failas is NewBranch bei pasalintas konfliktas|}
 \item  \colorbox{listinggray}{\lstinline|git commit -a -m "..."|} galima naudoti, jeigu nėra sukurtų naujų failų
 \item Yra papildomų įrankių, kurie padeda atlikti merge'inimo darbus, nes dažniausiai konfliktų visada bus
-\end{itemize}
-\end{frame}
-%----------------------------------------------------------
-
-\begin{frame}[fragile]{Git stash}
-\begin{itemize}
-\item master atšakoje sukuriame failą \textit{markdown.md} 
-\item jeigu failo necommitiname (nes pvz reikia trumpam kažką pakeisti kitoje atšakoje) ir periname į kitą atšaką, failas lieka o tai gali sukurti ateityje daug problemų
-\item todėl \colorbox{listinggray}{\lstinline|git add .|}, tada
-\item \colorbox{listinggray}{\lstinline|git stash|}, kas nukelia ne commitintą failą į \textit{stashed area}. Failo neberodo darbalaukyje
-\item dabar galime darbuotis kitose atšakose ir vėl grįžus: \colorbox{listinggray}{\lstinline|git stash apply|} ir \textit{markdown.md} failas vėl atsiranda baigus ji taisyti, galima commitinti.
 \end{itemize}
 \end{frame}
 
@@ -1073,23 +1358,75 @@ change7
 
 \begin{frame}[fragile]{Git atsatatymas 1}
 \begin{itemize}
-\item Na štai po vidurnakčio pasidarbavus, padarėme klaidą:
-\item \textit{readme.txt} papildome įrašu "error entry"
-\item \colorbox{listinggray}{\lstinline|git commit -a -m "padareme klaida"|}
-\item Tarkime kažką sugadinome, bet žinome, jog versija prieš tai veikė gerai
-\item su "git log" susirandame "blogo" commit hashą  pvz 123456
-\item \colorbox{listinggray}{\lstinline|git log --oneline|} pateikia logą trumpąją versiją
-\item komanda \colorbox{listinggray}{\lstinline|git revert HASH|} atstato pasirinktą versiją, versijos su "error entry" nebėra!
-\item po įvedimo "git revert hash" atsiranda langas, message langas (atitinka -m "...."), nes revert'inimas yra naujas commit
+\item Imituojame, jog dirbome ir sukūrėme gerą failą ir paskui jį papildėme blogu:
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ echo "sukuriamas geras failas" > svarbus.txt
+$ git add .
+$ git commit -m "sukurtas svarbus.txt"
+$ echo "12 nakties pridirbau nesamoniu" >> svarbus.txt
+$ git commit -a -m "pridirbta nesamone"
+$ git log --oneline
+78839b7 (HEAD -> master) pridirbta nesamone
+9547650 sukurtas svarbus.txt
+2a982aa merge klaida panaikinta, change6 ir change7
+26e6ae0 (NewBranch) sukurtas change7
+8562e69 sukurtas change6
+407d27c sukuriamas advanced.R ir pridedmas change5
+b8940f7 sukurtas gitignore sarasas
+ebff561 pridedamas change4 ir sukuriamas failas basic.R
+030210b pridetas change3
+ca5eddb sukurtas readme.txt, papildytas change1 ir change2
+\end{lstlisting}
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
 
 
-\begin{frame}[fragile]{Git atstatymas 2}
+\begin{frame}[fragile]{Git atsatatymas}
 \begin{itemize}
-\item Tarkime jus labai daug darbavotės, turite n commit padarę ir surpatote, kad pirmas commit buvo geras, o po to viskas ne.
+\item Norint susigrąžinti failą į praėjusią "gerą" būseną, reikia susirasti "blogo" commit hashą  mano atveju (žr. viršuje) 78839b7
+\item \colorbox{listinggray}{\lstinline|git log --oneline|}
+\item komanda \colorbox{listinggray}{\lstinline|git revert HASH|} atstato pasirinktą versiją, versijos su "12 nakties..." nebėra!
+\item komanda \colorbox{listinggray}{\lstinline|git revert 78839b7|}
+\item po įvedimo atsiranda \textit{message} langas (atitinka -m "...."), nes revert'inimas yra naujas commit
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git atstatymas}
+\begin{figure}
+\caption{Revert atidaro messge su nano}
+\fbox{\includegraphics[scale=0.3]{git_revert_1.png}}
+\end{figure}
+\begin{itemize}
+\item Spaudžiame Crtl+X ir vėl atsiduriame normaliame Git
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git atstatymas}
+\begin{itemize}
+\item Tik jau blogojo įrašo \textit{Sublime} neberodo
+\end{itemize}
+\begin{figure}
+\caption{Po revert}
+\fbox{\includegraphics[scale=0.25]{git_revert_2.png}}
+\end{figure}
+Spaudžiame Crtl+X ir vėl atsiduriame normaliame Git
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git reset}
+\begin{itemize}
+\item Atsargiai! 
+\item Tarkime jus labai daug darbavotės, turite n commit padarę ir supratote, kad pirmas commit buvo geras, o po to viskas ne.
 \item \colorbox{listinggray}{\lstinline|git revert HASH|} palieka buvusias versijas, bet šiuo atveju, jos nebereikalingos
 \item \colorbox{listinggray}{\lstinline|git reset --hard HASH|} komanda padaro hard-reset, t.y. resetina į pasirinktą commitą, tačiau ištrina viską, kas buvo daryta po to! 
 \item revert'inti \colorbox{listinggray}{\lstinline|git reset --hard HASH|} neįmanoma, priešingai nei paties revert.
@@ -1099,64 +1436,41 @@ change7
 
 %----------------------------------------------------------
 
+\begin{frame}[fragile]{Git branch ištrynimas}
+\begin{itemize}
+\item Mums nebereikia NewBranch atšakos
+\item Kiek šakų turime patikrinti galima su \colorbox{listinggray}{\lstinline|git branch|}. * parodo kur esame
+\item Nereikalingą šaką ištrinti galime su komanda \colorbox{listinggray}{\lstinline|git branch -d Newbranch|} -d = delete
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git branch
+  NewBranch
+* master
+
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git branch -d NewBranch
+Deleted branch NewBranch (was 26e6ae0).
+
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ git branch
+* master
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
 \begin{frame}{Git remote}
 \begin{itemize}
 \item norint žinoti, ar lokali repozitorija yra susieta su nuotoline repozitorija (pvz Github, Bitbucket ar pan)
 \item \colorbox{listinggray}{\lstinline|git remote|}
+\item Jeigu komanda neišmeta jokios informacijos, reiškia lokali \textit{repo} nesusieta su nuotoline \textit{repo}
 \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------
 
-\begin{frame}{Git repo klonavimas}
-\begin{itemize}
-\item Nueiname kiekvienas į savo github ir ten susikuriame repo:
-\begin{itemize}
-\item pavadinimas: test2
-\item Description paliekam tuščia
-\item inicializuojame su Readme.md
-\end{itemize}
-\item Git Bash lange pakylame viena direktorija aukščiau, lauk iš "test" folderio su \colorbox{listinggray}{\lstinline|cd ..|}
-\item GitHub nusikopijuojame sukurtos repo HTPPS adresą
-\item Git Bash  įrašome \colorbox{listinggray}{\lstinline| git clone HTTPS|}
-\item Dabartinėje direktorijoje atsirado test-repo folderis, keliaujame į jį \colorbox{listinggray}{\lstinline| cd "test2"|} 
-\item \colorbox{listinggray}{\lstinline|git remote|}
-\item \colorbox{listinggray}{\lstinline|git remote -v|} parodo HTTPS
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}{Git repo klonavimas}
-\begin{itemize}
-\item Klonavimas reiškia, jog mes sukuriame remote repo kloną savo kompiuteryje, su visa Git istorija.
-\item Tarkime tai ne mūsų remote repo ir po klonavimo mes kurį laiką nieko nedarėme. Galbūt tuo metu  originalo autorius kažką pakeitė, tada galima
-\item \colorbox{listinggray}{\lstinline|git fetch origin|}
-\item Tai persiunčia pakeitimus, bet nemerge'ina
-\item \colorbox{listinggray}{\lstinline|git remote pull origin|}
-\item atitinka fetch+merge
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}{Git repo klonavimas}
-\begin{itemize}
-\item Sukurkime test-repo direktorijoje naują failą
-\item \colorbox{listinggray}{\lstinline|touch info.txt|}
-\item \colorbox{listinggray}{\lstinline|notepad info.txt |} prirašome ko nors, išsaugome
-\item \colorbox{listinggray}{\lstinline|git add info.txt|}
-\item \colorbox{listinggray}{\lstinline|git commit -m "pridetas info.txt failas"|}
-\item dabar galime push'inti lokalius pakeitimus į github:
-\item \colorbox{listinggray}{\lstinline|git push origin |}
-\item pareikalavus įrašome github username ir userpassword
-\item GitHub atnaujiname (F5) ir voila, failas info.txt yra remote repozitorijoje
-\end{itemize}
-\end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}{Lokalios repo sukėlimas į remote repo}
+\begin{frame}{Git remote}
 \begin{itemize}
 \item Nueiname kiekvienas į savo GitHub ir ten susikuriame repo:
 \begin{itemize}
@@ -1170,17 +1484,205 @@ change7
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Git remote}
+\begin{figure}
+\caption{Nuotolinės repo kūrimas @GitHub: spaudžiam and + ir tada "New repository"}
+\fbox{\includegraphics[scale=0.3]{git_remote_1}}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Git remote}
+\begin{figure}
+\caption{Nuotolinės repo kūrimas @GitHub: pavadinimas :test, Initialize paliekam tuščią ir spaudžiam "Creat repository"}
+\fbox{\includegraphics[scale=0.23]{git_remote_2}}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Git remote}
+\begin{figure}
+\caption{Nuotolinės repo kūrimas @GitHub: šis langas pasako, kaip lokalinę repo sujungti su nuotoline...}
+\fbox{\includegraphics[scale=0.2]{git_remote_3}}
+\end{figure}
+\end{frame}
+
 %----------------------------------------------------------
 
-\begin{frame}
+\begin{frame}[fragile]{Git remote}
 \begin{itemize}
-\item Yra du metodai kaip sukurti GitHub repozitoriją
-\begin{enumerate}
-\item Tiesiog sukurti naują repozitoriją
-\item "Fork" ("šakutinti") kito GitHub vartotojo jau egzistuojančią repozitoriją
-\end{enumerate}
+\item po \colorbox{listinggray}{\lstinline|git push|} reikės įrašyti savo email (GitHub) ir pop-up lange savo passwordą
+\item po \colorbox{listinggray}{\lstinline|git remote -v|} parodo daugiau info apie remote repo
+\begin{lstlisting}
+$ git remote add origin https://github.com/justasmundeikis/test.git
+$ git remote -v
+origin  https://github.com/justasmundeikis/test.git (fetch)
+origin  https://github.com/justasmundeikis/test.git (push)
+$ git push origin master
+Username for 'https://github.com': vardas.pavarde@stud.vu.lt
+Enumerating objects: 32, done.
+Counting objects: 100% (32/32), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (21/21), done.
+Writing objects: 100% (32/32), 2.55 KiB | 55.00 KiB/s, done.
+Total 32 (delta 8), reused 0 (delta 0)
+remote: Resolving deltas: 100% (8/8), done.
+To https://github.com/justasmundeikis/test.git
+ * [new branch]      master -> master
+\end{lstlisting}
 \end{itemize}
 \end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git remote}
+\begin{figure}
+\caption{Su F5 refresh'inus GitHub puslapį matome, jog vietinio folderio turinys visas perkeltas į GitHub}
+\fbox{\includegraphics[scale=0.18]{git_remote_4}}
+\end{figure}
+\end{frame}
+
+
+%----------------------------------------------------------
+\begin{frame}
+\begin{itemize}
+\item Sveikinu su pirmu išsiuntimu savo darbo į internetą
+\item Suprantama, galima pirma sukurti repo @GitHub ir tada sukurtą repo klonuoti į savo PC tai, sekantis žingsnis
+\item Klonuoti galima ir "svetimas" repo
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Git repo klonavimas}
+\begin{itemize}
+\item Kiekvienas į savo GitHub paskyroje susikuriame repo:
+\begin{itemize}
+\item Pavadinimas: test2
+\item Description paliekam tuščią
+\item inicializuojame su Readme.md
+\end{itemize}
+\begin{figure}
+\caption{Sukuriama nauja repo "test2"}
+\fbox{\includegraphics[scale=0.18]{git_remote_5.png}}
+\end{figure}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Git repo klonavimas}
+\begin{itemize}
+\item GitHub nusikopijuojame sukurtos repo HTTPS adresą
+\begin{figure}
+\caption{Nukopijuojamas repo HTTPS}
+\fbox{\includegraphics[scale=0.2]{git_remote_6.png}}
+\end{figure}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git repo klonavimas}
+\begin{itemize}
+\item Git Bash lange pakylame viena direktorija aukščiau, įsitikiname ar esame S175 folderyje ir klonuojame nusikopijuotą adresą:
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175/test (master)
+$ cd ..
+
+USER@PC MINGW64 ~/Desktop/S175
+$ pwd
+/c/Users/USER/Desktop/S175
+
+USER@PC MINGW64 ~/Desktop/S175
+$ git clone https://github.com/justasmundeikis/test2.git
+Cloning into 'test2'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git repo klonavimas}
+\begin{itemize}
+\item Klonuotoje repo, sukursime failą, ir jį nusiųsime atgal į GitHub"
+\item pareikalavus įrašome github username ir userpassword
+\item GitHub atnaujiname (F5) ir voila, failas info.txt yra remote repozitorijoje (\colorbox{listinggray}{\lstinline|&&|}) apjungia dvi komandas vienoje eilutėje
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175
+$ pwd
+/c/Users/USER/Desktop/S175
+
+USER@PC MINGW64 ~/Desktop/S175
+$ cd test2
+
+USER@PC MINGW64 ~/Desktop/S175
+$ echo "test2 klonavimas ir siuntimas i Github" >about.txt
+
+USER@PC MINGW64 ~/Desktop/S175
+$ git add . && git commit -m "sukurtas about.txt"
+
+USER@PC MINGW64 ~/Desktop/S175
+$ git push
+\end{lstlisting}
+
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Git repo klonavimas}
+\begin{itemize}
+\item Sveikinu, sukūrėte GitHub repo
+\item Ją klovanote
+\item Pakeitėte vietinėje repo failus
+\item Ir juos pushinote į Github!
+\item Atnaujine Github, pamatysite savo naujai sukurtą failą!
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}{Git repo klonavimas}
+\begin{itemize}
+\item Dabar klonuokite dar vieną folderį:
+\item Tačiau pirma įsitikinite, ar esate S175 folderyje, jeigu ne, pereikite (žr sekanti skaidrė)
+\item \colorbox{listinggray}{\lstinline|git clone https://github.com/justasmundeikis/duomenu_analizes_ivadas.git|}
+\item Sveikinu, atsisiuntėte mano paskaitų medžiagą
+\item Norint žinoti ar nėra jokių paskaitos medžiagų atnaujinimo, galima nuėjus į patį folderį įrašyti komandą
+\item \colorbox{listinggray}{\lstinline|git pull|} 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Git repo klonavimas}
+\begin{lstlisting}
+USER@PC MINGW64 ~/Desktop/S175
+$ pwd
+/c/Users/USER/Desktop/S175
+
+$ git clone https://github.com/justasmundeikis/duomenu_analizes_ivadas.git
+Cloning into 'duomenu_analizes_ivadas'...
+
+USER@PC MINGW64 ~/Desktop/S175
+$ ls
+duomenu_analizes_ivadas/  test/  test2/
+
+USER@PC MINGW64 ~/Desktop/S175
+$ cd duomenu_analizes_ivadas/
+
+USER@PC MINGW64 ~/Desktop/S175/duomenu_analizes_ivadas (master)
+$ git pull
+Already up to date.
+\end{lstlisting}
+
+\end{frame}
+
+
 
 %----------------------------------------------------------
 \subsection{Markdown sintaksė}
@@ -1219,4 +1721,24 @@ change7
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------
+\begin{frame}{Literatūra}
+\begin{itemize}
+\item Apie duomenų analizė R.D. Peng \& E.Matsui: "The Art of Data Science" 1-3 skyriai
+\item CLI patarčiau šią mokamąją medžiagą: \href{https://www.learnenough.com/command-line-tutorial/basics}{\color{blue}{Learn Enough Command Line to Be Dangerous}}
+\item Git patarčiau šią mokamąją medžiagą: \href{https://www.learnenough.com/git-tutorial/getting_started}{\color{blue}{Learn Enough Git to Be Dangerous}}
+\item Youtube: ieškant "Git Basics"
+\end{itemize}
+\end{frame}
+
+\begin{frame} {Namų darbai}
+\begin{itemize}
+\item Namuose instaliuoti visas reikalingas programas (Git, Sublime)
+\item Pakartoti skaidrėse praeitus žingsnius
+\item Išspręsti Seminar 1 užduotis
+\item VU VMA įkelti savo Seminar 1 dokumento prašomas nuorodas
+\item Reguliariai pasitikrinti, ar nėra VMA įkeltų straipnsių skaitumui, jeigu yra, perskaityti, nes apie savaitinius skaitinius gali būti klausiama teste!!!
+
+\end{itemize}
+\end{frame}
+
 \end{document}
