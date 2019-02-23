@@ -1394,7 +1394,20 @@ ca5eddb sukurtas readme.txt, papildytas change1 ir change2
 \end{itemize}
 \end{frame}
 
-
+%----------------------------------------------------------
+\begin{frame}[fragile]{Perspėjimas}
+\begin{itemize}
+\item Priklausomai nuo to, koks yra standartinis editorius priskirtas git, atsidaro arba Nano editorius, arba VIM editorius
+\item \href{https://www.youtube.com/watch?v=ggSyF1SVFr4}{\color{blue}{Kadangi VIM papildomas ir nebūtinai reikalingas apsunkinimas, šioje vietoje pridedu tik nuorod į youtube video (8min) kaip dirbti su VIM}}
+\item Mano siūlymas:
+\item \colorbox{listinggray}{\lstinline|git config --global core.editor nano.exe|}
+\item tada revertinant atsidarys Nano, arba
+\item \colorbox{listinggray}{\lstinline|git config --global core.editor absadr|} kur vietoj absadr įrašomas sublime\_text.exe su absoliučiu adresu
+\item PVZ \colorbox{listinggray}{\lstinline|git config --global core.editor
+/c/Users/USER/Download/sublime/sublime_text.exe|}
+\item tada atsidaro Sublime langas!
+\end{itemize}
+\end{frame}
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{Git atstatymas}
