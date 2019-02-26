@@ -1,0 +1,1290 @@
+\documentclass[11pt,xcolor=table]{beamer}
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\usepackage[utf8]{inputenc}
+\usepackage[L7x]{fontenc}
+\usepackage[lithuanian]{babel}
+\usepackage{lmodern} %be neveikia bold, italic etc
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{graphicx}
+\graphicspath{{./figures/}}
+
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{subcaption}
+
+\usepackage{multirow} % for multirow tables
+\setbeamertemplate{caption}[numbered] % for numbering captions
+
+\usepackage{forest}
+
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,
+	rulecolor=,
+	language=r,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={0.5\baselineskip},
+        belowskip={0.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=false,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941}
+}
+
+
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{patterns,decorations.pathreplacing}
+
+
+\author{Justas Mundeikis}
+\title{Duomenų analizės įvadas}
+\subtitle{2-1 Dalis}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{Vilniaus Universitetas, EVAF} 
+%\date{} 
+%\subject{} 
+
+
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+%----------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{1. Dalies turinys}
+\tableofcontents
+\end{frame}
+
+%----------------------------------------------------------
+\section{R programavimas}
+%----------------------------------------------------------
+%----------------------------------------------------------
+\subsection{R Istorija}
+%---------------------------------------------------------
+
+\begin{frame}{R Istorija}
+\begin{itemize}
+\item R yra S dialektas
+\item S parašyta John Chambers et al. @Bell Labs 1976m.
+\item S buvo perrašyta 1988 (v3) ir tapo labiau panaši į statistinę programą, o 1998 išleista S v4.
+\item R sukurtas 1991 mokslinio darbo rėmuose (Ross Ihaka ir Robert Gentleman )
+\item 1993 R pristatytas visuomenei
+\item 1995 R gavo GNU licenziją
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+
+\begin{frame}{R Istorija}
+\begin{itemize}
+\item R sintaksė labai panaši į S 
+\item R veikia ant su bet kokia operacine sistema
+\item Didelė bendruomenė, todėl labai daug paketų ir dažni bugfix'ai
+\item Santykinai lengva atlikti statistines analizes, tačiau suteikia beveik neribotas galimybes norintiems programuoti savo paketus
+\item \href{https://www.gnu.org/philosophy/philosophy.html}{\color{blue}{Philosophy of the GNU Project}}
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+
+\begin{frame}{Free software}
+Jeigu kalbame apie "free software" turima omenyje
+\begin{itemize}
+\item Laisvė naudotis programa, bet kuriuo tikslu
+\item Laisvė analizuoti ir keisti programą pagal savo poreikius
+\item Laisvė dalintis programos kopijomis
+\item Laisvė dalintis pagerintomis kopijomis
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+
+\begin{frame}{R minusai}
+\begin{itemize}
+\item R remiasi 40 metų senumo programa, todėl trūksta 3D grafikų 
+\item Paketus kuria patys vartotojai, todėl jeigu nėra jau sukurto reikiamo funkcionalumo, reikia kurti pačiam
+\item Visi objektai R turi būti įkeliami į darbinę atmintį
+\item R nėra labai universali kalba
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+
+\begin{frame}{R ir RStudio instaliavimas}
+\begin{itemize}
+\item R reikia instaliuoti iš CRAN
+\item \href{https://cran.r-project.org/}{\textcolor{blue}{https://cran.r-project.org/}}
+\item Paleidžiame R 
+\item Tam kad būtų lengviau dirbti su R, turėti aibę papildomų funkcijų, instaliuojame RStudio
+\item \href{https://www.rstudio.com/products/rstudio/download/}{\textcolor{blue}{https://www.rstudio.com/products/rstudio/download/}}
+\item Startuojame RStudio
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R sistema}
+\begin{itemize}
+\item Bazinė R sistema su standartiniais paketais: stats, graphics, grDevices, utils, datasets, methods, base 
+\item Visi kiti paketai
+\item dauguma R paketų saugomi CRAN (Comprehensive R Archive Network), iš kur atsisiunčiamas ir pats R
+\item available.packages() funkcija, kuri surenką visą informaciją apie ezistuojančius R paketus @CRAN
+\begin{lstlisting}
+a <- available.packages()
+length(a)
+\end{lstlisting}
+\item Šiuo metu : 230180 paketai
+\item Taip pat galima instaliuoti ir paketus esančius @GitHub
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}{Kur rasti pagalbą}
+\begin{itemize}
+\item Dokumentacija
+\item Google (Ctrl+C Ctrl+V error code)
+\item Kursiokai
+\item Stackoverflow
+\item Dėstytojas
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}{Stackoverflow}
+\begin{itemize}
+\item \href{https://stackoverflow.com/}{\color{blue}{https://stackoverflow.com/}}
+\item Kokius konkrečiai žingsnius atlikote
+\item Kokio rezultato tikitės
+\item Kokį rezultatą gaunate
+\item Kokią R versiją, kokius paketus naudojate (retai: kokia operacinė sistema)
+\item Visada geriausia aprašyti problemą, bei pateikti visą kodą, leidžiantį atkartoti Jūsų problemą
+\item antraštė turėtų būti trumpa ir aiški
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\subsection{R Input Output}
+%----------------------------------------------------------
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Input Output}
+"<-" yra priskyrimo operatorius, ">" promt (CLI buvo \$)
+\begin{lstlisting}
+> x <- 1
+> print(x)
+[1] 1
+> msg <- "hello world"
+> print(msg)
+[1] "hello world"
+\end{lstlisting}
+
+Komentarai atskiriami su \# viskas į dešinę nuo \# ignoruojama, toje eilutėje
+\begin{lstlisting}
+> msg <- "hello world" #pirma žinute
+> msg # autoprint prints values without entering command print()
+[1] "hello world"
+> x <- 
++ 
+\end{lstlisting}
+ESC arba pabaigti įvesti. [1] indikuoja vektoriaus reikšmės numerį
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Input Output}
+Operatorius : sukuria eiles (sequence)
+\begin{lstlisting}
+> x <- 1:30
+> x
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18
+[19] 19 20 21 22 23 24 25 26 27 28 29 30
+\end{lstlisting}
+\end{frame}
+%----------------------------------------------------------
+\subsection{Objektų tipai}
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R objektai}
+R turi 5 bazinius objektų tipus (klasės)
+\begin{itemize}
+\item charackter 
+\item numeric
+\item integer
+\item complex
+\item logical
+\end{itemize}
+Dažniausiai naudojamas vektorius, kuriame gali būti tik tos pačios klasės objektai. Tuščią vektorių galima sukurti su komanda vector()\\
+list (sąrašas) gali talpinti įvairių klasių objektus.
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R objektai}
+\begin{itemize}
+\item Skaičius R supranta kaip numeric klasės objektus
+\item Jeigu reikia pilno skaičiaus (integer) tada skaičių reikia pabaigti su L raide 
+\item Inf suprantamas kaip begalybė
+\item NAN ("not a number"), arba  trūkstama reikšmė
+\begin{lstlisting}
+> x<-2L
+> x
+[1] 2
+> x <-2.1L
+Warning message:
+integer literal 2.1L contains decimal; using numeric value 
+> Inf
+[1] Inf
+> 1/Inf
+[1] 0
+> 0/0
+[1] NaN
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Atributai}
+R objektai gali turėti atributus.
+\begin{itemize}
+\item names, dimnames
+\item dimensions (e.g matricos)
+\item class (numeric, charackter)
+\item length
+\item kiti vartotojo priskirti atributai
+\item attributes() leidžia nustatyti / keisti objekto atributus
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Vektorių sukūrimas}
+
+\begin{itemize}
+\item c() funkcija leidžia sukurti objektų vektorius 
+\item c() iš concatenate 
+\begin{lstlisting}
+> x <- c(0.2 , 0.6) # numeric klasė
+> x <- c(TRUE, FALSE) #logical klasė
+> x <- c(T, F) #logical klasė
+> x <- c("a", "b", "c") #character klasė
+> x <- 1:5  #integer klasė
+> x <- c(1+0i, 2+4i) #complex klasė
+\end{lstlisting}
+\item galima sukurti tuščią vektorių, nurodant kokios klasės objektai jame bus ir kokia vektoriaus dimensija
+\begin{lstlisting}
+> x <- vector(mode="numeric", length = 8)
+> x
+[1] 0 0 0 0 0 0 0 0
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Vektorių sukūrimas}
+\begin{itemize}
+\item jeigu su c() sujungiami skirtingų klasių objektai, R priskiria bendriausią klasę visiems vektoriuje esantiems objektams
+\begin{lstlisting}
+> x <- c(0.2 , "a") # character klasė
+> x <- c(TRUE, FALSE, 3) #numeric klasė
+> x <- c("a", TRUE, FALSE) #character klasė
+\end{lstlisting}
+\item TRUE=1, FALSE=0
+\item procesas kuris vyksta vadinamas \textit{coersion}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Vektorių sukūrimas}
+\begin{itemize}
+\item vektorius galima priskirti tam tikrai klasei manualiai
+\begin{lstlisting}
+> x<-10:19
+> class(x)
+[1] "integer"
+> as.numeric(x)
+ [1]  0  1  2  3  4  5  6  7  8  9 10
+> as.logical(x)
+ [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[10]  TRUE  TRUE
+> as.character(x)
+ [1] "0"  "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9" 
+[11] "10"
+> as.factor(x)
+ [1] 0  1  2  3  4  5  6  7  8  9  10
+Levels: 0 1 2 3 4 5 6 7 8 9 10
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Vektorių sukūrimas}
+\begin{itemize}
+\item tačiau nelogiški manualūs priskyrimai generuos Nas
+\begin{lstlisting}
+> x<- c("a", "b", "c")
+> as.numeric(x)
+[1] NA NA NA
+Warning message:
+NAs introduced by coercion 
+
+> as.logical(x)
+[1] NA NA NA
+
+> as.complex(x)
+[1] NA NA NA
+Warning message:
+NAs introduced by coercion 
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{List - sąrašas}
+\begin{itemize}
+\item List gali talpinti įvairių klasių objektus
+\begin{lstlisting}
+> x <- list(1.2, 3L, TRUE, F, 1+4i, 1:3) 
+> x
+[[1]]
+[1] 1.2
+[[2]]
+[1] 3
+[[3]]
+[1] TRUE
+[[4]]
+[1] FALSE
+[[5]]
+[1] 1+4i
+[[6]]
+[1] 1 2 3
+\end{lstlisting}
+\item $[[nr]]$  nurodo list objekto numerį
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Matricos}
+\begin{itemize}
+\item Matricos, tas pats vektoriaus objektas, tačiau turintis dimensiją
+\begin{lstlisting}
+> x <- matrix(nrow = 3, ncol = 3)
+> x
+     [,1] [,2] [,3]
+[1,]   NA   NA   NA
+[2,]   NA   NA   NA
+[3,]   NA   NA   NA
+
+> dim(x)
+[1] 3 3
+
+> attributes(x)
+$dim
+[1] 3 3
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Matricos}
+\begin{itemize}
+\item Matricos užpildomos stulpeliniu būdų, jeigu nenurodoma kitaip
+\item ?matrix parodo funkcijos manual
+\begin{lstlisting}
+> m <- matrix(1:9, nrow = 3, ncol = 3)
+> m
+     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9
+
+>? matrix
+
+> m <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+> m
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9
+
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Matricos}
+\begin{itemize}
+\item Vektorius be dimensijų yra paprastas vektorius
+\item Tačiau vektoriui galima suteikti dimensijas post factum, tada vektorius tampa matrica
+\begin{lstlisting}
+> v <- 1:12
+> v
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12
+> dim(v) <-c(4,3)
+> v
+     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{cbind , rbind}
+\begin{itemize}
+\item cbind (columnbind) ir rbind (rowbind) iš vektorių sukuria matricas
+\begin{lstlisting}
+> x <-1:3
+> y <- 20:22
+> cbind(x,y)
+     x  y
+[1,] 1 20
+[2,] 2 21
+[3,] 3 22
+> rbind(x,y)
+  [,1] [,2] [,3]
+x    1    2    3
+y   20   21   22
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{cbind , rbind}
+\begin{itemize}
+\item Tačiau jeigu vektorių dydis ne toks pats... r coersion'a 
+\begin{lstlisting}
+> x <-1:3
+> y <- 1:5
+> cbind(x,y)
+     x y
+[1,] 1 1
+[2,] 2 2
+[3,] 3 3
+[4,] 1 4
+[5,] 2 5
+Warning message:
+In cbind(x, y) : number of rows of result is not a multiple of vector length (arg 1)
+> rbind(x,y)
+  [,1] [,2] [,3] [,4] [,5]
+x    1    2    3    1    2
+y    1    2    3    4    5
+Warning message:
+In rbind(x, y) :number of columns of result is not a multiple of vector length (arg 1)
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Faktoriai}
+\begin{itemize}
+\item Faktorių klasė skirta kategoriniams kintamiesiems (vardiniai, ranginiai)
+\item Faktoriai yra svarbūs modeliuojant bei kartais grafikams
+
+\begin{lstlisting}
+> x <-factor(c("taip", "ne", "taip", "taip", "ne"))
+> x
+[1] taip ne   taip taip ne  
+Levels: ne taip
+> table(x)
+x
+  ne taip 
+   2    3 
+> unclass(x)
+[1] 2 1 2 2 1
+attr(,"levels")
+[1] "ne"   "taip"
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Faktoriai}
+\begin{itemize}
+\item Lygiai pagal alfabetinį eiliškumą pasirodantį vektoriuje, arba nurodoma manualiai
+
+\begin{lstlisting}
+> x <-factor(c("girtas", "blaivus", "girtas" , "girtas" , "blaivus"),levels=c("girtas", "blaivus"))
+> x
+[1] girtas  blaivus girtas  girtas  blaivus
+Levels: girtas blaivus
+> table(x)
+x
+ girtas blaivus 
+      3       2  
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Trūkstami skaičiai}
+\begin{itemize}
+\item Trūkstami skaičiai pateikiami kaip NA
+\item Neapibrėžtos matematinės reikšmės NaN
+\item is.na() testuoja ar egzistuoja NA
+\item is.nan() testuoja ar egzistuoja NaN
+\item NA gali turėti klases (integer, charackter)
+\item NaN yra NA, bet NA nėra NaN
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Trūkstami skaičiai}
+\begin{itemize}
+\item Pvz
+\begin{lstlisting}
+> x <- c(1,2,NA,4,5,6)
+> is.na(x)
+[1] FALSE FALSE  TRUE FALSE FALSE FALSE
+> is.nan(x)
+[1] FALSE FALSE FALSE FALSE FALSE FALSE
+
+> x <- c(1,2,NA,4,NaN,6)
+> is.na(x)
+[1] FALSE FALSE  TRUE FALSE  TRUE FALSE
+> is.nan(x)
+[1] FALSE FALSE FALSE FALSE  TRUE FALSE
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data frames}
+\begin{itemize}
+\item Data frames naudojami laikyti tabelinius duomenis
+\item Iš esmės tai specialus atvejis List, kuriame kiekvienas stulpelis turi būti to paties ilgio
+\item Kiekvienas stulpelis gali talpinti vis kitos klasės duomenis
+\item Specialūs data frames atributai
+\begin{itemize}
+\item rownames
+\item colnames
+\end{itemize}
+\item Dažnai sukuriamos nuskaitant duomenis pvz., read.table arba read.csv()
+\item Galima pakeisti į matricą su as.matrix()
+\item tuščia data frame galima sukurti su data.frame()
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data frames}
+\begin{itemize}
+\item Data frames naudojami laikyti tabelinius duomenis
+\begin{lstlisting}
+> x <-data.frame(FName=c("Ana", "Maria", "John", "Peter"), Grades=c(9,10,7,8))
+> x
+  FName Grades
+1   Ana      9
+2 Maria     10
+3  John      7
+4 Peter      8
+> nrow(x)
+[1] 4
+> ncol(x)
+[1] 2
+> rownames(x)
+[1] "1" "2" "3" "4"
+> colnames(x)
+[1] "FName"  "Grades"
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data frames}
+\begin{itemize}
+\item Data frames galima priskirti eilučių ir stulpelių pavadinimus
+\begin{lstlisting}
+> y <- data.frame(1:3)
+> y
+  X1.3
+1    1
+2    2
+3    3
+> colnames(y) <- "NR"
+> y
+  NR
+1  1
+2  2
+3  3
+> rownames(y) <- c("alpha", "beta", "gama")
+> y
+      NR
+alpha  1
+beta   2
+gama   3
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{List names}
+\begin{itemize}
+\item List irgi gali turėti pavadinimus
+\begin{lstlisting}
+> x <- list (a=1, b=2, c=c(1:3))
+> x
+$a
+[1] 1
+
+$b
+[1] 2
+
+$c
+[1] 1 2 3
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Matrix names}
+\begin{itemize}
+\item Matricos irgi gali turėti pavadinimus, tik čia tai dimnames()
+\begin{lstlisting}
+> m <-matrix(1:4, nrow = 2, ncol=2)
+> m
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+> dimnames(m) <- list(c("a", "b"), c("c", "d"))
+> m
+  c d
+a 1 3
+b 2 4
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Vektorių vardai}
+\begin{itemize}
+\item Vektorių įverčiams irgi galima priskirti pavadinimus
+\begin{lstlisting}
+> x <- 1:3
+> x
+[1] 1 2 3
+> names(x) <- c("a", "b", "c")
+> x
+a b c 
+1 2 3
+> str(x)
+ Named int [1:3] 1 2 3
+ - attr(*, "names")= chr [1:3] "a" "b" "c"
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\subsection{Duomenų importas į R}
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Duomenų importas į R}
+Pagrindinės funkcijos, kurios apdeda importuoti duomenis į R
+\begin{itemize}
+\item read.table(), read.csv() tabelinių duomenų importavimui
+\item readLines nuskaityti tekstą (pvz. .txt, .html)
+\item source()importuoti R kodo failus
+\item dget() importuoti R kodo failus
+\item load() importavimas išsaugotų darbolaukių (workspace)
+\item unserialize, importavimas R objektų binarinėje formoje
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Duomenų eksportas iš R}
+Pagrindinės funkcijos, kurios apdeda eksportuoti duomenis į R
+\begin{itemize}
+\item write.table(), write.csv()
+\item writeLines()
+\item dump()
+\item dput()
+\item save()
+\item serialize()
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{read.table()}
+read.table() pagrindiniai argumentai
+\begin{itemize}
+\item file, nuskaitomo failo pavadinimas
+\item header, loginis indikatorius, ar egzistuoja stulpelių pavadinimai
+\item sep, nudoro kaip atskirti stulpeliai
+\item colClasses, vektorius, nurodantis skirtingas stulpelių klases
+\item nrows, eilučių skaičius duomenyse
+\item comment.char, nurodo kaip žymimi komentarai faile
+\item skip, skaičius, kiek eilučių nuo viršaus praleisti
+\item stringsAsFactors, ar character variables turėtų būti pakeisti į faktorius
+\item pilnas sąrašas ?read.table
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{PVZ: read.table() + CLI + ping}
+
+\begin{itemize}
+\item R'e pasitikriname kur esame: getwd()
+\item Jeigu reikia, su setwd() pasikeičiame į folderį Sxxx/R/data
+\item CLI užrašome komandą: 
+\begin{lstlisting}
+ping www.lithuanian-economy.net > c/Users/studentas/Dekstop/Sxxxx/R/data/LE-ping.txt
+\end{lstlisting}
+\item leidžiame paveikti surinkti duomenų ir nutraukiam su Ctrl+C
+\item su Sublime pasižiūrime kaip atrodo duomenys (pas kiekvieną kiek kitaip)
+\item 1 eilutės nereikia, kaip ir paskutinių...
+\item pvz: 
+\begin{lstlisting}
+data <-read.table("LE.txt", skip=1, header = FALSE, sep=" ", nrows = 46, comment.char="")
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{PVZ: read.table() + CLI + ping}
+\begin{itemize}
+\item Išdaliname 8 stulpelį į dvi dalis
+\item Išdalinimas tampa list
+\item Iš list paverčiame dataframe  (apie do.call pakalbėsime vėliau)
+\item Paverčiame df antrą stulpelį į numeric
+\item su hist() nupiešiame paprastą histogramą
+\begin{lstlisting}
+time <-strsplit(as.character(data$V8),'=',fixed=TRUE)
+df <-  data.frame(do.call(rbind, time))
+df$X2 <- as.numeric(df$X2)
+str(df)
+hist(df$X2)
+\end{lstlisting}
+\item PVZ baigtas
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Didelių failų nuskaitymas}
+\begin{itemize}
+\item Kiek reikia RAM norimiems duomenims:
+\begin{itemize}
+\item 1 numeric įrašas = 8 bytes
+\item 1 000 000 eilučių ir 20 stulpelių 
+\item $1000000 \times 200 \times 8=1880000000$
+\item 1024 bytes = KB, 1024 KB = 1 MB, $\frac{bytes}{2^{20}}=MB$, $\frac{bytes}{2^{30}}=GB$
+\item $\frac{1880000000}{2^{20}}=1792.9Mb$ arba 1.75 GB
+\item nykščio taisyklė, reikia dvigubai daugiau RAM!
+\end{itemize}
+\item Naudoti comment.char=""
+\item Galima padėti R geriau optimizuoti RAM nurodant nrows=...
+\begin{lstlisting}
+initial <- read.table("data.txt", nrows=100)
+classes <- sapply(initial, class)
+df <- read.table("data.txt", colClasses=classes,
+							comment.char="")
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Tekstiniai formatai}
+\begin{itemize}
+\item dump(), dput() išsaugo duomenis tekstiniu formatu, bet su meta duomenimis
+\item dput() skirtas vienam failui
+\item dump() skirtas vienam arba daugiau failų
+\item Tekstiniai formatai idealus naudojant VCS
+\item Tekstiniai formatai yra universalūs, todėl iš esmes atsparūs "zeitgeist"
+\item Minusas, jog tekstiniai formatai užima daugiau vietos
+\begin{lstlisting}
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{dump() ir source()}
+\begin{lstlisting}
+AirQualityUCI <- read.csv("AirQualityUCI.csv", 
+                          sep=";", 
+                          header = TRUE, 
+                          stringsAsFactors = FALSE, 
+                          comment.char = "")
+household_power_consumption <- read.table("household_power_consumption.txt", 
+                                          sep=";", 
+                                          header = TRUE, 
+                                          stringsAsFactors = FALSE, 
+                                          comment.char = "")
+
+list_files <-ls()
+dump(list_files, file="duomenys.R")
+dump(c("AirQualityUCI", 
+       "household_power_consumption"), 
+     file="duomenys.R")
+rm(list=ls())
+source("duomenys.R")
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{dump() ir source()}
+\begin{itemize}
+\item dump veikia gerai, kol failai nėra labai dideli (<100mb)
+\item Reikia patiems įsivertinti, kas yra greičiau dump() + source()
+\item ar visgi read.table() + visos komandos...
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\subsection{R ir išorinis pasaulis}
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R ir išorinis pasaulis}
+Kai nuskaitome failą, R naudojasi file funkcija, kad sudarytų ryšį su norimu failu
+\begin{itemize}
+\item file, atidaro ryšį su failu
+\begin{lstlisting}
+function (description = "", open = "", blocking = TRUE, encoding = getOption("encoding"), 
+    raw = FALSE, method = getOption("url.method", "default")) 
+\end{lstlisting}
+
+\item description - failo pavadinimas
+\item open - "r" (read only), "w" (writing), "a" (appending), "rb", "wb", "ab" (binarinėje formoje)
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R ir išorinis pasaulis}
+\begin{itemize}
+\item abu variantai tolygūs, nes funkcija read.table viduje naudojasi file funkcija
+\end{itemize}
+\begin{lstlisting}
+con <- file("LE.txt", "r")
+data <- read.table(con, sep=" ", 
+                   skip = 1, 
+                   nrows = 156, 
+                   stringsAsFactors = FALSE, 
+                   comment.char = "", 
+                   header = FALSE)
+close(con)
+
+data <- read.table("LE.txt", 
+                   sep=",", 
+                   skip = 1, 
+                   nrows = 60, 
+                   stringsAsFactors = FALSE, 
+                   comment.char = "")
+\end{lstlisting}
+
+\end{frame}
+
+
+
+
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R ir išorinis pasaulis}
+Galima atidaryti ryšį ir su zipintais failais
+\begin{itemize}
+\item gzfile, atidro ryšį su .gzip failu
+\item bzfile, atidro ryšį su .bzip2 failu
+\begin{lstlisting}
+con <- gzfile("census-income.data.gz")
+data <- read.table(con, sep=",", 
+                   nrows = 100, 
+                   stringsAsFactors = FALSE, 
+                   comment.char = "", 
+                   header = FALSE)
+
+close(con)
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R ir išorinis pasaulis}
+\begin{itemize}
+\item url, atidro ryšį su web tinklapiu
+\item galima nuskaityti pasirinkto tinklapio html kodą
+\begin{lstlisting}
+con <- url("http://www.delfi.lt", "r")
+data <- readLines(con)
+close(con)
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------
+\subsection{Subsetting}
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting}
+Pagrindiniai operatoriai leidžiantys pasirinkti dalį R objektų
+\begin{itemize}
+\item $[...]$ visada duoda objektą tos pačios klasės, galima pasirinkti daugiau nei vieną elementą
+\item $[[...]]$ vieno elemento iš list arba dataframe pasirinkimui
+\item \$ leidžia pasirinkti pagal pavadinimus (pagal col.names)
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting}
+\begin{itemize}
+\item skaitinis indeksas
+\item loginis indeksas
+\end{itemize}
+\begin{lstlisting}
+
+x <- c("a", "b", "c", "d")
+
+#skaitinis
+x[1]
+x[2]
+x[1:3]
+
+#loginis
+x[x>"b"]
+rule <- x>"b"
+rule
+x[rule]
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting}
+\begin{itemize}
+\item Subsetting naudojant list objektą
+\item Pradžiai pasidarome šį objektą:
+\end{itemize}
+\begin{lstlisting}
+> x <- list(grades=1:10, 
+			names=c("Ana", "Maria", "John", "Peter"),
+			course=c("1gr", "2gr"))
+
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting list}
+\begin{lstlisting}
+> x[1]
+$grades
+ [1]  1  2  3  4  5  6  7  8  9 10
+
+> x[[1]]
+ [1]  1  2  3  4  5  6  7  8  9 10
+
+> x$names
+[1] "Ana"   "Maria" "John"  "Peter"
+
+> x["names"]
+$names
+[1] "Ana"   "Maria" "John"  "Peter"
+
+> x[["names"]]
+[1] "Ana"   "Maria" "John"  "Peter"
+
+> x[c(1,3)]
+$grades
+ [1]  1  2  3  4  5  6  7  8  9 10
+$course
+[1] "1gr" "2gr"
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting list}
+\begin{itemize}
+\item Subsetting naudojant list objektą
+\end{itemize}
+\begin{lstlisting}
+> kint <- "names"
+> x[kint]
+$names
+[1] "Ana"   "Maria" "John"  "Peter"
+
+> x[[kint]]
+[1] "Ana"   "Maria" "John"  "Peter"
+> x$kint
+NULL
+\end{lstlisting}
+\end{frame}
+
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting list}
+\begin{itemize}
+\item Subsetting naudojant list objektą
+\end{itemize}
+\begin{lstlisting}
+> x <- list(grades=1:10, names=c("Ana", "Maria", "John", "Peter"), 
++           course=c("1gr", "2gr"))
+
+> x[[2]]
+[1] "Ana"   "Maria" "John"  "Peter"
+
+> x[[c(2,2)]]
+[1] "Maria"
+
+> x[[2]][[2]]
+[1] "Maria"
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting}
+\begin{itemize}
+\item Subsetting naudojant matricą (i,j) 
+\item Subsetting su $[]$ duoda vektorių, ne matricą!
+\end{itemize}
+\begin{lstlisting}
+> m <- matrix(1:9, nrow=3, ncol=3)
+> m
+     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9
+
+> m[1,1]
+
+[1] 1
+> m[3,3]
+
+[1] 9
+> m[2,]
+[1] 2 5 8
+
+> m[,3]
+[1] 7 8 9
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting}
+\begin{itemize}
+\item Subsetting naudojant matricą (i,j) 
+\item Subsetting su $[]$ duoda vektorių, ne matricą, todėl drop=FALSE
+\end{itemize}
+\begin{lstlisting}
+> m <- matrix(1:9, nrow=3, ncol=3)
+
+> m[1,1, drop=FALSE]
+     [,1]
+[1,]    1
+
+> m[2,, drop=FALSE]
+     [,1] [,2] [,3]
+[1,]    2    5    8
+
+> m[,3, drop=FALSE]
+     [,1]
+[1,]    7
+[2,]    8
+[3,]    9
+\end{lstlisting}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{NA išvalymas}
+\begin{itemize}
+\item Kartais duomenyse yra NA
+\end{itemize}
+\begin{lstlisting}
+> x <- c(1,2,3,NA,5,6,NA,8)
+> y <-c("a", "b", "c", NA, NA, "f", "g" , "h")
+
+> is.na(x)
+[1] FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE
+
+> trukst_vek <- is.na(x)
+
+> x[trukst_vek]
+[1] NA NA
+
+> x[!trukst_vek]
+[1] 1 2 3 5 6 8
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{NA išvalymas}
+\begin{itemize}
+\item complete.cases() duoda loginį vektorių, su pozicijomis, kuriose nėra NA
+\end{itemize}
+\begin{lstlisting}
+> complete.cases(x,y)
+[1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE
+
+> x[complete.cases(x,y)]
+[1] 1 2 3 6 8
+
+> y[complete.cases(x,y)]
+[1] "a" "b" "c" "f" "h"
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{NA išvalymas}
+\begin{itemize}
+\item Su complete.cases() galima išvalyti ir dataframe
+\end{itemize}
+\begin{lstlisting}
+> library(datasets)
+> airquality[1:6,]
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+
+> airquality[complete.cases(airquality),][1:6,]
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+7    23     299  8.6   65     5   7
+8    19      99 13.8   59     5   8
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{NA išvalymas}
+O bet tačiau...
+\begin{itemize}
+\item O bet tačiau, ypatingai atliekant apklausas, visada nutiks taip, jog dalis respondentų neatsakys į kuriuos nors pavienius klausimus (pvz., nesupras klausimo)
+\item Visos obzervacijos panaikinimas gali būti labai "brangus", ypač turint mažą n
+\item todėl geriau atliekant skaičiavimus su R, funkcijoms nurodyti kaip apeiti NA
+\item Alternatyva, pakeisti NA pvz 0, arba vidutine kintamojo reikšme. Tačiau tai būtina protokoluoti ir nurodyti tyrime / tyrimo meta apraše
+
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Vektorizuotos operacijos}
+\begin{itemize}
+\item R skaičiavimus atlieka vektorizuojant savo objektus
+\end{itemize}
+\begin{lstlisting}
+> x<- 1:5; y<-3:7; z<- 1:2
+
+> x+y
+[1]  4  6  8 10 12
+> x*y
+[1]  3  8 15 24 35
+> x/y
+[1] 0.3333333 0.5000000 0.6000000 0.6666667 0.7142857
+
+> x+z
+[1] 2 4 4 6 6
+Warning message:
+In x + z : longer object length is not a multiple of shorter object length
+
+> x*z
+[1] 1 4 3 8 5
+Warning message:
+In x * z : longer object length is not a multiple of shorter object length
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Matricos}
+\begin{lstlisting}
+> x<-matrix(1:4,2,2); y<-matrix(rep(10,4),2,2); s<-matrix(1:2,nrow=2)
+
+> x
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+> y
+     [,1] [,2]
+[1,]   10   10
+[2,]   10   10
+> x*y
+     [,1] [,2]
+[1,]   10   30
+[2,]   20   40
+> x+y
+     [,1] [,2]
+[1,]   11   13
+[2,]   12   14
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Matricos}
+\begin{lstlisting}
+> x<-matrix(1:4,2,2); y<-matrix(rep(10,4),2,2); s<-matrix(1:2,nrow=2)
+
+> x%*%y
+     [,1] [,2]
+[1,]   40   40
+[2,]   60   60
+> x%*%s
+     [,1]
+[1,]    7
+[2,]   10
+\end{lstlisting}
+\end{frame}
+%----------------------------------------------------------
+\end{document}
