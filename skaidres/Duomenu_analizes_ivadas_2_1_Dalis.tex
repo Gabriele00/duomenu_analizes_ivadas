@@ -94,12 +94,12 @@
 
 \begin{frame}{R Istorija}
 \begin{itemize}
-\item R yra S dialektas
-\item S parašyta John Chambers et al. @Bell Labs 1976m.
-\item S buvo perrašyta 1988 (v3) ir tapo labiau panaši į statistinę programą, o 1998 išleista S v4.
-\item R sukurtas 1991 mokslinio darbo rėmuose (Ross Ihaka ir Robert Gentleman )
-\item 1993 R pristatytas visuomenei
-\item 1995 R gavo GNU licenziją
+\item R yra S kalbos dialektas
+\item S kalba parašyta John Chambers et al. @Bell Labs 1976m.
+\item S buvo perrašyta 1988m. (v3) ir tapo labiau panaši į statistinę programą, o 1998m. išleista v4.
+\item R sukurtas 1991m. mokslinio darbo rėmuose (Ross Ihaka ir Robert Gentleman ) Auckland universitete (Naujoji Zealandija)
+\item 1993m. R pristatytas visuomenei
+\item 1995m. R gavo GNU licenziją
 \end{itemize}
 \end{frame}
 
@@ -111,20 +111,22 @@
 \item R veikia ant su bet kokia operacine sistema
 \item Didelė bendruomenė, todėl labai daug paketų ir dažni bugfix'ai
 \item Santykinai lengva atlikti statistines analizes, tačiau suteikia beveik neribotas galimybes norintiems programuoti savo paketus
-\item \href{https://www.gnu.org/philosophy/philosophy.html}{\color{blue}{Philosophy of the GNU Project}}
+\item R yra laisva programa (\textit{free software}) remiantis GNU Public License
 \end{itemize}
 \end{frame}
 
 %---------------------------------------------------------
 
 \begin{frame}{Free software}
-Jeigu kalbame apie "free software" turima omenyje
+Jeigu kalbame apie "free software" turima omenyje 4 laisves
 \begin{itemize}
-\item Laisvė naudotis programa, bet kuriuo tikslu
-\item Laisvė analizuoti ir keisti programą pagal savo poreikius
-\item Laisvė dalintis programos kopijomis
-\item Laisvė dalintis pagerintomis kopijomis
+\item 0. Laisvė naudotis programa, bet kuriuo tikslu
+\item 1. Laisvė analizuoti ir keisti programą pagal savo poreikius
+\item 2. Laisvė dalintis programos kopijomis
+\item 3. Laisvė dalintis pagerintomis kopijomis
 \end{itemize}
+1 ir 3 laisvėms būtina laisva prieiga prie programos kodo.\\
+\href{https://www.gnu.org/philosophy/philosophy.html}{\color{blue}{Philosophy of the GNU Project}}
 \end{frame}
 
 %---------------------------------------------------------
@@ -154,9 +156,12 @@ Jeigu kalbame apie "free software" turima omenyje
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{R sistema}
+R susideda iš dviejų komponentų:
+\begin{enumerate}
+\item Bazinė R sistema su standartiniais paketais: stats, graphics, grDevices, utils, datasets, methods, base  (galima pamatyti įvedus komandą search() )
+\item Visų kitų paketų
+\end{enumerate}
 \begin{itemize}
-\item Bazinė R sistema su standartiniais paketais: stats, graphics, grDevices, utils, datasets, methods, base 
-\item Visi kiti paketai
 \item dauguma R paketų saugomi CRAN (Comprehensive R Archive Network), iš kur atsisiunčiamas ir pats R
 \item available.packages() funkcija, kuri surenką visą informaciją apie ezistuojančius R paketus @CRAN
 \begin{lstlisting}
@@ -171,13 +176,14 @@ length(a)
 %----------------------------------------------------------
 
 \begin{frame}{Kur rasti pagalbą}
-\begin{itemize}
-\item Dokumentacija
-\item Google (Ctrl+C Ctrl+V error code)
-\item Kursiokai
-\item Stackoverflow
-\item Dėstytojas
-\end{itemize}
+99.99\%, na ką jau, 150\% visi susidursite su problemomis, kai kažkas neveiks kaip norite, kai R praneš apie klaidas ir t.t. ir kai patys nežinosite ką daryti toliau. Todėl toks "pagalbos eiliškumas": 
+\begin{enumerate}
+\item R, R paktetų, Git, GitHub dokumentacija, "help" funkcija
+\item Google (Ctrl+C Ctrl+V error code) 99.99\% kažkas jau tą problemą turėjo
+\item Kursiokai / Mokslo grupė
+\item \href{https://stackoverflow.com/}{\color{blue}{https://stackoverflow.com/}} (žr. sekanti skaidrė)
+\item Dėstytojas (žr. sekanti skaidrė)
+\end{enumerate}
 \end{frame}
 
 
@@ -191,7 +197,7 @@ length(a)
 \item Kokį rezultatą gaunate
 \item Kokią R versiją, kokius paketus naudojate (retai: kokia operacinė sistema)
 \item Visada geriausia aprašyti problemą, bei pateikti visą kodą, leidžiantį atkartoti Jūsų problemą
-\item antraštė turėtų būti trumpa ir aiški
+\item Antraštė turėtų būti trumpa ir aiški
 \end{itemize}
 \end{frame}
 
@@ -212,7 +218,7 @@ length(a)
 [1] "hello world"
 \end{lstlisting}
 
-Komentarai atskiriami su \# viskas į dešinę nuo \# ignoruojama, toje eilutėje
+Komentarai atskiriami su \# viskas į dešinę nuo \# ignoruojama (toje eilutėje)
 \begin{lstlisting}
 > msg <- "hello world" #pirma žinute
 > msg # autoprint prints values without entering command print()
@@ -239,13 +245,13 @@ Operatorius : sukuria eiles (sequence)
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{R objektai}
-R turi 5 bazinius objektų tipus (klasės)
+R turi 5 bazinius objektų tipus / klases (\textit{atomic classes}):
 \begin{itemize}
-\item charackter 
-\item numeric
-\item integer
-\item complex
-\item logical
+\item charackter: "vilnius", "amžius"
+\item numeric: 1, 4.5, -1.1...
+\item integer 1,2,3,4,5 (sveikas skaičius)
+\item complex 1+2i
+\item logical TRUE /FALSE arba T/F
 \end{itemize}
 Dažniausiai naudojamas vektorius, kuriame gali būti tik tos pačios klasės objektai. Tuščią vektorių galima sukurti su komanda vector()\\
 list (sąrašas) gali talpinti įvairių klasių objektus.
@@ -298,12 +304,12 @@ R objektai gali turėti atributus.
 \item c() funkcija leidžia sukurti objektų vektorius 
 \item c() iš concatenate 
 \begin{lstlisting}
-> x <- c(0.2 , 0.6) # numeric klasė
-> x <- c(TRUE, FALSE) #logical klasė
-> x <- c(T, F) #logical klasė
-> x <- c("a", "b", "c") #character klasė
-> x <- 1:5  #integer klasė
-> x <- c(1+0i, 2+4i) #complex klasė
+> x <- c(0.2 , 0.6) # numeric class
+> x <- c(TRUE, FALSE) #logical class
+> x <- c(T, F) #logical class
+> x <- c("a", "b", "c") #character class
+> x <- 1:5  #integer class
+> x <- c(1+0i, 2+4i) #complex class
 \end{lstlisting}
 \item galima sukurti tuščią vektorių, nurodant kokios klasės objektai jame bus ir kokia vektoriaus dimensija
 \begin{lstlisting}
@@ -316,13 +322,13 @@ R objektai gali turėti atributus.
 
 %----------------------------------------------------------
 
-\begin{frame}[fragile]{Vektorių sukūrimas}
+\begin{frame}[fragile]{Vektorių sujungimas (\textit{coersion})}
 \begin{itemize}
 \item jeigu su c() sujungiami skirtingų klasių objektai, R priskiria bendriausią klasę visiems vektoriuje esantiems objektams
 \begin{lstlisting}
-> x <- c(0.2 , "a") # character klasė
-> x <- c(TRUE, FALSE, 3) #numeric klasė
-> x <- c("a", TRUE, FALSE) #character klasė
+> x <- c(0.2 , "a") # character class
+> x <- c(TRUE, FALSE, 3) #numeric class
+> x <- c("a", TRUE, FALSE) #character class
 \end{lstlisting}
 \item TRUE=1, FALSE=0
 \item procesas kuris vyksta vadinamas \textit{coersion}
@@ -333,7 +339,7 @@ R objektai gali turėti atributus.
 
 \begin{frame}[fragile]{Vektorių sukūrimas}
 \begin{itemize}
-\item vektorius galima priskirti tam tikrai klasei manualiai
+\item Vektorius galima rankiniu būdu priskirti tam tikrai klasei 
 \begin{lstlisting}
 > x<-10:19
 > class(x)
@@ -357,7 +363,7 @@ Levels: 0 1 2 3 4 5 6 7 8 9 10
 
 \begin{frame}[fragile]{Vektorių sukūrimas}
 \begin{itemize}
-\item tačiau nelogiški manualūs priskyrimai generuos Nas
+\item tačiau nelogiški manualūs priskyrimai generuos NAs
 \begin{lstlisting}
 > x<- c("a", "b", "c")
 > as.numeric(x)
@@ -405,7 +411,7 @@ NAs introduced by coercion
 
 \begin{frame}[fragile]{Matricos}
 \begin{itemize}
-\item Matricos, tas pats vektoriaus objektas, tačiau turintis dimensiją
+\item Matricos, tai tas pats vektoriaus objektas, tačiau turintis dimensijos nustatymus
 \begin{lstlisting}
 > x <- matrix(nrow = 3, ncol = 3)
 > x
@@ -476,7 +482,7 @@ $dim
 
 \begin{frame}[fragile]{cbind , rbind}
 \begin{itemize}
-\item cbind (columnbind) ir rbind (rowbind) iš vektorių sukuria matricas
+\item cbind (columnbind) ir rbind (rowbind) iš atskirų vektorių sukuria matricas
 \begin{lstlisting}
 > x <-1:3
 > y <- 20:22
@@ -572,7 +578,7 @@ x
 \item Neapibrėžtos matematinės reikšmės NaN
 \item is.na() testuoja ar egzistuoja NA
 \item is.nan() testuoja ar egzistuoja NaN
-\item NA gali turėti klases (integer, charackter)
+\item NAN gali turėti klases (integer, numeric)
 \item NaN yra NA, bet NA nėra NaN
 \end{itemize}
 \end{frame}
@@ -581,7 +587,7 @@ x
 
 \begin{frame}[fragile]{Trūkstami skaičiai}
 \begin{itemize}
-\item Pvz
+\item is.na() ir is.nan() komandos pateikia vektorių, kuriame atspindimas testavimo rezultatas
 \begin{lstlisting}
 > x <- c(1,2,NA,4,5,6)
 > is.na(x)
@@ -610,9 +616,9 @@ x
 \item rownames
 \item colnames
 \end{itemize}
-\item Dažnai sukuriamos nuskaitant duomenis pvz., read.table arba read.csv()
+\item Dažnai sukuriamos nuskaitant duomenis pvz., read.table() arba read.csv()
 \item Galima pakeisti į matricą su as.matrix()
-\item tuščia data frame galima sukurti su data.frame()
+\item Tuščią \textit{data frame} galima sukurti su data.frame()
 \end{itemize}
 \end{frame}
 
@@ -737,10 +743,10 @@ Pagrindinės funkcijos, kurios apdeda importuoti duomenis į R
 \begin{itemize}
 \item read.table(), read.csv() tabelinių duomenų importavimui
 \item readLines nuskaityti tekstą (pvz. .txt, .html)
-\item source()importuoti R kodo failus
+\item source() importuoti R kodo failus
 \item dget() importuoti R kodo failus
 \item load() importavimas išsaugotų darbolaukių (workspace)
-\item unserialize, importavimas R objektų binarinėje formoje
+\item unserialize(), importavimas R objektų binarinėje formoje
 \end{itemize}
 \end{frame}
 
@@ -848,8 +854,6 @@ df <- read.table("data.txt", colClasses=classes,
 \item Tekstiniai formatai idealus naudojant VCS
 \item Tekstiniai formatai yra universalūs, todėl iš esmes atsparūs "zeitgeist"
 \item Minusas, jog tekstiniai formatai užima daugiau vietos
-\begin{lstlisting}
-\end{lstlisting}
 \end{itemize}
 \end{frame}
 
@@ -1035,28 +1039,37 @@ $names
 
 > x[["names"]]
 [1] "Ana"   "Maria" "John"  "Peter"
-
-> x[c(1,3)]
-$grades
- [1]  1  2  3  4  5  6  7  8  9 10
-$course
-[1] "1gr" "2gr"
 \end{lstlisting}
 \end{frame}
 
 %----------------------------------------------------------
 \begin{frame}[fragile]{Subsetting list}
-\begin{itemize}
-\item Subsetting naudojant list objektą
-\end{itemize}
+\begin{lstlisting}
+> x[c(1,3)]
+$grades
+ [1]  1  2  3  4  5  6  7  8  9 10
+
+$course
+[1] "1gr" "2gr"
+
+> x[[c(1,3)]]
+[1] 3
+
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{Subsetting list}
 \begin{lstlisting}
 > kint <- "names"
+
 > x[kint]
 $names
 [1] "Ana"   "Maria" "John"  "Peter"
 
 > x[[kint]]
 [1] "Ana"   "Maria" "John"  "Peter"
+
 > x$kint
 NULL
 \end{lstlisting}
@@ -1065,9 +1078,6 @@ NULL
 
 %----------------------------------------------------------
 \begin{frame}[fragile]{Subsetting list}
-\begin{itemize}
-\item Subsetting naudojant list objektą
-\end{itemize}
 \begin{lstlisting}
 > x <- list(grades=1:10, names=c("Ana", "Maria", "John", "Peter"), 
 +           course=c("1gr", "2gr"))
@@ -1209,11 +1219,40 @@ NULL
 %----------------------------------------------------------
 
 \begin{frame}[fragile]{NA išvalymas}
+\begin{itemize}
+\item kita alternatyva: na.omit()
+\end{itemize}
+\begin{lstlisting}
+> library(datasets)
+> airquality[1:6,]
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+
+> na.omit(airquality)[1:6,]
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+7    23     299  8.6   65     5   7
+8    19      99 13.8   59     5   8
+\end{lstlisting}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{NA išvalymas}
 O bet tačiau...
 \begin{itemize}
-\item O bet tačiau, ypatingai atliekant apklausas, visada nutiks taip, jog dalis respondentų neatsakys į kuriuos nors pavienius klausimus (pvz., nesupras klausimo)
+\item O bet tačiau... ypatingai atliekant apklausas, visada nutiks taip, jog dalis respondentų neatsakys į kuriuos nors pavienius klausimus (pvz., nesupras klausimo)
 \item Visos obzervacijos panaikinimas gali būti labai "brangus", ypač turint mažą n
-\item todėl geriau atliekant skaičiavimus su R, funkcijoms nurodyti kaip apeiti NA
+\item Todėl geriau atliekant skaičiavimus su R, funkcijoms nurodyti kaip apeiti NA
 \item Alternatyva, pakeisti NA pvz 0, arba vidutine kintamojo reikšme. Tačiau tai būtina protokoluoti ir nurodyti tyrime / tyrimo meta apraše
 
 \end{itemize}
