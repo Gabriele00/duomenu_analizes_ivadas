@@ -81,7 +81,7 @@
 
 %----------------------------------------------------------
 
-\begin{frame}{1. Dalies turinys}
+\begin{frame}{2.1. Dalies turinys}
 \tableofcontents
 \end{frame}
 
@@ -230,7 +230,128 @@ ESC arba pabaigti įvesti. [1] indikuoja vektoriaus reikšmės numerį
 \end{frame}
 
 %----------------------------------------------------------
+\begin{frame}{R rezervuoti objektai}
+\begin{itemize}
+\item ?reserved komanda parodo, kokie objektų pavadinimai negali būti perrašyti
+\item nebent naudojamos backticks kabutes pvz.: `if`
+\end{itemize}
+\begin{table}[]
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+if            & else       & repeat        & while           & function \\ \hline
+for           & in         & next          & break           & TRUE     \\ \hline
+FALSE         & NULL       & Inf           & NaN             & NA       \\ \hline
+NA\_integer\_ & NA\_real\_ & NA\_complex\_ & NA\_character\_ & …        \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
 
+%----------------------------------------------------------
+\begin{frame}{R aritmetikos operatoriai}
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Operator}  & \textbf{Description}              \\ \hline
++                  & Addition                          \\ \hline
+–                  & Subtraction                       \\ \hline
+*                  & Multiplication                    \\ \hline
+/                  & Division                          \\ \hline
+\textasciicircum{} & Exponent                          \\ \hline
+\%\%               & Modulus (Remainder from division) \\ \hline
+\%/\%              & Integer Division                  \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}{R Relational Operators}
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Operator} & \textbf{Description}     \\ \hline
+\textless{}       & Less than                \\ \hline
+\textgreater{}    & Greater than             \\ \hline
+\textless{}=      & Less than or equal to    \\ \hline
+\textgreater{}=   & Greater than or equal to \\ \hline
+Err:520           & Equal to                 \\ \hline
+!=                & Not equal to             \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R loginiai operatoriai
+}
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Operator} & \textbf{Description}     \\ \hline
+!                 & Logical NOT              \\ \hline
+\&                & Element-wise logical AND \\ \hline
+\&\&              & Logical AND              \\ \hline
+|                 & Element-wise logical OR  \\ \hline
+||                & Logical OR               \\ \hline
+\end{tabular}
+\end{table}
+
+
+\end{frame}
+
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R loginiai operatoriai
+}
+\begin{lstlisting}
+v <- c(3,1,TRUE,2+3i); t <- c(4,1,FALSE,2+3i)
+
+It is called Element-wise Logical AND operator. It combines each element of the first vector with the corresponding element of the second vector and gives a output TRUE if both the elements are TRUE.
+
+print(v&t)
+
+[1]  TRUE  TRUE FALSE  TRUE
+
+It is called Element-wise Logical OR operator. It combines each element of the first vector with the corresponding element of the second vector and gives a output TRUE if one the elements is TRUE.
+
+print(v|t)
+
+[1]  TRUE FALSE  TRUE  TRUE
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R loginiai operatoriai
+}
+\begin{lstlisting}
+v <- c(3,0,TRUE,2+2i)
+t <- c(1,3,TRUE,2+3i)
+
+It is called Logical NOT operator. Takes each element of the vector and gives the opposite logical value.
+
+print(!v)
+[1] FALSE  TRUE FALSE FALSE
+
+Called Logical AND operator. Takes first element of both the vectors and gives the TRUE only if both are TRUE.
+
+print(v&&t)
+[1] TRUE
+
+Called Logical OR operator. Takes first element of both the vectors and gives the TRUE if one of them is TRUE.
+
+print(v||t) 
+[1] FALSE
+\end{lstlisting}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------------------------
 \begin{frame}[fragile]{R Input Output}
 Operatorius : sukuria eiles (sequence)
 \begin{lstlisting}
@@ -240,6 +361,11 @@ Operatorius : sukuria eiles (sequence)
 [19] 19 20 21 22 23 24 25 26 27 28 29 30
 \end{lstlisting}
 \end{frame}
+
+
+
+
+
 %----------------------------------------------------------
 \subsection{Objektų tipai}
 %----------------------------------------------------------
@@ -247,11 +373,12 @@ Operatorius : sukuria eiles (sequence)
 \begin{frame}[fragile]{R objektai}
 R turi 5 bazinius objektų tipus / klases (\textit{atomic classes}):
 \begin{itemize}
-\item charackter: "vilnius", "amžius"
-\item numeric: 1, 4.5, -1.1...
-\item integer 1,2,3,4,5 (sveikas skaičius)
-\item complex 1+2i
+\item numeric (double): 1, 4.5, -1.1...
+\item integer 1L, 2L, 3L (sveikas skaičius)
+\item complex 1i , 2i, 3i
+\item character: "vilnius", "amžius" (visada su kabutėmis)
 \item logical TRUE /FALSE arba T/F
+\item su komanda typeof() galima pasitikrinti klasę
 \end{itemize}
 Dažniausiai naudojamas vektorius, kuriame gali būti tik tos pačios klasės objektai. Tuščią vektorių galima sukurti su komanda vector()\\
 list (sąrašas) gali talpinti įvairių klasių objektus.
@@ -733,6 +860,34 @@ a b c
 \end{lstlisting}
 \end{itemize}
 \end{frame}
+
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Masyvai (\textit{arrays})}
+\begin{itemize}
+\item Daugiamačiai masyvai
+\begin{lstlisting}
+> a <- array(c(1:6),dim = c(3,3,2))
+> print(a)
+, , 1
+
+     [,1] [,2] [,3]
+[1,]    1    4    1
+[2,]    2    5    2
+[3,]    3    6    3
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]    4    1    4
+[2,]    5    2    5
+[3,]    6    3    6
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
 
 %----------------------------------------------------------
 \subsection{Duomenų importas į R}
@@ -1326,4 +1481,626 @@ In x * z : longer object length is not a multiple of shorter object length
 \end{lstlisting}
 \end{frame}
 %----------------------------------------------------------
+
+
+%----------------------------------------------------------
+\section{R programavimas}
+%----------------------------------------------------------
+%----------------------------------------------------------
+\subsection{Valdymo struktūros}
+%---------------------------------------------------------
+\begin{frame}
+Valdymo struktūros (control structures) leidžia valdyti programų veikimą, priklausomai nuo tam tikrų aplinkybių:
+\begin{itemize}
+\item if, else: testuoja tam tikrą aplinkybę
+\item for: vykdo programą tam tikrą iteracijų skaičių
+\item while: vykdo programą kol egzistuoja tam tikros aplinkybės
+\item repeat: vykdo nesibaigiančią iteraciją
+\item break: nutraukia iteracijos procesą
+\item next: peršoka 1 iteraciją
+\item return: nutraukia funkciją
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+\begin{frame}[fragile]{if}
+
+\begin{lstlisting}
+# 1
+if(<condition>) {
+        ## do something
+} 
+
+#2
+if(<condition>) {
+        ## do something
+} else{
+        ## do something
+}
+
+#3
+if(<condition>) {
+        ## do something
+} else if(<condition>) {
+        ## do something
+} else{
+        ## do something
+}
+\end{lstlisting}
+\end{frame}
+
+%---------------------------------------------------------
+\subsubsection{if}
+%---------------------------------------------------------
+
+\begin{frame}[fragile]{if}
+
+\begin{lstlisting}
+x <- 5
+
+if(x>3){
+        y <- 5
+} else{
+        y <- 0
+}
+
+# tapatu
+
+y <- if (x>3) {
+        5
+} else{
+        0
+}
+
+\end{lstlisting}
+\end{frame}
+
+%---------------------------------------------------------
+\subsubsection{for}
+%---------------------------------------------------------
+
+\begin{frame}[fragile]{for}
+\begin{itemize}
+\item for loop dažniausiai naudojami iteruoti tam tikriems veiksmams, žinant, kiek kartų iteracija turi trukti.
+\item galima naudoti "i" arba bet kokią kitą raidę / stringą
+\end{itemize}
+\begin{lstlisting}
+for (i in 1:5){
+        print(i)
+}
+
+for (values in 1:5){
+        print(values)
+}
+
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+
+
+\end{lstlisting}
+\end{frame}
+
+%---------------------------------------------------------
+
+\begin{frame}[fragile]{for}
+\begin{itemize}
+\item visi šie for loops veikia vienodai
+\end{itemize}
+\begin{lstlisting}
+x <- c("a", "b", "c", "d", "e", "f")
+
+for (i in 1:6) {
+        print(x[i])
+}
+
+for (i in seq_along(x)){
+        print(x[i])
+}
+
+for (raide in x) {
+        print(raide)
+}
+
+for(i in 1:6) print(x[i])
+\end{lstlisting}
+\end{frame}
+
+%---------------------------------------------------------
+
+\begin{frame}[fragile]{for}
+\begin{itemize}
+\item nested for loop
+\item retai naudojama, sunkiai suprantama, geriau nekišt nagų 
+\end{itemize}
+\begin{lstlisting}
+x <- matrix(1:9, ncol=3, nrow=3)
+
+for (i in seq_len(nrow(x))) {
+        for (j in seq_len(ncol(x))) {
+                print(x[i,j])
+        }
+        
+}
+
+seq_len() 
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\subsubsection{while}
+%----------------------------------------------------------
+\begin{frame}[fragile]{while}
+\begin{itemize}
+\item while testuoja aplinkybes, jeigu ok, atlieka veiksmą, pabaigus vėl testuoja ir t.t. 
+\item while loop gali testis neribotą skaičių iteracijų, tad atsargiai
+\item galima sutikti, kai bandoma iteruoti optimizavimo uždavinius, kur while (<condition>) yra siekiama vertė
+\end{itemize}
+\begin{lstlisting}
+count <-0
+
+while(count<5000){
+        print(count)
+        count <-count+1
+}
+
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{while}
+\begin{itemize}
+\item pvz., čia visai neaišku, kada baigsis iteracija
+\end{itemize}
+\begin{lstlisting}
+z<- 5
+
+while(z>=3 && z<=10){
+        print(z)
+        #rbinom(n, size, prob)
+        coin <- rbinom(1,1,0.5)
+        if(coin==1){
+                z<- z+1
+        }else{
+                z<- z-1
+        }
+}
+
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\subsubsection{repeat, break, next}
+%----------------------------------------------------------
+\begin{frame}[fragile]{repeat, break, next}
+\begin{itemize}
+\item repeat inicializuoja begalinės trukmės loop
+\item vienintelis būdas sustabdyti, su break
+\item pavojinga funkcija!
+\end{itemize}
+\begin{lstlisting}
+x0 <- 1
+tol <- 1e-8
+
+repeat{
+        x1 <- computeEstimate() #pvz kokia nors optimizavimo funkcija
+        if(abs(x1-x0)<tol){
+                break
+        }else{
+                x0 <-x1
+        }
+}
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{repeat, break, next}
+\begin{itemize}
+\item next komanda peršoka prie sekančios iteracijos
+\end{itemize}
+\begin{lstlisting}
+for (i in 1:100) {
+        if(i<=30){
+                ## skips the first 30
+                next
+        }
+        print(i)
+        
+}
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\subsection{Funkcijos}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R Funkcijos}
+\begin{itemize}
+\item Užrašome savo pirmą funkciją
+\item Ką ji daro?
+\end{itemize}
+\begin{lstlisting}
+add2 <- function(x,y){
+        x+y
+}
+
+add2(3,5)
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}[fragile]{R Funkcijos}
+\begin{itemize}
+\item 2 funkcija
+\item Ką ji daro?
+\end{itemize}
+\begin{lstlisting}
+above10 <- function(x){
+        use <- x>10
+        x[use]
+}
+
+c <- seq(1:20)
+
+above10(c)
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos}
+\begin{itemize}
+\item Patobuliname antrą funkciją: 2 argumentai ir antras standartizuotas argumentas
+\end{itemize}
+\begin{lstlisting}
+
+above <- function(x,y){
+        use <- x>y
+        x[use]
+}
+above(c,6)
+
+above <- function(x,y=10){
+        use <- x>y
+        x[use]
+}
+
+above(c)
+above(c,2)
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos}
+\begin{itemize}
+\item Funkcija, kuri apskaičiuoja stulpelių vidurkius:
+\end{itemize}
+\begin{lstlisting}
+column_mean <- function(y){
+        nc <- ncol(y)
+        means <- numeric(nc)
+        for (i in 1:nc){
+                means[i] <-mean(y[,i])
+        }
+        means
+}
+
+library(datasets)
+column_mean(airquality)
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos}
+\begin{itemize}
+\item Kai kurių stulepelių nepavyko apskaičiuoti, nes kai kuriuos reikšmės NA
+\item na.rm=TRUE funkcijoje mean(), leidžia apskaičiuoti įverčius pašalinant NA
+\end{itemize}
+\begin{lstlisting}
+column_mean <- function(y){
+        nc <- ncol(y)
+        means <- numeric(nc)
+        for (i in 1:nc){
+                means[i] <-mean(y[,i], na.rm = TRUE )
+        }
+        means
+}
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos apibendrinimas}
+\begin{itemize}
+\item Funkcijos savaime yra R objektai, kuriuos galima perduoti kaip argumentus kitoms funkcijoms
+\item Funkcijos gali būti \textit{nested} viena į kitą
+\item Funkcijos rezultatas - paskutinė R išraiška funkcijos viduje
+\item \textit{Formal arguments} - predefinuoti argumentai, tai palengvina funkcijų naudojima (pvz., read.csv: sep=",")
+
+\end{itemize}
+\begin{lstlisting}
+f <- function (<arguments>){
+		##  funkcijos veikla
+}
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos}
+\begin{itemize}
+\item Pozicinis vs leksinis, dalinis funkcijų argumentų  \textit{matching}
+\begin{itemize}
+\item Leksikinis pilnas matching
+\item Leksikinis dalinis, bet unikalus matching
+\item Pozicinis matching
+\end{itemize}
+\end{itemize}
+\begin{lstlisting}
+?sd
+sd(x, na.rm = FALSE)
+
+data <- rnorm(100)
+
+sd(data)
+sd(x=data)
+sd(x=data, na.rm = TRUE)
+sd(na.rm = TRUE, x=data)
+sd(na.rm = TRUE, data)
+\end{lstlisting}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos}
+\begin{itemize}
+\item Pozicinis vs leksinis, dalinis funkcijų argumentų  \textit{matching}
+\begin{itemize}
+\item Leksikinis pilnas matching
+\item Leksikinis dalinis, bet unikalus matching
+\item Pozicinis matching
+\end{itemize}
+\item Patarimas bent jau pradžioje išrašykite argumentus su jų apibrėžimu, padeda greičiau išmokti ir padarysite mažiau klaidų
+\end{itemize}
+\begin{lstlisting}
+args(lm)
+function (formula, data, subset, weights, na.action, method = "qr", model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, contrasts = NULL, offset, ...) 
+
+mydata <- data.frame(x=rnorm(1000), y=rnorm(1000))
+
+lm(data=mydata, y~x, model = FALSE, 1:100)
+lm(y~x, data=mydata, 1:100, model = FALSE)
+lm(y~x, dat=mydata, 1:100, mod = FALSE)
+lm (formula= "y~x", data=mydata, subset=1:100,model = FALSE)
+plot(lm(formula= "y~x", data=mydata, subset=1:100,model = FALSE))
+ 
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos - Lazy evaluation}
+\begin{itemize}
+\item \textit{Lazy evaluation} reiškia, jog argumentai funkcijoje panaudojami tada, kai ir jeigu, jų reikia
+\end{itemize}
+\begin{lstlisting}
+f<-function(a,b){
+         a^2
+}
+f(2) #positional matching a=2
+[1] 4
+
+f <- function(a,b){
+        print(a)
+        print(b)
+}
+
+f(10)  #positional matching a=10
+
+[1] 10
+Error in print(b) : argument "b" is missing, with no default
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos - ...}
+\begin{itemize}
+\item ... indikuoja argmentus, kurie perduodami kitai funkcijai
+\item \textit{Generic functions} naudoja ... \textit{methods} (šiuo metu nesvarbu...)
+\end{itemize}
+\begin{lstlisting}
+
+
+myplot <- function(x,y,type="l",...){
+        plot(x,y,type=type,...)
+}
+
+plot(mydata$x, mydata$y)
+myplot(mydata$x, mydata$y)
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos - ...}
+\begin{itemize}
+\item ... indikuoja argmentus, kurie perduodami kitai funkcijai
+\item \textit{Generic functions} naudoja ... \textit{methods} (šiuo metu nesvarbu...)
+\end{itemize}
+\begin{lstlisting}
+myplot <- function(x,y,type="l",...){
+        plot(x,y,type=type,...)
+}
+
+plot(x=rnorm(1000), y=rnorm(1000))
+myplot(x=rnorm(1000), y=rnorm(1000))
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{R Funkcijos - ...}
+\begin{itemize}
+\item ...  arba kai funkcija negali žinoti, kokie argumentai bus pateikti, arba kiek jų
+\item Tačiau po jų, būtina teisingai išrašyti argumentus
+
+\end{itemize}
+\begin{lstlisting}
+args(paste)
+function (..., sep = " ", collapse = NULL) 
+
+args(cat)
+function (..., file = "", sep = " ", fill = FALSE, labels = NULL, 
+          append = FALSE) 
+paste("a", "b", "c", sep = ",")
+[1] "a,b,c"
+
+paste("a", "b", "c", se = ",")
+[1] "a b c ,"
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------
+\subsection{Data ir laikas}
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data ir laikas}
+\begin{itemize}
+\item Datos turi Date klasę
+\item Laikas gali būti POSIXct arba POSIXlt klasės
+\item Data išsaugoma kaip dienų skirtumas lyginant su 1970-01-01
+\item Laikas išsaugomas kaip sekundžių skirtumas lyginant su 1970-01-01
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data ir laikas}
+\begin{itemize}
+\item Character string su data galima paversti į datos klasės objektą
+\begin{lstlisting}
+x <- as.Date("2019-03-27")
+
+x
+[1] "2019-03-27"
+
+class(x)
+[1] "Date"
+
+unclass(x)
+[1] 17982
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data ir laikas}
+\begin{itemize}
+\item Laikas gali b8ti POSIXct arba POSIXlt klasės
+\item POSIXct išsaugo laiką kaip skaičių
+\item POSIXlt išsaugo laiką kaip \textit{list} su daug papildomos informacijos
+\item Naudingos funkcijos
+\begin{itemize}
+\item weekdays
+\item months
+\item quarters
+\end{itemize}
+\begin{lstlisting}
+x <- Sys.time()
+x
+class(x)
+p <- as.POSIXlt(x)
+p
+unclass(p)
+names(unclass(p))
+p$sec
+
+unclass(x)
+
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data ir laikas}
+\begin{itemize}
+\item Komanda strptime padeda iš \textit{charackter string} nuskaityti datą
+\item Praktikoje patartina geriau naudotis paketai tokiais kaip \textit{lubridate}, \textit{zoo}
+\begin{lstlisting}
+datestring <- c("2019 January 21, 21:15","2019 February 14, 14:14")
+x <- strptime(datestring, format="%Y %B %d, %H:%M")
+x
+class(x)
+
+#but not with lithuanian names
+datestring <- c("2019 Sausis 21, 21:15","2019 Vasaris 14, 14:14")
+x <- strptime(datestring, format="%Y %B %d, %H:%M")
+x
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data ir laikas}
+\begin{itemize}
+\item Su datomis galima pasižaisti:
+\begin{lstlisting}
+x <- as.Date("2019-03-27")
+class(x)
+
+y <- strptime("2019 January 21, 21:15", format="%Y %B %d, %H:%M")
+
+x-y
+
+as.POSIXct(x)-y
+as.POSIXlt(x)-y
+
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}[fragile]{Data ir laikas}
+\begin{itemize}
+\item Su datomis galima pasižaisti:
+\begin{lstlisting}
+x <- as.Date("2016-02-28"); y <- as.Date("2016-03-01")
+y-x
+x <- as.Date("2016-02-28"); y <- as.Date("2016-02-29")
+y-x
+
+lt <- as.POSIXct("2019-02-27 08:00:00", tz = "EET")
+us <- as.POSIXct("2019-02-27 08:00:00", tz = "EST")
+us-lt
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+%----------------------------------------------------------
+\section{Tvarkingas kodavimas}
+
+\begin{frame}{Tvarkingas kodavimas}
+\begin{itemize}
+\item Visada rašykite kodą su (plain text) editoriumi
+\item Naudokite \textit{identing} (8 spaces) (CRTL+I @R)
+\item Max eilučių ilgis: 80 ženklų
+\item Apribokite funkcijas: 1 funkcija - 1 operacija
+\end{itemize}
+\end{frame}
+
 \end{document}

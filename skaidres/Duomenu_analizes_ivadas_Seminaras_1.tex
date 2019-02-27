@@ -69,8 +69,8 @@ Instaliuokite šias programas savo asmeniniame kompiuteryje. Jeigu naudojatės V
 \item Instaliuokite Sublime
 \item Nepamirškite pagrindinių nustatymų
 \begin{lstlisting}
-$ git config --global user.name "Vardas Pavardė"
-$ git config --global user.email vardas.pavarde@evaf.vu.lt
+$ git config --global user.name "Firstname Lastname"
+$ git config --global user.email firstname.lastname@evaf.vu.lt
 $ git config --global core.pager cat 
 \end{lstlisting}
 \end{enumerate}
@@ -85,17 +85,27 @@ $ git config --global core.pager cat
 \\Pastaba: Tarkime, kad mano studento nr yra "S175", Jūsų gali būti kitoks, tada naudojate savo vietoj mano "S175"
 
 \begin{enumerate}
+
 \item Su Git nueiname and Desktopo (arba tiesiog paleidžiama "Git Bash Here" [su dešiniu pelės mygtuku])
+
 \item Sukuriame folderį webpage \colorbox{listinggray}{\lstinline|mkdir -p S175/webpage|}
-\item Perėjus į patį webpage folderį, inicijuojame jį su git, taigi prima \colorbox{listinggray}{\lstinline|cd S175/webpage|}, o tada \colorbox{listinggray}{\lstinline|git init|}
+
+\item Perėjus į patį webpage folderį, inicijuojame jį su git, taigi pirma \colorbox{listinggray}{\lstinline|cd S175/webpage|}, o tada \colorbox{listinggray}{\lstinline|git init|}
+
 \item Pirmas dalykas, kurį mums reiktų sukurti, tai bazinis html dokumentas kurio pavadinimas būtų \textit{index} \colorbox{listinggray}{\lstinline|touch index.html|}
+
 \item Jeigu tiesiog atsidarysite index.html failą su kuria nors naršykle, pamatysite, kad viskas yra absoliučiai balta! Neįdomu :D
-\item Atsidarome \textit{index.html} su \textit{Sublime} editoriumi
+
+\item Atsidarome \textit{index.html} su \textit{Sublime} editoriumi (editoriuje pasirenkame View -> Syntax -> HTML)
+
+
 \item Editoriuje įrašome tekstą
 \begin{lstlisting}
-Čia kuriamas mano tinklapis
+Cia kuriamas mano tinklapis
 \end{lstlisting}
 išaugome (ctrl+s)
+
+
 \item Atnaujiname interneto naršyklę (F5), rezultatas turėtų atrodyti daugmaž taip
 
 \begin{figure}[ht]
@@ -202,7 +212,7 @@ Changes not staged for commit:
 \includegraphics[scale=0.4]{webpage_6.png}
 \end{figure}
 
-\item Github sukuriame naują repo "webpage", Praleidžiame aprašymą ir paliekame be "README".
+\item Github sukuriame naują repo "webpage", Praleidžiame aprašymą ir paliekame \textbf{be "README".}
 
 \item Keliaujame į Git Bash ir įrašome
 
