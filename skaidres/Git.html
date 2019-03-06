@@ -194,6 +194,14 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="css"><code>.badCode {
+background-color: red;
+}</code></pre>
+<style type="text/css">
+.badCode {
+background-color: red;
+}
+</style>
 <div id="basic-settings" class="section level2">
 <h2>Basic settings</h2>
 <p>Many students working on the same computers cause, that the <em>Git config</em> has multiple diferent settings set. So there are basically two options: either unset set values, or edit the Git config file itself</p>
@@ -211,10 +219,10 @@ git config --global user.email fistnamelastname@provider.geo
 <pre><code>git config --global core.pager cat
 git config --global core.askPass &quot;&quot;</code></pre>
 <p>Depending on the computer operating system, after installing Git, the core editor might be <em>nano</em> or <em>Vim</em>. Personally I preffer <em>nano</em>. To make sure, you never end up in <em>Vim</em>, you can mannualy set your core editor to <em>nano</em>. Or if you have <em>Sublime</em> installed, set core editor su <em>Sublime</em>, by appending the execution file (.exe). I strongly suggest using <em>Sublime</em>, given its simplicity and many features</p>
-<pre><code>$ git config −−global core.editor nano.exe
+<pre><code>$ git config --global core.editor nano.exe
 
 #here the absolute link to the execution file might be different on every computer!
-$ git config −−global core.editor /c/Users/USER/Download/sublime/sublime_text.exe</code></pre>
+$ git config --global core.editor /c/Users/USER/Download/sublime/sublime_text.exe</code></pre>
 </div>
 <div id="git-basic-commands" class="section level2">
 <h2>Git Basic Commands</h2>
