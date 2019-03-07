@@ -15,7 +15,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, error = TRUE, cache = TRUE, fig.pos = 'h')
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, error = TRUE, cache = FALSE, fig.pos = 'h')
 library(gridExtra)
 ```
 
