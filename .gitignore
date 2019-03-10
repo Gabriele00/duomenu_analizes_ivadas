@@ -6,5 +6,6 @@
 *.gz
 *.toc
 *.vrb
+*.Rmd
 /knygos
 /class_work
