@@ -7,8 +7,8 @@
 *.toc
 *.vrb
 *.Rmd
+*.Rhistory
 header.txt
 headet_en.txt
 /knygos
-/class_work
 /lectures_slides/figures
