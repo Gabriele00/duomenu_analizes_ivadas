@@ -11,7 +11,7 @@
 
 <meta name="author" content="Justas Mundeikis" />
 
-<meta name="date" content="2019-03-10" />
+<meta name="date" content="2019-03-17" />
 
 <title>Seminar 2</title>
 
@@ -73,9 +73,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -106,8 +104,6 @@ summary {
 </style>
 
 
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -182,38 +178,48 @@ $(document).ready(function () {
 
 
 
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
 
 <div class="fluid-row" id="header">
 
 
 
 <h1 class="title toc-ignore">Seminar 2</h1>
-<h4 class="author"><em>Justas Mundeikis</em></h4>
-<h4 class="date"><em>2019-03-10</em></h4>
+<h4 class="author">Justas Mundeikis</h4>
+<h4 class="date">2019-03-17</h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#apie-seminara"><span class="toc-section-number">1</span> Apie seminarą</a></li>
-<li><a href="#uzduotys"><span class="toc-section-number">2</span> Užduotys</a><ul>
-<li><a href="#pasikartojimo-dalis"><span class="toc-section-number">2.1</span> Pasikartojimo dalis</a><ul>
-<li><a href="#duomenys"><span class="toc-section-number">2.1.1</span> Duomenys:</a></li>
-<li><a href="#uzduotys-1"><span class="toc-section-number">2.1.2</span> Užduotys:</a></li>
+<li><a href="#apie-seminara"><span class="toc-section-number">1</span> Apie seminarą</a><ul>
+<li><a href="#seminaro-aptarimas"><span class="toc-section-number">1.1</span> Seminaro aptarimas:</a></li>
+<li><a href="#uzduotys"><span class="toc-section-number">1.2</span> Užduotys</a></li>
 </ul></li>
-<li><a href="#funkciju-programavimas"><span class="toc-section-number">2.2</span> Funkcijų programavimas</a><ul>
-<li><a href="#pirma-funkcija"><span class="toc-section-number">2.2.1</span> Pirma funkcija</a></li>
-<li><a href="#antra-funckija"><span class="toc-section-number">2.2.2</span> Antra funckija</a></li>
-<li><a href="#trecia-funkcija"><span class="toc-section-number">2.2.3</span> Trečia funkcija</a></li>
-<li><a href="#klausimai-antrai-daliai"><span class="toc-section-number">2.2.4</span> Klausimai antrai daliai:</a></li>
+<li><a href="#pasikartojimo-dalis"><span class="toc-section-number">2</span> Pasikartojimo dalis</a><ul>
+<li><a href="#duomenys"><span class="toc-section-number">2.1</span> Duomenys:</a></li>
+<li><a href="#uzduotys-1"><span class="toc-section-number">2.2</span> Užduotys:</a></li>
 </ul></li>
+<li><a href="#funkciju-programavimas"><span class="toc-section-number">3</span> Funkcijų programavimas</a><ul>
+<li><a href="#pirma-funkcija"><span class="toc-section-number">3.1</span> Pirma funkcija</a></li>
+<li><a href="#antra-funckija"><span class="toc-section-number">3.2</span> Antra funckija</a></li>
+<li><a href="#trecia-funkcija"><span class="toc-section-number">3.3</span> Trečia funkcija</a></li>
 </ul></li>
+<li><a href="#klausimai-funkciju-daliai"><span class="toc-section-number">4</span> Klausimai funkcijų daliai:</a></li>
 </ul>
 </div>
 
 <div id="apie-seminara" class="section level1">
 <h1><span class="header-section-number">1</span> Apie seminarą</h1>
-<p>Seminaras nėra skirtas vien tam, jog studentai pasikartotų paskaitų metu įgytas žinias, bet jog ir būtų skatinami savarankiškai gilintis į studijuojama dalyką. Todėl labai tikėtina, jog sprendžiant seminaro užduotis, studentai turės ne tik dar kartą peržiūrėti paskaitų skaidres, bet ir panaršyti literatūroje / internete, beieškant tinkamų sprendimų. Kaip dėstytojas rekomenduočiau taip spręsti seminaro užduotis:</p>
+<p>Seminaras nėra skirtas vien tam, jog studentai pasikartotų paskaitų metu įgytas žinias, bet jog ir būtų skatinami savarankiškai gilintis į studijuojamą dalyką. Todėl labai tikėtina, jog sprendžiant seminaro užduotis, studentai turės ne tik dar kartą peržiūrėti paskaitų skaidres, bet ir panaršyti literatūroje / internete, beieškant tinkamų sprendimų. Kaip dėstytojas rekomenduočiau taip spręsti seminaro užduotis:</p>
 <ul>
 <li>Pabandyti išspręsti visas užduotis vieniems</li>
 <li>Sulyginti savo užduotis su pateiktais rezultatais</li>
@@ -221,25 +227,33 @@ $(document).ready(function () {
 <li>Sulyginti savo rezultatus. Išsiaiškinti taprusavyje, kodėl kas kaip sprendė. Labai svarbu suprasti, jog R’e visada bus galima rasti <code>n+1</code> galimą sprendimą tam pačiam uždaviniui atlikti. Rezultatas bus tas pats, bet kelias pasirinktas kitas. Svarbiausia bandyti turint sprendimą ieškoti būdų, kaip “optimizuoti” kodą, jog R galėtų veikti kuo sparčiau.</li>
 </ul>
 <p>Seminaro užduočių sudėtingumas yra santykinai propocionalus testų / egzamino sudėtingumui, todėl labai svarbu, jog sprendžiant pavieniui ar grupėse, studentai suprastų <strong><em>kodėl</em></strong> ir ne tik <strong><em>kaip</em></strong>.</p>
+<div id="seminaro-aptarimas" class="section level2">
+<h2><span class="header-section-number">1.1</span> Seminaro aptarimas:</h2>
+<ul>
+<li>2019-03-21 I srautas</li>
+<li>2019-03-28 II srautas</li>
+</ul>
 </div>
-<div id="uzduotys" class="section level1">
-<h1><span class="header-section-number">2</span> Užduotys</h1>
-<p>Seminarą sudaro 2 dalys: pasikartojimo užduotis ir 3 funkcijų užduotis. * Pasikartojimo užduotis sudėtingumu skalėje nuo 0-10 siekti apie 5 ir atitinka (ne)anonsuotų testų sudėtingumą * Funkcijų parašymas sudėtingumu skalėje nuo 0-10 siekti tarp 8 ir 12 atitinka sudėtingumo lygiui, kurio tikėčiausi rašto darbe</p>
-<div id="pasikartojimo-dalis" class="section level2">
-<h2><span class="header-section-number">2.1</span> Pasikartojimo dalis</h2>
-<div id="duomenys" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> Duomenys:</h3>
-<p>Parsisiųskite suzipintą duomenų failą: <a href="https://github.com/justasmundeikis/duomenu_analizes_ivadas/raw/master/seminarai/2_seminaro_u%C5%BEduotis_1.zip">2_seminaro_užduotys_1.zip</a>. Unzippinkite failą ir importuokite duomenis tiesigiai iš R.</p>
+<div id="uzduotys" class="section level2">
+<h2><span class="header-section-number">1.2</span> Užduotys</h2>
+<p>Seminarą sudaro 2 dalys: pasikartojimo užduotis ir 3 funkcijų užduotys. * Pasikartojimo užduotis sudėtingumu skalėje nuo 0-10 siektia apie 5 ir atitinka (ne)anonsuotų testų sudėtingumą * Funkcijų parašymas sudėtingumu skalėje nuo 0-10 siekti tarp 8 ir 12 atitinka sudėtingumo lygiui, kurio tikėčiausi rašto darbe</p>
 </div>
-<div id="uzduotys-1" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> Užduotys:</h3>
+</div>
+<div id="pasikartojimo-dalis" class="section level1">
+<h1><span class="header-section-number">2</span> Pasikartojimo dalis</h1>
+<div id="duomenys" class="section level2">
+<h2><span class="header-section-number">2.1</span> Duomenys:</h2>
+<p>Parsisiųskite suzipintą duomenų failą: <a href="https://github.com/justasmundeikis/duomenu_analizes_ivadas/raw/master/seminarai/2_seminaro_u%C5%BEduotis_1.zip">2_seminaro_užduotis_1.zip</a>. Unzippinkite failą ir importuokite duomenis į R. (Tiesa, tau galima apdaryti ir tiesiogiai iš R!)</p>
+</div>
+<div id="uzduotys-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> Užduotys:</h2>
 <ol style="list-style-type: decimal">
 <li>Kokie yra importuoto dataframe stulpelių pavadinimai?</li>
 <li>R’e atspausdinkite pirmas 4 dataframe eilutes.</li>
 <li>R’e atspausdinkite paskutines 4 dataframe eilutes.</li>
 <li>Kiek elementų / stebėjimų / observacijų turi dataframe?</li>
 <li>Kokia yra Ozono kiekio vertė 47 eilutėje?</li>
-<li>Kokios yra vėho greičio reikmšmės nuo 50 iki 59 stebėjimo?</li>
+<li>Kokios yra vėjo greičio reikšmės nuo 50 iki 59 stebėjimo?</li>
 <li>Kiek <code>NA</code> reikšmių yra Ozono kintamojo stulpelyje?</li>
 <li>Koks Ozono kintamojo vidurkis visame dataframe?</li>
 <li>Koks Solar.R kintamojo vidurkis, jeigu pasirenkami duomenys, kai Ozono reikmšės yra didesnis nei 31 ir temperatūra didesnė nei 90?</li>
@@ -248,12 +262,12 @@ $(document).ready(function () {
 </ol>
 </div>
 </div>
-<div id="funkciju-programavimas" class="section level2">
-<h2><span class="header-section-number">2.2</span> Funkcijų programavimas</h2>
-<p>Šioje dalyje Jums reikės parašyti tris skirtingas funkcijas, naudojantis šiuo zip failu: <a href="https://github.com/justasmundeikis/duomenu_analizes_ivadas/blob/master/seminarai/2_seminaro_u%C5%BEduotis_2.zip">2_seminaro_užduotis_2.zip</a>, kuriame yra oro kokybės matavimo duomenys iš JAV. Zip faile yra 332 skirtingų matavimo stočių failai, savo atksiruose .csv failuose. Kiekvieno failo pavadinimas pvz., “212.csv” reiškia, jog tai 212-os matavimo stoties duomenys. Kiekvename .csv faile yra 4 stulpeliai: data, sulfatų ir nitratų kiekis bei stoties ID.</p>
+<div id="funkciju-programavimas" class="section level1">
+<h1><span class="header-section-number">3</span> Funkcijų programavimas</h1>
+<p>Šioje dalyje Jums reikės parašyti tris skirtingas funkcijas, naudojantis šiuo zip failu: <a href="https://github.com/justasmundeikis/duomenu_analizes_ivadas/blob/master/seminarai/2_seminaro_u%C5%BEduotis_2.zip">2_seminaro_užduotis_2.zip</a>, kuriame yra oro kokybės matavimo duomenys iš JAV. Zip faile yra 332 skirtingų matavimo stočių failai, savo atskiruose .csv failuose. Kiekvieno failo pavadinimas pvz., “212.csv” reiškia, jog tai 212-os matavimo stoties duomenys. Kiekvename .csv faile yra 4 stulpeliai: data, sulfatų ir nitratų kiekis bei stoties ID.</p>
 <p>Parsisiųskite duomenis tik R pagalba. Išzipinkite duomenis.</p>
-<div id="pirma-funkcija" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Pirma funkcija</h3>
+<div id="pirma-funkcija" class="section level2">
+<h2><span class="header-section-number">3.1</span> Pirma funkcija</h2>
 <p>Parašykite funkciją <code>uzterstumo_vidurkis</code>, kuri apskaičiuotų vieno iš pasirinktų kintamųjų vidurkį pasirinktose stotyse.b Taigi funkcija <code>uzterstumo_vidurkis</code> turi priimti 3 argumentus: direktoriją, kintamojo pavadinimą bei matavimo stoties ID. Priklausomai nuo pateikto stočių ID vektoriaus, funkcija turi nuskaityti pasirinktų stočių .csv failus iš nurodytos direktorijos ir pateikti pasirinkto kintamojo bendrą (t.y. visų pasirinktų stočių) vidurkį. Labai svarbu, jog pateikiant vidurkį, būtų panaikintos NA reikmšmės, kitaip vidurkis negalės būti apskaičiuotas.</p>
 <p>Funkcijos prototipas:</p>
 <pre class="r"><code>pollutantmean &lt;- function(direktorija, kintamasis, id=1:332){
@@ -276,8 +290,8 @@ $(document).ready(function () {
 <pre class="r"><code>uzterstumo_vidurkis(&quot;specdata&quot;, &quot;nitrate&quot;, 23)</code></pre>
 <pre><code>## [1] 1.280833</code></pre>
 </div>
-<div id="antra-funckija" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Antra funckija</h3>
+<div id="antra-funckija" class="section level2">
+<h2><span class="header-section-number">3.2</span> Antra funckija</h2>
 <p>Parašykite funkciją, kuri nuskaitytų norimą direktoriją ir grąžintų dataframe, kurios pirmame stulpelyje būtų failo pavadinimas, o antrame pilnų observacijų skaičius.</p>
 <p>Funkcijos prototipas:</p>
 <pre class="r"><code>complete &lt;- function(direktorija, id=1:332){
@@ -316,8 +330,8 @@ $(document).ready(function () {
 <pre><code>##   id nobs
 ## 1  3  243</code></pre>
 </div>
-<div id="trecia-funkcija" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Trečia funkcija</h3>
+<div id="trecia-funkcija" class="section level2">
+<h2><span class="header-section-number">3.3</span> Trečia funkcija</h2>
 <p>Parašykite funkciją kuri priimtu argumentus: direktoriją ir “threshold”. Threshold nusako, kiek turi būti pilnų observacijų, jog matavimo stoties rodikliai būtų įtraukti į skaičiavimus. Funkcija turi apskaičiuoti koreliaciją tarp “sulfit” ir “nitrat”</p>
 <pre class="r"><code>corr &lt;- function(direktorija, threshold=0){
         ## `direktorija` yra charackter string nurodanti, kur randasi csv failai
@@ -353,8 +367,9 @@ summary(cr)</code></pre>
 <pre class="r"><code>length(cr)</code></pre>
 <pre><code>## [1] 323</code></pre>
 </div>
-<div id="klausimai-antrai-daliai" class="section level3">
-<h3><span class="header-section-number">2.2.4</span> Klausimai antrai daliai:</h3>
+</div>
+<div id="klausimai-funkciju-daliai" class="section level1">
+<h1><span class="header-section-number">4</span> Klausimai funkcijų daliai:</h1>
 <ul>
 <li>Pateiktie suapvalintą iki 3 ženklų po kablelio atsakymą:</li>
 </ul>
@@ -404,8 +419,6 @@ n &lt;- length(cr)
 cr &lt;- corr(&quot;specdata&quot;, 1000)                
 cr &lt;- sort(cr)
 print(c(n, round(cr, 4)))</code></pre>
-</div>
-</div>
 </div>
 
 
