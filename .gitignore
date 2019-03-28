@@ -7,7 +7,6 @@
 *.toc
 *.vrb
 *.tex
-*.Rmd
 *.Rhistory
 header.txt
 header_en.txt
