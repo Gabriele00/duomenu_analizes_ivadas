@@ -191,7 +191,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">1 Testas CLI, Git, GitHub, R, Skaitiniai</h1>
 <h4 class="author">Vardas Pavardė</h4>
-<h4 class="date">2019-03-28 01:19</h4>
+<h4 class="date">2019-03-30 14:27</h4>
 
 </div>
 
@@ -260,7 +260,7 @@ $(document).ready(function () {
 <li>[ ] <code>git pull https://github.com/name/folder master</code></li>
 <li>[ ] <code>git pull clone master https://github.com/name/folder</code></li>
 </ul></li>
-<li>(1 taškas) Kuri iš komandų ne stage’ins failų ir ne commit’ins jų (pastaba: kai paskutinio commit nėra sukurtų jokių naujų failų)?
+<li>(1 taškas) Kuri iš komandų ne stage’ins failų ir ne commit’ins jų (pastaba: kai po paskutinio commit nėra sukurtų jokių naujų failų)?
 <ul>
 <li>[ ] <code>git add . &amp;&amp; git commit -m &quot;....&quot;</code></li>
 <li>[ ] <code>git add -A &amp;&amp; git commit -m &quot;....&quot;</code></li>
@@ -330,9 +330,11 @@ sapply(strsplit(str1,&quot; &quot;),length)
 <li>(14 taškų) Šiame uždavinyje turite parsisiųsti duomenis, juos importuoti į R, ir atlikti skaičiavimus. Atlikte žemiau pateiktus veiksmus pagal pateikta eilės seką:
 <ul>
 <li>Savo Github paskyroje susikurkite repo “ds-test-1”. <em>NEinicializuokite</em> su README.md. Klonuokite folderį į savo darbinę aplinką (patartina prieš tai CLI darbinę direktoriją pasikeist į Desktop).</li>
-<li>Su CLI (GitBash) nuskaitykite duomenis iš <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data" class="uri">https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data</a> [Patarimas: naudokite <code>curl url</code> komandą po jos perduodant komandą taip, kad CLI sukurtų failą census.csv [failas census.csv turi būti įrašytas lokaliame folderyje ds-test-1]</li>
+<li>Šio dokumento viršuje pakeiskite: <code>author: &quot;Vardas Pavardė&quot;</code> pakeiskite į savo vardą ir pavardę</li>
+<li>Išsaugokite šį pakeistą failą pervadinant jį į “StudNr_Vardas_Pavarde.Rmd” (save as) į nuklonuot tuščią folderį</li>
+<li>Su CLI (GitBash) nuskaitykite duomenis iš <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data" class="uri">https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data</a> [Patarimas: naudokite <code>curl url</code> komandą, po jos perduodant komandą taip, kad CLI sukurtų failą census.csv [failas census.csv turi būti įrašytas lokaliame folderyje ds-test-1]</li>
 <li>Alternatyviai galite duomenis nuskaityti ir iškart su R</li>
-<li>Pasitikrinkite ar R naudojasi ta pačia working directory (ds-test-1) ir ar aptinka pasisiųstą failą (jeigu su curl). Jeigu ne, pasikeiskite.</li>
+<li>Pasitikrinkite ar R naudojasi ta pačia working directory (ds-test-1) ir ar aptinka pasisiųstą failą (jeigu su curl). Jeigu ne, pasikeiskite (pakeitimas turi būti atliekamas .Rmd faile, ne consolėje)</li>
 <li>Toliau pildykite R kodą žemiau esančiame snippet.</li>
 </ul></li>
 </ol>
@@ -363,8 +365,6 @@ sapply(strsplit(str1,&quot; &quot;),length)
 <div id="darbo-uzbaigimo-ir-shipinimo-instrukcija" class="section level2">
 <h2><span class="header-section-number">1.6</span> Darbo užbaigimo ir ship’inimo instrukcija:</h2>
 <ul>
-<li>Viršuje pakeiskite: <code>author: &quot;Vardas Pavardė&quot;</code> pakeiskite į savo vardą ir pavardę</li>
-<li>Išsaugokite šį pakeistą failą pervadinant jį į “StudNr_Vardas_Pavarde.Rmd” (save as)</li>
 <li>Tada viršuje spauskite ant Knit trikampiuko ir pasirinkite <code>knit to html</code>.</li>
 <li>Pushinkit lokalią repo į Github. Folderyje turi būti 3 failai: “census.csv”, “StudNr_Vrdas_Pavardė.Rmd”, “StudNr_Vrdas_Pavardė.html”</li>
 <li>Įsitikinkite jog Githube guli repo kopija ir repo url įrašykite į <a href="https://docs.google.com/spreadsheets/d/1H_ts3wTKYZ4rocmFseR2YJtZHfhJ543MUWsTTa7x5Kc/edit?usp=sharing" class="uri">https://docs.google.com/spreadsheets/d/1H_ts3wTKYZ4rocmFseR2YJtZHfhJ543MUWsTTa7x5Kc/edit?usp=sharing</a> F stulpelį</li>

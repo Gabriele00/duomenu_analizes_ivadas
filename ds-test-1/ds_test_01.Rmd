@@ -63,7 +63,7 @@ Testas susideda iš kelių dalių.
     - [ ] `git pull https://github.com/name/folder master`
     - [ ] `git pull clone master https://github.com/name/folder`
 
-7. (1 taškas) Kuri iš komandų ne stage'ins failų ir ne commit'ins jų (pastaba: kai paskutinio commit nėra sukurtų jokių naujų failų)? 
+7. (1 taškas) Kuri iš komandų ne stage'ins failų ir ne commit'ins jų (pastaba: kai po paskutinio commit nėra sukurtų jokių naujų failų)? 
     - [ ] `git add . && git commit -m "...."`
     - [ ] `git add -A && git commit -m "...."`
     - [ ] `git add -U && commit -m "...."`
@@ -113,11 +113,13 @@ sapply(strsplit(str1," "),length)
 
 ## CLI & R
 12. (14 taškų) Šiame uždavinyje turite parsisiųsti duomenis, juos importuoti į R, ir atlikti skaičiavimus. Atlikte žemiau pateiktus veiksmus pagal pateikta eilės seką:
-    * Savo Github paskyroje susikurkite repo "ds-test-1". *NEinicializuokite* su README.md. Klonuokite folderį į savo darbinę aplinką (patartina prieš tai CLI darbinę direktoriją pasikeist į Desktop). 
+    * Savo Github paskyroje susikurkite repo "ds-test-1". *NEinicializuokite* su README.md. Klonuokite folderį į savo darbinę aplinką (patartina prieš tai CLI darbinę direktoriją pasikeist į Desktop).
+    * Šio dokumento viršuje pakeiskite: `author: "Vardas Pavardė"` pakeiskite į savo vardą ir pavardę
+    * Išsaugokite šį pakeistą failą pervadinant jį į "StudNr_Vardas_Pavarde.Rmd" (save as) į nuklonuot tuščią folderį
     * Su CLI (GitBash) nuskaitykite duomenis iš https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data 
-    [Patarimas: naudokite `curl url` komandą po jos perduodant komandą taip, kad CLI sukurtų failą census.csv [failas census.csv turi būti įrašytas lokaliame folderyje ds-test-1]
+    [Patarimas: naudokite `curl url` komandą, po jos perduodant komandą taip, kad CLI sukurtų failą census.csv [failas census.csv turi būti įrašytas lokaliame folderyje ds-test-1]
     * Alternatyviai galite duomenis nuskaityti ir iškart su R
-    * Pasitikrinkite ar R naudojasi ta pačia working directory (ds-test-1) ir ar aptinka pasisiųstą failą (jeigu su curl). Jeigu ne, pasikeiskite.
+    * Pasitikrinkite ar R naudojasi ta pačia working directory (ds-test-1) ir ar aptinka pasisiųstą failą (jeigu su curl). Jeigu ne, pasikeiskite (pakeitimas turi būti atliekamas .Rmd faile, ne consolėje)
     * Toliau pildykite R kodą žemiau esančiame snippet. 
 
 ```{r, collapse=TRUE}
@@ -149,9 +151,6 @@ sapply(strsplit(str1," "),length)
 
 
 ## Darbo užbaigimo ir ship'inimo instrukcija:
-
-* Viršuje pakeiskite: `author: "Vardas Pavardė"` pakeiskite į savo vardą ir pavardę
-* Išsaugokite šį pakeistą failą pervadinant jį į "StudNr_Vardas_Pavarde.Rmd" (save as)
 * Tada viršuje spauskite ant Knit trikampiuko ir pasirinkite `knit to html`. 
 * Pushinkit lokalią repo į Github. Folderyje turi būti 3 failai: "census.csv", "StudNr_Vrdas_Pavardė.Rmd", "StudNr_Vrdas_Pavardė.html"
 * Įsitikinkite jog Githube guli repo kopija ir repo url įrašykite į https://docs.google.com/spreadsheets/d/1H_ts3wTKYZ4rocmFseR2YJtZHfhJ543MUWsTTa7x5Kc/edit?usp=sharing F stulpelį
