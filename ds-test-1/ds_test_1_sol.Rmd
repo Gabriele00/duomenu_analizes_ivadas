@@ -78,14 +78,14 @@ Testas susideda iš kelių dalių.
 
 ## Skaitiniai
 9. (1 taškas) Estijoje parlamento rinkimuose, ultra-dešinioji EKRE partija: 
-    - [ ] padidino frakcijos dydį
+    - [x] padidino frakcijos dydį
     - [ ] sumažino frakcijos dyį
     - [ ] frakcijos dydis nepakito
     - [ ] nepateko į parlamentą
 
 10. (1 taškas) OECD pristatytoje atnaujintoje pasaulio ekonomikos prognozėje:  
     - [ ] OECD pagerino pasaulio ekonomikos augimo perspektyvą
-    - [ ] OECD pablogino pasaulio ekonomikos augimo perspektyvą
+    - [x] OECD pablogino pasaulio ekonomikos augimo perspektyvą
     - [ ] Nepakeitė pasaulio ekonomikos augimo perspektyvos
     - [ ] OECD apie pasaulio ekonomikos augimo perspektyvą neužsiminė
 
@@ -124,36 +124,50 @@ sapply(strsplit(str1," "),length)
 ## Žemiau pateiktos komandos, ką turite padaryti. 
 ## Atitinkamas R komandas rašykite po komentaro (aprašymo) eilute. 
 ## Visada galite pasitikrinti ar R skaičiuoja toje eilutėje paleidę CTRL+ENTER, arba visą snippet su žaliu trikampiu
-
 # importuokite duomenis į R, importuotus duomenis priskirkite objektui census <- ....
+
+
+
+#ALT1: iportuojame iš curl url pagalba sukurto failo
+## nebuvau labai reiklaus, dėl header=TRUE ar FALSE
+census <- read.csv("census.csv", header = FALSE, stringsAsFactors = FALSE)
+ 
+#ALT2: nuskaityti duomenis tiesiai į R
 url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data"
-census <- read.csv(url, sep=",", header = TRUE, stringsAsFactors = FALSE)
+census <- read.csv(url, sep=",", header = FALSE, stringsAsFactors = FALSE)
+
+#arba
+
+census <- read.csv(file="https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
+                   sep=",",
+                   header = FALSE, 
+                   stringsAsFactors = FALSE)
+
+
 
 # atspausdinkite viršutines 8 eilutes ir pirmus 4 stulpelius
 census[1:8,1:4]
 head(census[,1:4],8)
 
 # atspausdinkite apatines 4 eilutes ir 5, 6, 7, 8 stulpelius  
-
-
 first <- nrow(census)-4
 last <- nrow(census)
 census[first:last,5:8]
-
+ 
 tail(census[,5:8],4)
 
 
 # apskaičiuokite X39 stulpelio vidurkį
-mean(census$X39)
+mean(census[,1], na.rm=TRUE)
 
 # apskaičiuokite X39 stulpelio medianą
-median(census$X39)
+median(census[,1], na.rm=TRUE)
 
 # apskaičiuokite X39 stulpelio miniumą
-min(census$X39)
+min(census[,1], na.rm=TRUE)
 
 # apskaičiuokite X39 stulpelio maksimumą 
-max(census$X39)
+max(census[,1], na.rm=TRUE)
 
 ```
 

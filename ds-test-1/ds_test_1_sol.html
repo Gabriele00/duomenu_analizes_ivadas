@@ -191,7 +191,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">1 Testas CLI, Git, GitHub, R, Skaitiniai</h1>
 <h4 class="author">Vardas Pavardė</h4>
-<h4 class="date">2019-03-28 01:32</h4>
+<h4 class="date">2019-03-30 14:13</h4>
 
 </div>
 
@@ -286,7 +286,7 @@ $(document).ready(function () {
 <ol start="9" style="list-style-type: decimal">
 <li>(1 taškas) Estijoje parlamento rinkimuose, ultra-dešinioji EKRE partija:
 <ul>
-<li>[ ] padidino frakcijos dydį</li>
+<li>[x] padidino frakcijos dydį</li>
 <li>[ ] sumažino frakcijos dyį</li>
 <li>[ ] frakcijos dydis nepakito</li>
 <li>[ ] nepateko į parlamentą</li>
@@ -294,7 +294,7 @@ $(document).ready(function () {
 <li>(1 taškas) OECD pristatytoje atnaujintoje pasaulio ekonomikos prognozėje:
 <ul>
 <li>[ ] OECD pagerino pasaulio ekonomikos augimo perspektyvą</li>
-<li>[ ] OECD pablogino pasaulio ekonomikos augimo perspektyvą</li>
+<li>[x] OECD pablogino pasaulio ekonomikos augimo perspektyvą</li>
 <li>[ ] Nepakeitė pasaulio ekonomikos augimo perspektyvos</li>
 <li>[ ] OECD apie pasaulio ekonomikos augimo perspektyvą neužsiminė</li>
 </ul></li>
@@ -339,68 +339,82 @@ sapply(strsplit(str1,&quot; &quot;),length)
 <pre class="r"><code>## Žemiau pateiktos komandos, ką turite padaryti. 
 ## Atitinkamas R komandas rašykite po komentaro (aprašymo) eilute. 
 ## Visada galite pasitikrinti ar R skaičiuoja toje eilutėje paleidę CTRL+ENTER, arba visą snippet su žaliu trikampiu
-
 # importuokite duomenis į R, importuotus duomenis priskirkite objektui census &lt;- ....
+
+
+
+#ALT1: iportuojame iš curl url pagalba sukurto failo
+## nebuvau labai reiklaus, dėl header=TRUE ar FALSE
+census &lt;- read.csv(&quot;census.csv&quot;, header = FALSE, stringsAsFactors = FALSE)
+ 
+#ALT2: nuskaityti duomenis tiesiai į R
 url &lt;- &quot;https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data&quot;
-census &lt;- read.csv(url, sep=&quot;,&quot;, header = TRUE, stringsAsFactors = FALSE)
+census &lt;- read.csv(url, sep=&quot;,&quot;, header = FALSE, stringsAsFactors = FALSE)
+
+#arba
+
+census &lt;- read.csv(file=&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data&quot;,
+                   sep=&quot;,&quot;,
+                   header = FALSE, 
+                   stringsAsFactors = FALSE)
+
+
 
 # atspausdinkite viršutines 8 eilutes ir pirmus 4 stulpelius
 census[1:8,1:4]
-##   X39         State.gov X77516  Bachelors
-## 1  50  Self-emp-not-inc  83311  Bachelors
-## 2  38           Private 215646    HS-grad
-## 3  53           Private 234721       11th
-## 4  28           Private 338409  Bachelors
-## 5  37           Private 284582    Masters
-## 6  49           Private 160187        9th
-## 7  52  Self-emp-not-inc 209642    HS-grad
-## 8  31           Private  45781    Masters
+##   V1                V2     V3         V4
+## 1 39         State-gov  77516  Bachelors
+## 2 50  Self-emp-not-inc  83311  Bachelors
+## 3 38           Private 215646    HS-grad
+## 4 53           Private 234721       11th
+## 5 28           Private 338409  Bachelors
+## 6 37           Private 284582    Masters
+## 7 49           Private 160187        9th
+## 8 52  Self-emp-not-inc 209642    HS-grad
 head(census[,1:4],8)
-##   X39         State.gov X77516  Bachelors
-## 1  50  Self-emp-not-inc  83311  Bachelors
-## 2  38           Private 215646    HS-grad
-## 3  53           Private 234721       11th
-## 4  28           Private 338409  Bachelors
-## 5  37           Private 284582    Masters
-## 6  49           Private 160187        9th
-## 7  52  Self-emp-not-inc 209642    HS-grad
-## 8  31           Private  45781    Masters
+##   V1                V2     V3         V4
+## 1 39         State-gov  77516  Bachelors
+## 2 50  Self-emp-not-inc  83311  Bachelors
+## 3 38           Private 215646    HS-grad
+## 4 53           Private 234721       11th
+## 5 28           Private 338409  Bachelors
+## 6 37           Private 284582    Masters
+## 7 49           Private 160187        9th
+## 8 52  Self-emp-not-inc 209642    HS-grad
 
 # atspausdinkite apatines 4 eilutes ir 5, 6, 7, 8 stulpelius  
-
-
 first &lt;- nrow(census)-4
 last &lt;- nrow(census)
 census[first:last,5:8]
-##       X13       Never.married       Adm.clerical Not.in.family
-## 32556  12  Married-civ-spouse       Tech-support          Wife
-## 32557   9  Married-civ-spouse  Machine-op-inspct       Husband
-## 32558   9             Widowed       Adm-clerical     Unmarried
-## 32559   9       Never-married       Adm-clerical     Own-child
-## 32560   9  Married-civ-spouse    Exec-managerial          Wife
-
+##       V5                  V6                 V7         V8
+## 32557 12  Married-civ-spouse       Tech-support       Wife
+## 32558  9  Married-civ-spouse  Machine-op-inspct    Husband
+## 32559  9             Widowed       Adm-clerical  Unmarried
+## 32560  9       Never-married       Adm-clerical  Own-child
+## 32561  9  Married-civ-spouse    Exec-managerial       Wife
+ 
 tail(census[,5:8],4)
-##       X13       Never.married       Adm.clerical Not.in.family
-## 32557   9  Married-civ-spouse  Machine-op-inspct       Husband
-## 32558   9             Widowed       Adm-clerical     Unmarried
-## 32559   9       Never-married       Adm-clerical     Own-child
-## 32560   9  Married-civ-spouse    Exec-managerial          Wife
+##       V5                  V6                 V7         V8
+## 32558  9  Married-civ-spouse  Machine-op-inspct    Husband
+## 32559  9             Widowed       Adm-clerical  Unmarried
+## 32560  9       Never-married       Adm-clerical  Own-child
+## 32561  9  Married-civ-spouse    Exec-managerial       Wife
 
 
 # apskaičiuokite X39 stulpelio vidurkį
-mean(census$X39)
-## [1] 38.58163
+mean(census[,1], na.rm=TRUE)
+## [1] 38.58165
 
 # apskaičiuokite X39 stulpelio medianą
-median(census$X39)
+median(census[,1], na.rm=TRUE)
 ## [1] 37
 
 # apskaičiuokite X39 stulpelio miniumą
-min(census$X39)
+min(census[,1], na.rm=TRUE)
 ## [1] 17
 
 # apskaičiuokite X39 stulpelio maksimumą 
-max(census$X39)
+max(census[,1], na.rm=TRUE)
 ## [1] 90</code></pre>
 </div>
 <div id="darbo-uzbaigimo-ir-shipinimo-instrukcija" class="section level2">
