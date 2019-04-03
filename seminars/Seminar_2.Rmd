@@ -64,11 +64,18 @@ Parsisiųskite suzipintą duomenų failą: [2_seminaro_užduotis_1.zip](https://
 
 Parsisiųskite duomenis tik R pagalba. Išzipinkite duomenis.
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
+#sukuriamas temporalinis failas
 temp <- tempfile()
+# objektui url priskirimas ur;
 url <-"https://github.com/justasmundeikis/duomenu_analizes_ivadas/raw/master/seminars/2_seminaro_u%C5%BEduotis_2.zip"
+# nudownloadiname į tempoainė failą url
 download.file(url, temp)
+# išpakuojame konteinerį
 unzip(temp)
+
+#išpakuojamas visas zip turinys, o pats zip ištrinamas
+unlink(temp, recursive = TRUE, force = TRUE)
 ```
 
 ## Pirma funkcija
@@ -91,13 +98,24 @@ pollutantmean <- function(direktorija, kintamasis, id=1:332){
 }
 ```
 
-```{r, echo=FALSE}
+Sprendimas
+```{r, echo=TRUE}
 pollutantmean <-  function(direktorja, kintamasis, id=1:332){
+        
+        #sukuriamas tuščias dataframe
         df <- data.frame()
+        
+        #sukuriamas failų pavadinimų su adresu (full.names=T) vektorius
+        failas <- list.files(direktorja, full.names = TRUE) 
+        
+        #pradedamas for loop kiekvimam i iš id (i perima konkrečius id įveriučius)
+        #check: for(i in 3:5) print(i)
         for (i in id) {
-                failai <- list.files(direktorja, full.names = TRUE)[i]
-                df <- rbind(df,read.csv(failai,header = TRUE))
+                #df prikabinaimas jau turimas df ir duomenys iš csv
+                df <- rbind(df,read.csv(failas[i],header = TRUE))
         }
+        
+        #apskaičiuojamas vidurkis
         mean(df[,kintamasis], na.rm = TRUE)
         
 }
@@ -132,16 +150,29 @@ complete <- function(direktorija, id=1:332){
 ```
 
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 complete <- function(direktorija, id=1:332){
+        #sukurimas dataframe su 2 stulpeliais ir tusčiom vertem
         df <- data.frame(id=NA, nobs=NA)
+        
+        #sukuriamas failų pavadinimų su adresu (full.names=T) vektorius
+        failas <- list.files(direktorija, full.names = TRUE)
+        
+        #sukuriamas pagalbinis skaitiklis j, kur j=1, 
+        #tam kad išnaudoti įrašant df 1 eilutėje
         j <- 1
         for (i in id) {
-                failas <- list.files(direktorija, full.names = TRUE)[i]
+                # df j-toje eilutėje 1 stulp[elyje įrašoma i reikšmė]
                 df[j,1] <-i
-                df[j,2] <- sum(complete.cases(read.csv(failas,header = TRUE)))
+                # df j-toje eilutėje 2 stulp[elyje įrašoma nuskaityti i failo complete cases suma
+                # complete cases gržina loginį vektoriu (1,0,1) tad galima sumuot TRUE
+                df[j,2] <- sum(complete.cases(read.csv(failas[i],header = TRUE)))
+                
+                #tam kad prasisuktų for loope į sekančią eilutę
                 j <- j+1
         }
+        
+        #pabaigus atspausdina visa df
         print(df)
 }
 ```
@@ -170,27 +201,42 @@ corr <- function(direktorija, threshold=0){
 }
 ```
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 corr <- function(direktorija, threshold=0){
         
-        ls_files <- list.files(direktorija, full.names = TRUE) 
+        #sukuriamas failų pavadinimų su adresu (full.names=T) vektorius
+        failas <- list.files(direktorija, full.names = TRUE) 
         
-        ax <- numeric(length=length(ls_files))
+        # sukurimas tuščias (=0) skaitinis vektorius nummeric(), kurio ilgumas length(failas)
+        ax <- numeric(length=length(failas))
         
-        for(i in 1:length(ls_files)){
-                ax[i] <- sum(complete.cases(read.csv(ls_files[i],header = TRUE)))
+        #startuojamas for loopas kurio pagalba ax užpildomas pilnų case skaičiumi
+        #taigi gauname vektoriu, kuriame ax atspindi kiek kuris .csv failas turi pilnų case (eilučių be NA)
+        for(i in 1:length(failas)){
+                ax[i] <- sum(complete.cases(read.csv(failas[i],header = TRUE)))
                 }
-        bx <- seq_along(ls_files)[ax>threshold]
+        
+        #seq_alon sukuria eilės sekos voktroių 1:tokio ilgumo kaip failas
+        #iš to vektoriaus paimami tie skaičiai, kurių failai atitinka threshold
+        #taigi sužinomo kuri failas[i] turėsime naudoti
+        bx <- seq_along(failas)[ax>threshold]
 
+        # sukuriamas  tuščias cx vektorius, į kurį kalsime korelaicijas
         cx <- numeric(length = length(bx))
+        
         j <- 1
+        #išnaudojame sukurt bx su skaičiais, kurie parodo kuris failas atitinka reikalavimus
         for (i in bx) {
-                temp <- read.csv(ls_files[i],header = TRUE)
-                temp <- na.omit(temp)
+                
+                #nuskaitome reikalinga failą
+                temp <- na.omit(read.csv(failas[i],header = TRUE))
+                #apskaičiuojame kotreliacija tarp 2 ir 3 stulpelio ir reikmšė priskiriame  j-tai vektoriaus cx pozicijai
                 cx[j] <- cor(temp[,2], temp[,3])
+                # prastumiam j +1
                 j <- j+1
 
         }
+        #atspausindam cx vektoriu
         cx
 }
 ```

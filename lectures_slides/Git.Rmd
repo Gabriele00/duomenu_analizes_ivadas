@@ -4,18 +4,47 @@ author: "Justas Mundeikis"
 institute: "Vilnius University (FEBA)"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output:
+  html_document:
+    df_print: paged
   pdf_document:
     toc: true
     number_sections: true
     includes:
       in_header: header_en.txt
-  html_document:
-    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# 
+
+## Command-line interface
+
+### Why learn command-line interface?
+
+[In the Beginning was the Command Line](https://www.learnenough.com/command-line-tutorial/basics)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Basic settings
 

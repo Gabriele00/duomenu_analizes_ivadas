@@ -11,7 +11,7 @@
 
 <meta name="author" content="Justas Mundeikis" />
 
-<meta name="date" content="2019-02-28" />
+<meta name="date" content="2019-03-31" />
 
 <title>Git Basics</title>
 
@@ -73,9 +73,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -106,8 +104,6 @@ summary {
 </style>
 
 
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -182,58 +178,70 @@ $(document).ready(function () {
 
 
 
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
 
 <div class="fluid-row" id="header">
 
 
 
 <h1 class="title toc-ignore">Git Basics</h1>
-<h4 class="author"><em>Justas Mundeikis</em></h4>
-<h4 class="date"><em>February 28, 2019</em></h4>
+<h4 class="author">Justas Mundeikis</h4>
+<h4 class="date">2019-03-31</h4>
 
 </div>
 
 
-<pre class="css"><code>.badCode {
-background-color: red;
-}</code></pre>
-<style type="text/css">
-.badCode {
-background-color: red;
-}
-</style>
-<div id="basic-settings" class="section level2">
-<h2>Basic settings</h2>
+<div id="section" class="section level1">
+<h1></h1>
+<div id="command-line-interface" class="section level2">
+<h2>Command-line interface</h2>
+<div id="why-learn-command-line-interface" class="section level3">
+<h3>Why learn command-line interface?</h3>
+<p><a href="https://www.learnenough.com/command-line-tutorial/basics">In the Beginning was the Command Line</a></p>
+</div>
+</div>
+</div>
+<div id="basic-settings" class="section level1">
+<h1>Basic settings</h1>
 <p>Many students working on the same computers cause, that the <em>Git config</em> has multiple diferent settings set. So there are basically two options: either unset set values, or edit the Git config file itself</p>
-<pre><code>## with this comand, user can unset the set values
-git config --global --unset user.name
-git config --global --unset user.email
+<pre class="r"><code># with this comand, user can unset the set values
+$ git config --global --unset user.name
+$ git config --global --unset user.email
 
-## or open the nano editor (if set as standard editor for Git) and edit (delete) all entries, save and exit
-git config --global --edit</code></pre>
+# or open the nano editor (if set as standard editor for Git) 
+# and edit (delete) all entries, save and exit
+$ git config --global --edit</code></pre>
 <p>You are setting Git on your own computer that noby else uses, then following settings should be set</p>
-<pre><code>git config --global user.name &quot;Firstname Lastname&quot;
-git config --global user.email fistnamelastname@provider.geo 
-## preferebly set the email the same one, with which you created your GitHub account</code></pre>
+<pre class="r"><code>$ git config --global user.name &quot;Firstname Lastname&quot;
+$ git config --global user.email fistnamelastname@provider.geo 
+# preferebly set the email the same one, with which you created your GitHub account</code></pre>
 <p>In Windows 10, Windows tries to save your passwords. Which is from security point of view, not the best idea. Further the appearing pop-up to enter the password itself is annoying. Thus following settings should prevent Windows from saving your password and from opening a pop up for the password entry. Instead the password will be entered directly after entering your username after the command (for example <code>git push</code>)</p>
-<pre><code>git config --global core.pager cat
-git config --global core.askPass &quot;&quot;</code></pre>
+<pre class="r"><code>$ git config --global core.pager cat
+$ git config --global core.askPass &quot;&quot;</code></pre>
 <p>Depending on the computer operating system, after installing Git, the core editor might be <em>nano</em> or <em>Vim</em>. Personally I preffer <em>nano</em>. To make sure, you never end up in <em>Vim</em>, you can mannualy set your core editor to <em>nano</em>. Or if you have <em>Sublime</em> installed, set core editor su <em>Sublime</em>, by appending the execution file (.exe). I strongly suggest using <em>Sublime</em>, given its simplicity and many features</p>
-<pre><code>$ git config --global core.editor nano.exe
+<pre class="r"><code>$ git config --global core.editor nano.exe
 
-#here the absolute link to the execution file might be different on every computer!
+# here the absolute link to the execution file might be different on every computer!
 $ git config --global core.editor /c/Users/USER/Download/sublime/sublime_text.exe</code></pre>
 </div>
-<div id="git-basic-commands" class="section level2">
-<h2>Git Basic Commands</h2>
+<div id="git-basic-commands" class="section level1">
+<h1>Git Basic Commands</h1>
 <p>Here is a short list of main commands and their breaf description</p>
-<div id="initiating-git-in-a-folder" class="section level3">
-<h3>Initiating Git in a folder:</h3>
-<pre><code>$ git init #initiates a repository</code></pre>
+<div id="initiating-git-in-a-folder" class="section level2">
+<h2>Initiating Git in a folder:</h2>
+<pre class="r"><code>$ git init #initiates a repository</code></pre>
 </div>
-<div id="adding-failes-to-staging-area" class="section level3">
-<h3>Adding failes to staging area</h3>
-<pre><code>## adding files to staging area
+<div id="adding-failes-to-staging-area" class="section level2">
+<h2>Adding failes to staging area</h2>
+<pre class="r"><code># adding files to staging area
 # adds spesicif file
 $ git add filename
 
@@ -246,45 +254,49 @@ $ git add -A
 # updates the index (use only if no new files were created)
 $ git add -u</code></pre>
 </div>
-<div id="commiting-files-that-are-in-staging-area" class="section level3">
-<h3>Commiting files that are in staging area</h3>
-<pre><code>## commiting files
-# commits with message, without -m and &quot;mesage text&quot;, editor would appear (nano or Submlime)
+<div id="commiting-files-that-are-in-staging-area" class="section level2">
+<h2>Commiting files that are in staging area</h2>
+<pre class="r"><code># commiting files
+# commits with message, without -m and &quot;mesage text&quot;, 
+# editor would appear (nano or Submlime)
 $ git commit -m &quot;mesage text&quot; 
 
-# here -a stands for all changed files, so use only if no new files were created, else stage with git add .
+# here -a stands for all changed files, so use only if no new files 
+# were created, else stage with git add .
 $ git commit -am &quot;mesage text&quot; </code></pre>
 </div>
-<div id="branching-and-merging" class="section level3">
-<h3>Branching and merging</h3>
-<pre><code># creating new branch (branchname = NewBranch |...)
+<div id="branching-and-merging" class="section level2">
+<h2>Branching and merging</h2>
+<pre class="r"><code># creating new branch (branchname = NewBranch |...)
 $ git branch branchnname
 
 # switching to the branch (branchname = master | NewBranch |...)
 $ git checkout branchname
 
-# merging happens into the branch, you are on, by calling the branchname to be merged with 
-git merge branchname
-</code></pre>
+# merging happens into the branch, you are on, 
+# by calling the branchname to be merged with 
+$ git merge branchname</code></pre>
 </div>
-<div id="reverting" class="section level3">
-<h3>Reverting</h3>
-<pre><code># allways check git log
+<div id="reverting" class="section level2">
+<h2>Reverting</h2>
+<pre class="r"><code># allways check git log
 $ git log
 
 # shorter git log version
 $ git log --oneline
 
-# reverting a commit by using its HASH (if necessary edit the merging errors by hand, save and commit -m &quot;...&quot;)
+# reverting a commit by using its HASH 
+# (if necessary edit the merging errors by hand, save and commit -m &quot;...&quot;)
 $ git revert HASH 
 
 # reseting (reverts and DELETS everything from that commit)
 $ git reset --hard HASH</code></pre>
 </div>
-<div id="setting-remotes" class="section level3">
-<h3>Setting remotes</h3>
-<pre><code>## setting remote directory (first create one in Github, WITHOUT Readme.md!)
-# &quot;origin&quot; is just a name for the remote directory, you can have many remotes (with different http://... paths)
+<div id="setting-remotes" class="section level2">
+<h2>Setting remotes</h2>
+<pre class="r"><code># setting remote directory (first create one in Github, WITHOUT Readme.md!)
+# &quot;origin&quot; is just a name for the remote directory, 
+# you can have many remotes (with different http://... paths)
 $ git add remote origin https://......git
 
 # to check if reomte is set
@@ -299,11 +311,12 @@ $ git push -u origin master
 # if you wnat to update local repo from remote remote
 $ git pull origin master
 
-# if you the files in remote are outdated (or include Readme.md), simple pushing will not overwrite, thus
+# if you the files in remote are outdated (or include Readme.md), 
+# simple pushing will not overwrite, thus
 $ git push -f origin master
 
 # cloning (downloading repo from GitHub) your own or some elses repo
-git clone https://...git</code></pre>
+$ git clone https://...git</code></pre>
 </div>
 </div>
 

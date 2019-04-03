@@ -8,6 +8,7 @@
 *.vrb
 *.tex
 *.Rhistory
+*.Rmd
 header.txt
 header_en.txt
 /knygos

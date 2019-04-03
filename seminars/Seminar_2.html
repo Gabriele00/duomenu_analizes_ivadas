@@ -11,7 +11,7 @@
 
 <meta name="author" content="Justas Mundeikis" />
 
-<meta name="date" content="2019-03-17" />
+<meta name="date" content="2019-04-04" />
 
 <title>Seminar 2</title>
 
@@ -194,7 +194,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Seminar 2</h1>
 <h4 class="author">Justas Mundeikis</h4>
-<h4 class="date">2019-03-17</h4>
+<h4 class="date">2019-04-04</h4>
 
 </div>
 
@@ -266,6 +266,17 @@ $(document).ready(function () {
 <h1><span class="header-section-number">3</span> Funkcijų programavimas</h1>
 <p>Šioje dalyje Jums reikės parašyti tris skirtingas funkcijas, naudojantis šiuo zip failu: <a href="https://github.com/justasmundeikis/duomenu_analizes_ivadas/blob/master/seminarai/2_seminaro_u%C5%BEduotis_2.zip">2_seminaro_užduotis_2.zip</a>, kuriame yra oro kokybės matavimo duomenys iš JAV. Zip faile yra 332 skirtingų matavimo stočių failai, savo atskiruose .csv failuose. Kiekvieno failo pavadinimas pvz., “212.csv” reiškia, jog tai 212-os matavimo stoties duomenys. Kiekvename .csv faile yra 4 stulpeliai: data, sulfatų ir nitratų kiekis bei stoties ID.</p>
 <p>Parsisiųskite duomenis tik R pagalba. Išzipinkite duomenis.</p>
+<pre class="r"><code>#sukuriamas temporalinis failas
+temp &lt;- tempfile()
+# objektui url priskirimas ur;
+url &lt;-&quot;https://github.com/justasmundeikis/duomenu_analizes_ivadas/raw/master/seminars/2_seminaro_u%C5%BEduotis_2.zip&quot;
+# nudownloadiname į tempoainė failą url
+download.file(url, temp)
+# išpakuojame konteinerį
+unzip(temp)
+
+#išpakuojamas visas zip turinys, o pats zip ištrinamas
+unlink(temp, recursive = TRUE, force = TRUE)</code></pre>
 <div id="pirma-funkcija" class="section level2">
 <h2><span class="header-section-number">3.1</span> Pirma funkcija</h2>
 <p>Parašykite funkciją <code>uzterstumo_vidurkis</code>, kuri apskaičiuotų vieno iš pasirinktų kintamųjų vidurkį pasirinktose stotyse.b Taigi funkcija <code>uzterstumo_vidurkis</code> turi priimti 3 argumentus: direktoriją, kintamojo pavadinimą bei matavimo stoties ID. Priklausomai nuo pateikto stočių ID vektoriaus, funkcija turi nuskaityti pasirinktų stočių .csv failus iš nurodytos direktorijos ir pateikti pasirinkto kintamojo bendrą (t.y. visų pasirinktų stočių) vidurkį. Labai svarbu, jog pateikiant vidurkį, būtų panaikintos NA reikmšmės, kitaip vidurkis negalės būti apskaičiuotas.</p>
@@ -282,12 +293,32 @@ $(document).ready(function () {
         ## apskaičiuojamas pasirinktų stočių bei pasirinkto kintamojo vidurkis. 
         ## vidurkis neapvalinimas, bet skaičiavimui pašalinimi NA
 }</code></pre>
+<p>Sprendimas</p>
+<pre class="r"><code>pollutantmean &lt;-  function(direktorja, kintamasis, id=1:332){
+        
+        #sukuriamas tuščias dataframe
+        df &lt;- data.frame()
+        
+        #sukuriamas failų pavadinimų su adresu (full.names=T) vektorius
+        failas &lt;- list.files(direktorja, full.names = TRUE) 
+        
+        #pradedamas for loop kiekvimam i iš id (i perima konkrečius id įveriučius)
+        #check: for(i in 3:5) print(i)
+        for (i in id) {
+                #df prikabinaimas jau turimas df ir duomenys iš csv
+                df &lt;- rbind(df,read.csv(failas[i],header = TRUE))
+        }
+        
+        #apskaičiuojamas vidurkis
+        mean(df[,kintamasis], na.rm = TRUE)
+        
+}</code></pre>
 <p>Pasitikrinimui, ar funkcija veikia teisingai:</p>
-<pre class="r"><code>uzterstumo_vidurkis(&quot;specdata&quot;, &quot;sulfate&quot;, 1:10)</code></pre>
+<pre class="r"><code>pollutantmean(&quot;specdata&quot;, &quot;sulfate&quot;, 1:10)</code></pre>
 <pre><code>## [1] 4.064128</code></pre>
-<pre class="r"><code>uzterstumo_vidurkis(&quot;specdata&quot;, &quot;nitrate&quot;, 70:72)</code></pre>
+<pre class="r"><code>pollutantmean(&quot;specdata&quot;, &quot;nitrate&quot;, 70:72)</code></pre>
 <pre><code>## [1] 1.706047</code></pre>
-<pre class="r"><code>uzterstumo_vidurkis(&quot;specdata&quot;, &quot;nitrate&quot;, 23)</code></pre>
+<pre class="r"><code>pollutantmean(&quot;specdata&quot;, &quot;nitrate&quot;, 23)</code></pre>
 <pre><code>## [1] 1.280833</code></pre>
 </div>
 <div id="antra-funckija" class="section level2">
@@ -306,6 +337,30 @@ $(document).ready(function () {
         
 
         
+}</code></pre>
+<pre class="r"><code>complete &lt;- function(direktorija, id=1:332){
+        #sukurimas dataframe su 2 stulpeliais ir tusčiom vertem
+        df &lt;- data.frame(id=NA, nobs=NA)
+        
+        #sukuriamas failų pavadinimų su adresu (full.names=T) vektorius
+        failas &lt;- list.files(direktorija, full.names = TRUE)
+        
+        #sukuriamas pagalbinis skaitiklis j, kur j=1, 
+        #tam kad išnaudoti įrašant df 1 eilutėje
+        j &lt;- 1
+        for (i in id) {
+                # df j-toje eilutėje 1 stulp[elyje įrašoma i reikšmė]
+                df[j,1] &lt;-i
+                # df j-toje eilutėje 2 stulp[elyje įrašoma nuskaityti i failo complete cases suma
+                # complete cases gržina loginį vektoriu (1,0,1) tad galima sumuot TRUE
+                df[j,2] &lt;- sum(complete.cases(read.csv(failas[i],header = TRUE)))
+                
+                #tam kad prasisuktų for loope į sekančią eilutę
+                j &lt;- j+1
+        }
+        
+        #pabaigus atspausdina visa df
+        print(df)
 }</code></pre>
 <p>Pasitikrinimui, ar funkcija veikia teisingai:</p>
 <pre class="r"><code>complete(&quot;specdata&quot;, 1)</code></pre>
@@ -340,6 +395,43 @@ $(document).ready(function () {
 
         ## grąžinamas numerinis vektorius su koreliacijomis tarp nitrato ir sulfato
         
+}</code></pre>
+<pre class="r"><code>corr &lt;- function(direktorija, threshold=0){
+        
+        #sukuriamas failų pavadinimų su adresu (full.names=T) vektorius
+        failas &lt;- list.files(direktorija, full.names = TRUE) 
+        
+        # sukurimas tuščias (=0) skaitinis vektorius nummeric(), kurio ilgumas length(failas)
+        ax &lt;- numeric(length=length(failas))
+        
+        #startuojamas for loopas kurio pagalba ax užpildomas pilnų case skaičiumi
+        #taigi gauname vektoriu, kuriame ax atspindi kiek kuris .csv failas turi pilnų case (eilučių be NA)
+        for(i in 1:length(failas)){
+                ax[i] &lt;- sum(complete.cases(read.csv(failas[i],header = TRUE)))
+                }
+        
+        #seq_alon sukuria eilės sekos voktroių 1:tokio ilgumo kaip failas
+        #iš to vektoriaus paimami tie skaičiai, kurių failai atitinka threshold
+        #taigi sužinomo kuri failas[i] turėsime naudoti
+        bx &lt;- seq_along(failas)[ax&gt;threshold]
+
+        # sukuriamas  tuščias cx vektorius, į kurį kalsime korelaicijas
+        cx &lt;- numeric(length = length(bx))
+        
+        j &lt;- 1
+        #išnaudojame sukurt bx su skaičiais, kurie parodo kuris failas atitinka reikalavimus
+        for (i in bx) {
+                
+                #nuskaitome reikalinga failą
+                temp &lt;- na.omit(read.csv(failas[i],header = TRUE))
+                #apskaičiuojame kotreliacija tarp 2 ir 3 stulpelio ir reikmšė priskiriame  j-tai vektoriaus cx pozicijai
+                cx[j] &lt;- cor(temp[,2], temp[,3])
+                # prastumiam j +1
+                j &lt;- j+1
+
+        }
+        #atspausindam cx vektoriu
+        cx
 }</code></pre>
 <p>Pasitikrinimui, ar funkcija veikia teisingai:</p>
 <pre class="r"><code>cr &lt;- corr(&quot;specdata&quot;, 150)
