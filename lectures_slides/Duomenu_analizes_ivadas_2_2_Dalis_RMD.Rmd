@@ -1,0 +1,884 @@
+---
+title: "Duomenų analizės įvadas"
+subtitle: '2.2. dalis - R programavimas'
+author: "Justas Mundeikis"
+institute: "VU EVAF"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+output:
+ beamer_presentation:
+  includes:
+   in_header: header.txt
+---
+
+```{r setup, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+library(kableExtra)
+```
+
+## Turinys
+\tableofcontents
+
+# Loop funkcijos
+
+## Loop funkcijos
+Rašant skriptus, `for`, `while` ir kiti loopai yra tinkami, bet jeigu norima parašyti kodą tiesiog konsolėje, tada susiduriama su daug problemų.
+
+* `apply`: taiko funkciją masyvo stulepliams / eilutėms
+* `lapply`: loopina per list ir paleidžia funkciją kiekvienam elementui
+* `sapply`: veikia kaip ir `lapply` tik supaprastina rezultatus
+* `tapply`: taiko funkciją vektoriaus dalims
+* `mapply`: multivariatinė `lapply` versija 
+
+## apply
+* `apply` naudojama taikyti funkcijas duomenų masyvų (`array`: `dataframe`, `matrix`) eilutėms ar stulpeliams. 
+* `apply` iš esmės supaprastina `for loop` naudojimą.
+
+```{r}
+args(apply)
+# kur X yra array
+# MARGIN=1 eilutėms
+# MARGIN=2 stulpeliams
+# FUN taikoma funkcija
+```
+
+## apply
+* `apply` taikymas matricų eilutėms ir stulpeliams
+
+```{r}
+x <- matrix(1:4,2,2)
+x
+apply(x, 1, mean) # 1 - eiltuėms
+apply(x, 2, mean) # 2 - stulpeliams
+apply(x, 1, sum) # 1 - eiltuėms
+apply(x, 2, sum) # 2 - stulpeliams
+
+```
+
+## apply
+* Norint pritaikyti apply funkciją daugiau dimensijų turinčiam duomenų masyvui, būtina nurodyti vektorių, kurios dimensijos išlaikomos
+```{r}
+x <- array(data=rnorm(40), dim = c(2,2,10))
+# išlaikoma 1 ir 2 dimensijos, 
+# jungiame per 3 dimensiją
+apply(x, c(1,2), mean) 
+```
+
+## apply
+Exercise:
+
+* create a `sales` dataframe 
+* calculate sum of sales using `apply`
+    * for every month
+    * for every sales-person
+```{r}
+#generate sales dataframe
+set.seed(101)
+sales <- data.frame(row.names = month.abb[1:12], 
+                Marry=sample(0:100,12, replace = TRUE),
+                John=sample(100:200,12, replace = TRUE),
+                Felix=sample(150:300,12, replace = TRUE),
+                Jenny=sample(0:400,12, replace = TRUE))
+```
+
+## apply
+Solution:
+```{r, echo=TRUE}
+set.seed(101)
+sales <- data.frame(row.names = month.abb[1:12], 
+                Marry=sample(0:100,12, replace = TRUE),
+                John=sample(100:200,12, replace = TRUE),
+                Felix=sample(150:300,12, replace = TRUE),
+                Jenny=sample(0:400,12, replace = TRUE))
+
+apply(sales, MARGIN=1, sum)
+apply(sales, MARGIN=2, sum)
+```
+
+
+## apply
+Exercise: build the follwing graphs:
+
+* line chart with dots for sum of monthly sales (hint: use `?plot`)
+* bar chart for every sales-person's sum of yearly turnover 
+* boxplot for every sales person's monthly sales
+
+Solutions should look like:
+
+```{r, echo=FALSE, fig.height=4.5}
+par(mfrow=c(1,3))
+plot(apply(sales, MARGIN=1, sum), type="b")
+barplot(apply(sales, MARGIN=2, sum))
+boxplot(sales)
+```
+
+## apply
+Boxplotas:
+
+* duomenys suskirstomi didėjimo tvarka
+* 1Q = reikšmė ties 25% visų stebėjimu (dežutės apačia)
+* 2Q = mediana = reikšmė ties 50% visų stebėjimu (storas brukšnys)
+* 3Q = reikšmė ties 75% visų stebėjimu (dežutės viršus)
+* IQR = 3Q-1Q 
+* Whiskers 1Q-1.5*IQR, 3Q+1.5*IQR, bet  brežiama iki tiek, kiek yra reiškmių
+* Outlayeriai, kas žemiau, aukščiau Whiskers 
+
+## apply
+Boxplotas:
+```{r}
+c <- c(sample(5:15, 20, replace = TRUE), 0, 25)
+c
+mean(c)
+sd(c)
+```
+
+```{r, echo=FALSE, fig.height=4}
+par(mfrow=c(1,2))
+hist(c)
+boxplot(c)
+```
+## apply
+Solution:
+
+```{r,eval=FALSE}
+
+plot(apply(sales, MARGIN=1, sum), type="b")
+
+barplot(apply(sales, MARGIN=2, sum))
+
+boxplot(sales)
+```
+
+
+## apply
+Jeigu norima apskaičiuoti dataframe / matricų eilučių ar stuleplių sumas / vidurkius, galima naudoti jau supaprastintas funkcijas, jos veikia dar greičiau, nes yra parašytas su c++, tačiau skirtumas pasijaučia tik su labai dideliais duomenų masyvais.
+
+* `rowSums=apply(x,1,sum)`
+* `rowMeans=apply(x,1,mean)`
+* `colSums=apply(x,2,sum)`
+* `colMeans=apply(x,2,mean)`
+
+## apply
+`apply` priima `...` taigi galima deleguoti papildomus funkcijų parametrus. 
+
+PVZ:
+
+* `quantile`: The generic function quantile produces sample quantiles corresponding to the given probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
+* `summary`: summary is a generic function used to produce result summaries of the results of various model fitting functions. The function invokes particular methods which depend on the class of the first argument.
+
+## apply
+PVZ:
+```{r}
+apply(sales, 2, quantile, probs=c(0,0.25 ,0.5, 0.75,1))
+apply(sales, 2, summary, digits=0)
+```
+
+# rep
+## rep
+Replicate Elements of Vectors and Lists
+* `rep` - replicates the values in x. It is a generic function.
+*`?rep` - for more details
+
+```{r, eval=FALSE}
+args(rep)
+rep(1:4, 2)
+rep(1:4, each = 2)       # not the same.
+rep(1:4, c(2,2,2,2))     # same as second.
+rep(1:4, c(2,1,2,1))
+rep(1:4, each = 2, len = 4)    # first 4 only.
+rep(1:4, each = 2, len = 10)   # 8 integers plus two recycled 1's.
+rep(1:4, each = 2, times = 3)  # length 24, 3 complete replications
+```
+
+
+# sweep
+
+## sweep
+Returns an array obtained from an input array by sweeping out a summary statistic.
+```{r}
+args(sweep)
+```
+
+## sweep
+Standartizavimas:
+
+* Kartais yra patogiau naudotis standartizuotais duomenimis
+* $z=\frac{X-\mu}{\sigma}$
+* z - kiek vertė `X` yra nutolusi nuo vidurkio kartų, matuojant standartiniais nuokrypiais
+* `sales_mean` = $\mu$
+* `sales_sd` = $\sigma$
+* taikant prielaidą dėl normaliojo skirstinio:
+    * 95% visų duomenų $\pm \mu$
+
+PVZ:
+```{r, eval=TRUE}
+sales_mean <- apply(sales, 2, mean) 
+sales_sd <- apply(sales, 2, sd)
+df1 <- sweep(sales, 2, sales_mean, "-")
+df2 <- sweep(df1, 2, sales_sd, "/")
+```
+
+## sweep
+```{r, fig.height=4.5}
+par(mfrow=c(1,2))
+boxplot(sales)
+boxplot(df2)
+```
+
+```{r, echo=FALSE}
+rm(list = c("df1", "df2"))
+```
+
+# lapply
+## lapply
+* `lapply` priima 3 argumentus: 
+    1. list objektą, 
+    2. funkciją arba funkcijos pavadinimą, 
+    3. galimus funkcijos papildomus argumentus
+* `lapply` visad grąžina `list` klasės objektą
+* Jeigu `X` nėra list, tada R bando paversti `X` list objektu.
+
+## lapply
+
+```{r}
+set.seed(101)
+x <-  list(a=1:10, 
+           b=rnorm(50), 
+           c=seq(from=100, to=200, by=2))
+
+lapply(x, mean)
+```
+
+## lapply
+
+```{r}
+y <- 1:3
+#taip R/lapply mato vektorių x konvertvus jį į list objektą
+#list susideda iš trijų elementų kiekvienas elementas turi savo reikmšmę
+as.list(1:3) 
+```
+
+## lapply
+* `runif` generuoja tolygiojo skirstinio atsitiktinius skaičius (`runif(n, min = 0, max = 1)`)
+```{r}
+lapply(y, runif)
+```
+
+## lapply
+Išnaudojant `...` galime perleisti papildomus argumentus `runif` funckijai:
+```{r}
+lapply(y, runif, min=5, max=10)
+```
+
+## lapply
+`lapply` ir kitos apply funkcijos gali naudotis `USER DEFINED FUNCTION` (UDF), t.y. niekur kitur nedefinuotomis funkcijomis
+```{r}
+z <- list(a=matrix(1:9, nrow=3, ncol = 3), 
+          b=matrix(1:4, nrow = 2, ncol=2))
+#elt yra anoniminė funkcija. vietoj "elt" galėtų būti "x", 
+#arba "abrakadabra"
+lapply(z, function(elt) elt[,1, drop=FALSE]) 
+```
+
+## lapply
+Klausimas: ką generuoja ši `lapply` funkcija?
+```{r}
+set.seed(101)
+A <- matrix(sample(1:10,9),3,3)
+B <- matrix(sample(1:10,9),3,3)
+C <- matrix(sample(1:10,9),3,3)
+MAT_LIST <- list(A,B,C)
+
+lapply(MAT_LIST, "[", ,1)
+```
+
+## lapply
+Exercise:
+Use `lapply` to calculate the sum of sales for every sales-person
+
+Solution:
+```{r, echo=TRUE}
+lapply(sales, sum)
+```
+
+
+# sapply
+
+## sapply
+`sapply` bando supaprastinti `lapply` rezultatus (jeigu įmanoma)
+
+* jeigu `lapply` grąžintų list, kurių kiekvienas elementas yra 1 ilgumo, tada `sapply` grąžina vektorių
+* jeigu `lapply` grąžintų list, kurių kiekvienas elementas yra >1 ir vienodo ilgumo, tada `sapply` grąžina matricą
+* jeigu netinka pirma du variantai, grąžina list kaip ir `lapply`
+
+## sapply
+```{r}
+set.seed(101)
+x <-  list(a=1:10, 
+           b=rnorm(50), 
+           c=seq(from=100, to=200, by=2))
+lapply(x, mean)
+
+sapply(x, mean)
+```
+
+## sapply
+```{r}
+sapply(MAT_LIST,"[",1,1, simplify = TRUE)  # nepriima tuščių argumentų
+sapply(MAT_LIST,"[",1,1, simplify = FALSE) # nepriima tuščių argumentų
+
+```
+
+
+## sapply
+Exercise:
+Use `sapply` to calculate sales for every sales-person
+
+Solution:
+```{r, echo=TRUE}
+sapply(sales, sum)
+```
+
+
+# mapply
+
+## mapply
+* `mapply` taiko paraleliai (vienu metu) funckiją skirtingiems argumentams naudojantis list arba vektoriais
+* "m" - multivariate
+```{r}
+str(mapply)
+```
+
+* `FUN` yra funkcija, kuri bus taikoma
+* `...` argumentai, kuriais naudojamasi funkcijoje
+* `MoreArgs` kiti `FUN` argumentai
+* `SIMPLIFY` ar rezultatas turėtų būti simplifikuotas kaip `sapply`
+
+## mapply
+Jeigu norime sukurti tokį list objektą, 4 kartus rašome rep(), su argumentais 1-4 ir 4-1
+```{r}
+list(rep(1,4), rep(2,3), rep(3,2), rep(4,1))
+```
+
+
+## mapply
+Supaprastinant galima naudoti `mapply` funkciją, kurios argumentai `rep` funckija ir du vektoriai 1:4 ir 4:1
+```{r}
+mapply(rep, 1:4, 4:1)
+```
+
+## mapply
+Funkcija `noise` generuoja `n` atsitiktinių normaliojo skirstinio skaičių su vidurkiu `mean` ir standartiniu nuokrypiu `sd`
+```{r}
+noise <- function(n, mean, sd){
+        rnorm(n, mean, sd)
+        }
+
+noise(4,1,0.01) # veikia kaip tikėtasi
+# list(noise(1,1,0.01),noise(2,2,0.01),noise(3,3,0.01),noise(4,4,0.01))
+noise(1:4,1:4,0.01) # veikia ne kaip tikėtasi
+```
+
+## mapply
+Šioje vietoje galima naudotis `mapply` tam, kad funkcija priimtų argumentus iš vektorių
+```{r}
+# dabar norime generuoti tokį list objektą
+# list(noise(1,1,0.01),noise(2,2,0.01),noise(3,3,0.01),noise(4,4,0.01))
+mapply(noise, 1:4, 1:4, 0.01)
+```
+
+## mapply
+Exercise:
+
+* Generate following matrix using `mapply`
+```{r, echo=FALSE}
+mapply(rep, 1:5,5)
+```
+
+# rapply
+
+## rapply
+`rapply` yra *recursive apply* ir taikomas `list` objektams
+```{r}
+args(rapply)
+
+# PVZ:
+z <- list(1,2,3,4)
+rapply(z, function(x){x^2})
+# jeigu funkcija telpa į vieną eilutę, galime be {}
+rapply(z, function(x) x^2)
+```
+
+## rapply
+Exercise:
+
+* Calculate the bonus for each salesperson
+* Bonus =0.15 * average sales of the year (use `rapply` and either `lapply` or `sapply`) 
+
+## rapply
+Solutions:
+
+```{r, echo=TRUE}
+#kai visi keliai veda į Romą :)
+rapply(lapply(sales, mean), function(x) x*0.15)
+rapply(sapply(sales, mean, simplify = FALSE), function(x) x*0.15)
+rapply(sales, function(x) mean(x)*0.15)
+# aišku galima ir ...
+apply(sales, 2, mean)*0.15
+sapply(sales, mean)*0.15
+```
+
+## rapply
+Papildomi `rapply` pvz., savistudijoms 
+https://www.r-bloggers.com/rapply-function-explanation-and-examples
+
+
+# tapply
+
+## tapply
+Apply a function to each cell of a ragged array, that is to each (non-empty) group of values given by a unique combination of the levels of certain factors.
+
+```{r}
+str(tapply)
+```
+
+* `X` yra vektorius
+* `INDEX` faktorius arba faktorių list
+* `FUN` taikoma funkcija
+* `...` papildomi `FUN` argumentai
+* `simplify` ar supaprastinti rezultatus
+
+
+## tapply
+```{r}
+set.seed(101)
+x <- c(rnorm(10), runif(10, min=5, max=15), rnorm(10, mean = 100))
+x
+# Generate factors by specifying the pattern of their levels.
+#gl(n, k, length = n*k, labels = seq_len(n), ordered = FALSE)
+f <- gl(3,10) 
+f
+```
+
+## tapply
+Supjaustome `x` vektorių pagal faktorių vektorių `f` ir pritaikome `mean`
+
+```{r}
+tapply(x, f, mean)
+tapply(x, f, mean, simplify = FALSE)
+```
+
+## tapply
+Supjaustome `x` vektorių pagal faktorių vektorių `f` ir pritaikome `summary`
+```{r}
+tapply(x, f, summary)
+```
+
+
+# split
+## split
+`split` padalina vektorių arba kitą objektą į grupes priklausomai nuo faktorių arba faktorių list
+
+* `x` vektorius / list / dataframe
+* `f` faktorius arba faktorių list
+* `drop` indikuoja, ar tušti faktoriai turėtų būti panaikinti 
+
+```{r}
+str(split)
+```
+
+
+
+## split
+```{r}
+split(x, f)
+# dabar galima naudoti lapply / sapply
+```
+
+## split
+Taigi galime suskaidyti `x` į 3 `list` objektus ir tada kiekvienam atlikti `lapply`, `sapply` arba iškart `tapply`
+```{r}
+lapply(split(x, f),mean)
+sapply(split(x,f), mean)
+# tolygu:
+tapply(x, f, mean)
+```
+
+## split
+
+* Pasitikriname ar loadina `airquality` dataset, jeigu ne `library(datasets)`
+* Mūsų tikslas: apskaičiuoti 4 kintamųjų vidurkius: Ozone, Solar.R, Wind, Temp
+```{r}
+head(airquality)
+```
+
+## split
+Supjaustome `airquality` pagal mėnesius:
+```{r}
+s <- split(airquality, airquality$Month)
+```
+
+## split
+* Pritaikome `sapply` funckiją (galima ir `lapply`, bet skaidrėse per daug vietos atima :D)
+* Ką reikia pakeisti, jog negauti mėnesių ir dienų vidurkių, bei panaikinti `NA`?
+```{r}
+sapply(s, function(x) colMeans(x))
+#tolygu 
+# sapply(s, function(x) apply(x,2,mean))
+```
+
+## split
+Solution:
+```{r, echo=TRUE}
+# pastaba: dataframe[1:n], pradėjo veikti kaip df[,1:n]
+# tad kodas veiktų colMeans(x[1:4], na.rm=TRUE) t.y. be ","
+# bet dirbkite tvarkingai su ","
+sapply(s, function(x) colMeans(x[,1:4], na.rm=TRUE))
+# ALT: sapply(s, function(x) apply(x[,1:4],2,mean, na.rm=TRUE))
+# veikia ir
+# sapply(s, function(x) colMeans(x[1:4], na.rm=TRUE))
+```
+
+
+## split
+Importuojame į R tikrus Lietuvos darbo užmokesčio duomenis:
+
+(pastaba: dėl laiko stokos, duomenų surinkimas iš LSD ir EUROSTAT bus seminaro uždavinyje, dabar naudotis clonuotame folderyje esančiu failu)
+```{r}
+#bandant atkartoti, pasikeisti relatyvų/absoliutų adresą!!!
+df <- read.csv("./duomenys_paskaitoms/Darbo_užmokestis_mėnesinis_1995_2017.csv")
+head(df,5)
+```
+
+## split
+* Supjaustom `df` pagal `Lytis` ir `Sektorius`
+* Inspektuojam gautą objektą
+```{r}
+df_s <- split(df, list(df$Lytis, df$Sektorius))
+```
+
+
+## split
+Apskaičiuojamepajamų vidurkius
+```{r}
+sapply(df_s, function(x) mean(x[,"Reikšmė"], na.rm=TRUE))
+```
+
+# aggregate
+## agregate
+Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form.
+
+* x - an R object.
+* by- a list of grouping elements, each as long as the variables in the data frame x. The elements are coerced to factors before use.
+
+```{r}
+args(aggregate)
+?aggregate
+```
+
+
+## agregate
+```{r}
+aggregate(airquality, 
+          list(airquality$Month), #jeigu nebus list() mes klaidą
+          FUN=mean, 
+          na.rm=TRUE)
+# tik vienam kintamajam
+aggregate(airquality$Ozone, list(airquality$Month), FUN=mean, na.rm=TRUE)
+```
+
+
+## agregate
+Exercise:
+
+* pritaikykite `aggregate` norint apskaičiuoti vidutines mėnesines pajamas Lietuvoje pagal lytį ir sektorius
+* (tikėtina pakeisiu dataset, nes šiaip šis skaičiavimas nėra labai prasmingas)
+
+```{r, eval=TRUE, echo=FALSE}
+aggregate(df$Reikšmė,list(Lytis=df$Lytis, Sektorius=df$Sektorius),FUN = mean, na.rm=TRUE)
+# setNames(aggregate(df$Reikšmė,list(df$Lytis, df$Sektorius),FUN = mean, na.rm=TRUE), c("Lytis", "Sektorius", "Reikšmė"))
+# note: Lytis=... Sektorius=... perduodami tam, kad generuot antraštes lentelėje
+# palyginimui
+# aggregate(df$Reikšmė,list(df$Lytis, df$Sektorius),FUN = mean, na.rm=TRUE)
+```
+
+# Skirstiniai
+
+## Distribucijos (lt. = skirstiniai)
+Ne retai atliekant įvarius tyrimus ar skaičiuojant tikimybes statistikoje, reikės remtis tam tikrais skirstiniais.
+
+`?distributions` 
+
+* dnorm
+* dgamma
+* beta
+* dpois
+
+ir t.t.
+
+## Distribucijos
+Šioje dalyje aptarsime:
+
+* Binomial Distribution
+* Poisson Distribution
+* Continuous Uniform Distribution
+* Exponential Distribution
+* Normal Distribution
+
+
+## Distribucijos
+Visos distribucijos galimos su 4 funkcijomis:
+
+```{r, eval=FALSE}
+# ?dnorm
+
+dnorm(x, mean = 0, sd = 1, log = FALSE)
+pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+rnorm(n, mean = 0, sd = 1)
+```
+
+* d density
+* p cumulative distribution
+* q quantile function
+* r random number generation
+
+
+## Binominis skirstinys
+Dichotomine matavimų skale matuojamų požymių reikšmių skirstinys (0/1, herbas/skaičius, moteris/vyras, išlaikė/neišlaikė) 
+
+Skirstinys yra diskretus ir apibūdinamas parametrais *n* ir *p*. Parametras $n \geq 0$ reiškia bandymų skaičių, o *p* – požymio tikimybę įgyti vieną iš dviejų galimų reikšmių. 
+
+Binominio skirstinio pasiskirstymo tankio funkcija (tikimybė gauti x reikmšę su n bandymų ir p tikimybės reikmše):
+$$ f(x)= \binom{n}{x} p ^x (1-p)^{n-x} \text{ kur } x=1,2,3,...,n$$
+
+
+## Binominis skirstinys
+Tarkime duomenų analizės teste yra 10 klausimų, kurių kiekvienas turi 4 galimus atsakymus, iš kurių tik vienas yra teisingas. Tarkime studentas atėjo visiškai nepasiruošęs ir visiškai atsitiktinai pasirinks atsakymus. Norint išlaikyti testą, reikia teisingai astakyti į ne mažiau kaip 5 klausimus.
+Kokia tikimybė, jog studentas neišlaikys testo?
+
+* p = 1/4=0.25 ir (1-p)=1-0.25=0.75
+* n = 10
+* x=4
+
+Diskreti tikimybė:
+```{r}
+# tikimybė jog studentas atsakys lygiai 4 teisingai
+dbinom(x=4, size = 10, prob = 0.25)
+```
+
+## Binominis skirstinys
+Skirstinio funkcija
+```{r, fig.height=5}
+x <- seq(from=0, to=10, by=1)
+y <- dbinom(x, size=10, prob=0.25)
+plot(x,y, type = "b")
+axis(side = 1, at = x,labels = T)
+```
+
+## Binominis skirstinys
+Tačiau norint žinoti visas vertes iki 4
+```{r}
+# todėl norint žinoti tikimybę jog studentas atsakys į 4 arba mažiau
+dbinom(x=0, size = 10, prob = 0.25)+
+        dbinom(x=1, size = 10, prob = 0.25)+
+        dbinom(x=2, size = 10, prob = 0.25)+
+        dbinom(x=3, size = 10, prob = 0.25)+
+        dbinom(x=4, size = 10, prob = 0.25)
+# sum(mapply(dbinom, 0:4, 10,.25))
+
+# alternatyviai galima pasinaudoti pbinom()
+pbinom(q=4, size= 10, prob = 0.25, lower.tail = TRUE)
+# tačiau piktąjį dėstytoją domina, 
+# kokia tikimybė, jog studentas "praslys":
+pbinom(q=4, size= 10, prob = 0.25, lower.tail = FALSE)
+```
+
+## Binominis skirstinys
+Binominio skirstinio ***tankio funkcija***
+```{r, fig.height=5}
+x <- seq(from=0, to=10, by=1)
+y <- pbinom(x, size=10, prob=0.25)
+plot(x,y, type = "b")
+axis(side = 1, at = x,labels = T)
+```
+
+
+## Binominis skirstinys
+Tarkime dėstytojas nori nustatyti ribą, į kiek klausimų turi teisingai atsakyti studentai, kai:
+
+* studentai turėdami 4 galimus pasirinkimus (daugiau alternatyvių atsakymų dėstytojas nenori sugalvoti, nes tingi)
+* destyjas nenori, kad studentai praslystų pro testą didesne nei 1% tikimybe
+* destytojas tingi galvoti daugiau nei 10 klausimų
+
+```{r}
+qbinom(0.01, 10, 0.25, lower.tail = FALSE)
+pbinom(5,10,.25,lower.tail = FALSE) # galima pasitikrinti tikimybes
+pbinom(6,10,.25,lower.tail = FALSE) # galima pasitikrinti tikimybes
+```
+
+## Poisson skirstinys
+Diskretus skirstinys (tikimybių pasiskirstymo dėsnis), nusakantis įvykių tikimybes įvykti per tam tikrą laiko intervalą, jeigu įvykiai vyksta pastoviu dažniu ir yra nepriklausomi vienas nuo kito.
+
+* Vidurkis= $\bar{k}=\lambda$
+* Dispersija= $\sigma^2= \lambda$
+
+Jei per tam tikrą laiko intervalą įvyksta vidutiniškai $\lambda$ įvykių, tuomet tikimybė, kad per tą laiką įvyks tiksliai $x$ įvykių bus lygi: 
+
+$$ f(x)= \frac{\lambda^x e^{-\lambda}}{x!} \text{ kur } x=1,2,3,...,n$$
+
+## Poisson skirstinys
+Poisson distribucija, kur $\lambda$ yra vidutinė įvykio tikimybė per tam tikrą laikotarpį
+```{r, fig.height=2.5}
+rpois(n=10, lambda = 1)
+rpois(n=10, lambda=2)
+sim <-rpois(n=1000, lambda=2)
+mean(sim)
+sd(sim)^2 # dispersija=sigma^2=sd^2
+hist(sim)
+```
+
+
+## Poisson skirstinys
+
+Skambučių centras per valandą sulaukia 50 skambučių. *Maximum capacity* yra 65 skambučiai per valandą. Tada skambučiai nukreipiami į alternatyvų skambučių centrą, kuriame dirba beždžionėlės, tad klientai visad lieka nepatenkinti. Klausimas, kokia yra tikimybė, jog per sekančią valandą skambučių centras sulauks: 5, 30, 60  (arba mažiau skambučių):
+```{r}
+dpois(5, 50) ## 5 Pr(x=5), lambda=50
+dpois(30 , 50) ## 30  Pr(x=30), lambda=50
+dpois(60, 50) ## 60  Pr(x=50), lambda=50
+
+ppois(5, 50) ## 5 arba mažiau skambučių Pr(x<=5), lambda=50
+ppois(30, 50) ## 30 arba mažiau skambučių Pr(x<=30), lambda=50
+ppois(60, 50) ## 60 arba mažiau skambučių Pr(x<=50),lambda=50
+```
+
+
+## Poisson skirstinys
+Exercise:
+
+Kokia tikimybė, jog skambučių centras sulauks daugiau skambučių nei skambučių centro maksimalus aptarnavimo limitas?
+
+Jeigu įmonės išsikeltas tiklsas, jog nepatenkintų klientų būtų mažiau nei 0.1%, ar patartumėte vadovybei plėsti skambučių centro galimybes? Kiek papildomų darbuotojų reikia nusamdyti skambučiui centrui, jeigu 1 darbuotojas gali priimti po 5 skambučius per valandą?
+
+## Poisson skirstinys
+Solution:
+
+```{r, echo=TRUE}
+ppois(q=65, lambda = 50, lower.tail = FALSE)
+
+# Kiek papildomų skambučių reiktų papildomai galėti priimti?
+qpois(p=0.001, lambda = 50, lower.tail = FALSE)
+
+ceiling(
+        (qpois(p=0.001, lambda = 50, lower.tail = FALSE) - 65) / 5
+        )
+```
+
+
+## Tolygusis skirstinys (Continuous uniform distribution)
+Skirstinys su vienoda tikimybe visiems skaičiams tarp `a` ir `b`. Visais kitais atvejais tikimybė =0.
+$$
+f(x)=
+\begin{cases} 
+\frac{1}{b-a} \text{ when } a \leq x \leq b
+\\0, else
+\end{cases}
+$$
+
+## Tolygusis skirstinys (Continuous uniform distribution)
+
+```{r, fig.height=5}
+dist <- runif(n=1000, min=2, max=5)
+hist(dist, breaks = seq(from=0, to=6, by=1))
+```
+
+
+## Eksponentinis skirstinys
+is the probability distribution that describes the time between events in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate
+$$
+f(x, \lambda)=
+\begin{cases} 
+\lambda e^{- \lambda x} , \text{ when }x\geq 0
+\\0, x < 0
+\end{cases}
+$$
+
+$$
+f(x, \mu)=
+\begin{cases} 
+\frac{1}{\mu} e^{-x/ \mu} , \text{ when }x\geq 0
+\\0, x < 0
+\end{cases}
+$$
+
+
+## Eksponentinis skirstinys
+
+```{r}
+?dexp
+```
+
+## Eksponentinis skirstinys
+PVZ: Tarkime kasininkas aptarnauja vieną klientą per vidutiniškai 3 minutes. Žinoma, kad aptarnavimo laikas turi eksponentinį skirstinį. Kokia tikimybe sekantis klientas bus aptarnautas per mažiau nei 2 minutes
+
+* vidutinis aptarnavimo greitis: 1/3=0.333 klientų per minutę
+
+```{r}
+pexp(2, rate=1/3)
+```
+
+## Eksponentinis skirstinys
+
+```{r, fig.height=5}
+x <- seq(from=0, to=10, by=1)
+y <- dexp(x, rate=1/3 )
+plot(x,y, type = "l")
+axis(side = 1, at = x,labels = T)
+```
+
+## Eksponentinis skirstinys
+Tankio funkcija:
+```{r, fig.height=5}
+x <- seq(from=0, to=10, by=1)
+y <- pexp(x, rate=1/3 )
+plot(x,y, type = "l")
+axis(side = 1, at = x,labels = T)
+```
+
+
+## Normalusis skirstinys
+
+Sakysime, kad atsitiktinis dydis x turi normalųjį skirstinį, jei jo tankis
+$$\varphi_{\mu,\sigma}(x)=\frac{1}{\sqrt{2 \pi \sigma^2}}e^{-(x-\mu)^2/(2\sigma^2)} \text{ for } - \infty<x< \infty ; -\infty<\mu< \infty, \sigma^2>0 $$
+Sakysime, kad atsitiktinis dydis x turi standartinį normalųjį skirstinį, jeigu $\mu=0, \sigma^2=1$
+
+## Normalusis skirstinys
+```{r, fig.height=5}
+x <- seq(from=-5, to=5, by=0.2)
+y <- dnorm(x)
+plot(x,y, type = "p")
+axis(side = 1, at = x,labels = F)
+```
+
+## Normalusis skirstinys
+```{r, fig.height=5}
+x <- seq(from=-5, to=5, by=0.2)
+y <- pnorm(x)
+plot(x,y, type = "p")
+axis(side = 1, at = x,labels = F)
+```
+
+## Normalusis skirstinys
+* Tarkime yra žinoma, jog ūgis turi normalųjį skirstinį
+* Kurso vidurkis: 1.70, standartinis nuokrypis: 10 cm
+* Klausimai:
+    * kokia tikimyybė, jog auditorijoje bus 1.5m arba mažesnis asmuo
+    * kokia tikimybė, jog auditorijoje bus 1.85m arba didesnis asmuo
+    * iki kokio ūgio bus 95% visų studentų
+    
+## Normalusis skirstinys
+Solutions:
+```{r, echo=TRUE}
+pnorm(q=1.5,mean=1.7,sd=0.1, lower.tail = TRUE)
+pnorm(q=1.85, mean=1.7,sd=0.1, lower.tail = FALSE)
+qnorm(p=0.95,mean=1.7, sd=0.1, lower.tail = TRUE)
+```

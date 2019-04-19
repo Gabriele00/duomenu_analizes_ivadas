@@ -1,0 +1,153 @@
+---
+title: "Seminar 2"
+author: "Justas Mundeikis"
+institute: "Vilnius University (FEBA)"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+output:
+  html_document:
+    toc: true
+    df_print: paged
+    number_sections: true
+  pdf_document:
+    toc: true
+    number_sections: true
+    includes:
+      in_header: header_lt_text.txt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+# Rašto darbo / kursinio / esė *proposal*
+Labai svarbu, jog studentai suprastų, kam yra skirtas pats rašto darbas bei kokią funckiją atlieka rašto darbo *proposal*.
+
+DAI kurso rašto darbo tiklsas - jog studentai pademonstruotų 3 kurso metu įgytus gebėjimus:
+
+1. surinkti ir apdoroti duomenis, juos pateikti auditorijai
+2. surinkti ir panaudoti argumentacijoje mokslinę literatūrą
+3. pirmus du punktus "įvelti į konktestą" (savaitiniai skaitiniai)
+
+*Proposal* tiklsas yra "priversti" studentus laiku imtis darbų bei padėti studentams susidėlioti mintis. Pats proposal paruošimas, ko gero sudaro ~50%, gal net daugiau, viso darbo ir padeda studentams rašant rašto darbą nenuklysti į lankas (nepamesti *raudono siūlo*), matyti darbo stuktūrą ir įsivertinti, kiek laiko pats darbas atims. 
+
+Pats proposal dėstytojui nėra įdomus, jis iš esmės yra skirtas pačiam studentui. Tačiau dėstytjas gali matydamas tam tikras problemas duoti *feedback* studentui. 
+
+*Proposal* reikia pristatyti el. laiško pavidalu (word/pdf/Rmarkdown/txt) iki gegužės 12d. 24:00 (sharp!). Terminą pratesiau, nes nesame taip toli pažengę su R, kaip tikėjausi. Tai nereiškia, jog studentai, kurie jaučiasi gerai, negali atsiųsti proposalo anksčiau.
+
+Jeigu rašant *proposal* matote, jog kinta Jūsų tema, atitinkamai keiskite ir google spredsheet esantį įrašą, tačiau tema negali dubliuotis su kitų studentų temomis.
+
+
+
+# Proposal dalys
+## Pavadinimas
+Pavadinimas turi atspindėti rašto darbo turinį, kartu pavadinimas turi būti trumpas. Kitaip tariant: "*as short as possible, as long as necessary*" Neaukokite kokybės dėl trumpumo.
+
+Blogi pvz:
+
+* Lietuvos darbo rinkos raida
+* Lietuvos ekonomika po krizės
+
+Geri pvz:
+
+* Neįgaliųjų užimtumo situacija Lietuvoje nuo įstojimo į ES
+* TUI įtaka Lietuvos pramonės raidai nuo 2010 metų
+
+Dažniausiai straipnsio pavadinimas Jums susidėlios realiai tada kai rpadėsite skaityti mokslinius straipnsius ir pamatysite, jog turite apsiriboti, tam, kad neišsiplėstumėte per daug. Tokie apsiribojimai automatiškai padės ir konkretizuojant rašto darbo pavadinimą.
+
+## Kontekstas
+
+Jau ko gero apskaitose tapo aišku, kad kontekstas yra labai svarbi dalis, tiek atliekant bet kokias analizes, tiek vertinant tai, kas vyksta, nes suteikia faktams prasmę / reikšmę. Tad šioje dalyje būtina aprašyti kodėl kontekstualiai Jūsų tema yra svarbi, kokios dilemos ar problemos kyla. Pvz., rašant apie OECD siūlymą investuoti, būtų galima aprašyti kodėl yra svarbu investuotu, kokie trendai ES/Pasaulyje, koks politinis kontekstas, kur kyla konfliktai.
+
+* (50-100 žodžių).
+
+## Pagrindinai klausimai
+Kiekvienas rašto darbo, kad ir kokia jo forma bebūtų, visada bando atsakyti savo skaitytojams į tam tikrus klausimus. Tad šioje dalyje būtina įvardinti kokie yra Jūsų rašto darbo pagrindiniai klausimai. Jeigu darbas būtų tyriamasis, tada galite užduoti klausimus, į kuriuos bandysite atsakyti atliekamu tyrimu (skaičiavimu), jeigu darbas yra labiau esė, tai kokias oponuojančias mintis reflektuosite.
+
+PVZ:
+
+Tiriamieji klausimai:
+
+* Ar neįgaliųjų užimtumas Lietuvoje didėjo?
+* Kokie veiksniai galimai turėjo įtakos / siejosi su neįgaliųjų užimtumu
+
+Esė tipo klausimai
+
+* Kokie yra svarbiausai politiniai / socialiniai argumentai už ir prieš Brexit?
+* Kokios yra galimos teigiamos ir neigiamos minimalaus mėnesio atlyginimo pasekmės?
+
+## Svarbos argumentas
+Šioje dalyje reikia trumpai aprašyti, kodėl atsakymai į iškeltus klausimus yra svarbūs. Kokia reikšmė to, ką darote (tai liečia ne tik šį rašto darbą, bet ypatingai baigiamuosius darbus). Dažniausiai moksle bandoma arba sužinoti naujus faktus, arba giliau ištyrinėti jau iš esmės žinomus, bet dar menkai suprantamus faktus, arba gilinamasi į metodikas. 
+
+* (50-100 žodžių).
+
+## Duomenys
+Kadangi šiam darbui labai svarbi dalis yra duomenų importas, apdorojimas ir lentelių, grafikų padarymas, t.y. tam tikrų faktų generavimas, kuris iliustruotų kontekstą, problemą, argumentus arba išvadas, labai svarbu, jog Jūs labai laikau pradėtumėte nuo to, ir kur, kokius duomenis Jūs imsite. Todėl būtina nurodyti:
+
+* duomenų šaltinis (LSD, Eurostat, IMF, World Bank, OECD)
+* duomenų pavadinimas / lentelių kodai (LSD: "Materialiniai nepritekliai", Eurostat: "prc_hicp_midx")
+* metodai: ką planuojate su minimais duomenimis padaryti
+
+
+## Preliminarūs rezultatai
+Idealiausia, kad rašant *proposal*, Jūs jau atliktumėte preliminarią duomenų analizę ir matytumėte, kokios yra Jūsų rašto darbo išvados. Nesvarbu, ar tai esė, ar *report*, bet rašto darbas visad užsibaigia Jūsų asmeninėmis išvadomis. Tačiau išvadas galite suformuoti tik atlikę visus viršuje minėtus žingsnius.
+
+## Literatūra
+Ruošiant *proposal* reiktų būti perskaičius mažiausiai 5-8 skirtingus mokslinius straipsnius. Iš vienos pusės, tai susiję su labai varginančia darbo dalimi, tinkamos literatūros paieška, iš kitos pusės, tai labai padeda konkretizuoti temą, nes greit pasidaro akivaizdu, kad "Lietuvos darbo rinkos raida" yra labai plati tema ir norint sutilpti į 1500-3000 žodžių tiesoig aprašyti visko, nebūtų įmanoma bei atimtų per daug laiko. 
+
+Literatūra nurodoma pateikiant bibtex raktą (google scholar), pvz.,
+
+* @techreport{card1993minimum,
+title={Minimum wages and employment: A case study of the fast food industry in New Jersey and Pennsylvania},
+author={Card, David and Krueger, Alan B},
+year={1993},
+institution={National Bureau of Economic Research}
+}
+
+* bei vienu sakiniu parašant kodėl naudotas / planuojamas naudoti šis šaltinis Jūsų darbe
+
+## Planuojamas turinys
+Šioje dalyje pateikiamas planuojamas darbo turinys ir po 1 - 2 sakinius parašoma ką planuojama aprašyti minimoje dalyje.
+
+PVZ:
+
+Esė:
+
+1. Įvadas
+    * Kodėl MMA tematika yra svarbi
+    * MMA istorinė raida
+    * MMA raida Lietuvoje
+2. MMA nauda/ rizika
+    * Argumentai už minimalų mėnesinį atlyginimą
+    * Argumentai prieš minimalų mėnesinį altginimą
+    * Ką rodo duomenys pasaulyje
+    * Ką rodo duomenys Lietuvoje
+3. Išvados
+
+Report:
+
+1. Įvadas
+    * Kodėl MMA tematika yra svarbi
+2. Literatūros appžvalga
+    * Kas buvo tirta iki šiol, kas yra žinoma, kas yra žinoma, kad yra nežinoma
+3. Duomenys
+    * Šaltiniai, kaip apdoroti duomenys ir t.t.
+4. Metodai
+    * Kokie metodai taikyti (čia aišku labiau jau kursiniams, baigiamiesiems darbams, kai mokėsite kokius nors metodus :D)
+5. Rezultatai
+    * Ką pritaikius metodus gavote, kokie rezultatai, rezultatų interpretacija
+6. Išvados
+
+# Rašto darbas
+(bus papildyta, po sekančio susitikimo, kylančiais klausimais)
+
+* darbas uploadintas githube
+* .Rmd formatu (alternatyva .tex formatas + .R skriptas)
+* importuoja duomenis iš interneto
+* jeigu duomenys nepaimami iš interneto, tada importuoja iš .csv failo, .csv failas githube
+* sumezgą dokumentą (pdf/html)
+* essay/report stilius
+* lietuvių / anglų kalba
+* 1500+ žodžių. Minimumas 1500 žodžių, bet esant poreikui gali būti daugiau, neturėtų viršyti 3000 žodžių.
+* tekstas trumpas, be jokių pilstymų iš kiauro į tuščią, pasikartojimų ir t.t. Iš esmės stilius, kaip working paper
+* min 5 moksliniai straipsniai, taisyklingai cituojami
+* plagiatas, copy-paste --> akademinė taryba, pašalinimas iš univero, kurso neišlaikymas ir t.t. 
