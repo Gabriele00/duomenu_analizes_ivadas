@@ -6,9 +6,4 @@
 *.gz
 *.toc
 *.vrb
-*.tex
 *.Rhistory
-header.txt
-header_en.txt
-/knygos
-/lectures_slides/figures
