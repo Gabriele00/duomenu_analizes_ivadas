@@ -1,0 +1,196 @@
+---
+title: "Seminar 2"
+author: "Justas Mundeikis"
+institute: "Vilnius University (FEBA)"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+output:
+  html_document:
+    toc: true
+    df_print: paged
+    number_sections: true
+  pdf_document:
+    toc: true
+    number_sections: true
+    includes:
+      in_header: header_lt_text.txt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+# Apie seminarą
+## Seminaro tikslai
+* pasikartoti Git, Github, CLI (lieka aktualu iki pat egzamino)
+* susipažinti su LSD
+* Pasikartoti ir praktiškai pritaikyti paskaitų metu įgytas žinias (R 2.1 ir R 2.2)
+* Toliau gilinti savo žinias rašant funkcijas
+
+## Seminaro aptarimas:
+* 2019-04-25 I ir II srautai kartu
+
+# Nedarbo lygis Lietuvoje
+
+Eikite į Lietuvos Statistikos departamento (LSD) tinklapį. Jame esančioje duomenų bazėje susiraskite Nedarbo lygio statistiką ("Amžius (tikslinės grupės")| Gyvenamoji vietovė | Lytis (1998-2018)..). 
+Pasirinkite visus laikotarpius, bei pritaikykite pakeitimus. Parsisiųskite duomenis .csv formatu. Kaip naudotis duomenų baze rasite [https://osp.stat.gov.lt/documents/10180/637156/RDB_naudotojo_vadovas.pdf](https://osp.stat.gov.lt/documents/10180/637156/RDB_naudotojo_vadovas.pdf)
+
+Importuokite duomenis
+```{r, echo=FALSE}
+data <- read.csv("data-table.csv", sep=",", header = TRUE, stringsAsFactors = FALSE)
+```
+
+Pasitikrinkite ar importavimas įvyko teisingai bei matote:
+```{r}
+str(data)
+
+```
+
+Apskaičiuokite vidutinį nedarbo lygį laikotarpiui 1998-2018  pagal amžiaus grupes. Jums pgali būti prasminga prieš skaičiuojant, susikurti naują R objektą, kuriame būtų tik "Miestas ir kaimas", "Vyrai ir moterys". Apskaičiuojant nepašalinkite `na.rm`. Rezultatas kurį turėtumėte gauti:
+
+```{r, echo=FALSE}
+df <- data[data$Lytis=="Vyrai ir moterys" & data$Gyvenamoji.vietovė=="Miestas ir kaimas",]
+aggregate(df$Reikšmė, list(df$Amžius..tikslinės.amžiaus.grupės.), mean)
+```
+
+Atgaminkite žemiau pateiktą grafiką. Naudokites internetu, jeigu reikia pgalbos formatuojant grafiką, pvz., [https://stackoverflow.com/questions/14860078/plot-multiple-lines-data-series-each-with-unique-color-in-r](https://stackoverflow.com/questions/14860078/plot-multiple-lines-data-series-each-with-unique-color-in-r)
+```{r, echo=FALSE}
+df <- data[data$Lytis=="Vyrai ir moterys" & 
+                   data$Gyvenamoji.vietovė=="Miestas ir kaimas" &
+                   data$Amžius..tikslinės.amžiaus.grupės. %in% c("15–24", "15–74"),]
+
+plot(df[df[,3]=="15–24",1],
+     df[df[,3]=="15–24",7],
+     type="l",
+     col="red",
+     ylim = c(0,40),
+     xlab = "Metai", 
+     ylab = "Nedarbo lygis, %")
+lines(df[df[,3]=="15–74",1],
+     df[df[,3]=="15–74",7],
+     col="blue")
+```
+
+
+# Funkcijų rašymas
+Parsisiųskite zip failą pavadinimu [https://github.com/justasmundeikis/duomenu_analizes_ivadas/raw/master/seminars/3_seminaras.zip](https://github.com/justasmundeikis/duomenu_analizes_ivadas/raw/master/seminars/3_seminaras.zip). Išpakuokite turinį taip, jog visi failai esantys zip archyve būtų išpakuoti į folderį "3_seminaras". Šis folderis tarnaus Jums kaip darbinė R direktorija. Startuokite R ir pasikeiskite R darbinę direktoriją į šį folderį. 
+Pasitikrinkite, ar R mato visus tris failus su komanda `dir()` jeigu reikia, keiskite direktoriją su `setwd("...")` komanda. Komanda `getwd()` pasako kur esate.
+
+Šioje dalyje naudosimės *U.S. Department of Health and Human Services* surinktais duomenimis apie ligonines JAV, kuriais remiantis yra analizuojama JAV veikiančių ligoninių veikla. Šiam seminarui duomenų apimtis yra sumažinta ir direktorijoje Jūs rasite 3 failus:
+
+* `outcome-of-care-measures.csv` kuriame yra 30 dienų mirtingumo rodikliai surinkti virš 4000 ligoninių JAV. 
+* `hospital-data.csv` kuriame surinkta bendrinė informacija apie kiekvieną ligoninę
+* `Hospital_Revised_Flatfiles.pdf` yra duomenų `code book`, kurioje aprašomi visi failai ir juose esantys kintamieji, jų kodavimas (zip faile nėra visų duomenų, o tik 11 ir 19 failai).
+
+
+## Funkcija `best`
+Parašykite funkciją `best`, kuri priima du argumentus: `state` - 2 ženklų ilgumo valstijos kodą, ir `outcome` ligos pavadinimą, nuskaito `outcome-of-care-measures.csv` ir pateikia character vektorių su ligoninės pavadinimu, kuriame minimos ligos mirtingumo rodiklis yra geriausias (žemiausias) pasirinkotje valstijoje. Ligoninių pavadinimai yra stulpelyje: `Hospital.Name`. Galimos ligos yra:
+
+* `heart attack`
+* `heart failure`
+* `pneumonia`
+
+Vertinant ligonines, tos ligoninės, kurios neturi norimos ligos statistikos, turėtų būti pašalintos iš reitingavimo proceso. Jeigu dvi ligoninės turi identiškai gerą statistiką pateiktai ligai, tada funkcija turi grąžinti alfabetiškai pirmą ligoninę. Parašytą funkciją (script) išsaugokite kaip failą "best.R" Rašant šią funkciją Jums gali prireikti R funkcijos `order()`. Susipažinkite su ja savarankiškai, naudokitės internete esančiais resursais.
+
+Funkcijos prototipas:
+```{r, eval=FALSE}
+best <- function(state, outcome){
+        ## nuskaityti duomenis iš .csv failo
+        
+        ## patikrinti ar valstijos ir ligos pavadinimas yra teisingas, jeigu ne, 
+        ## gražinti pranešimą apie klaidingą įvedimą, 
+        ## pvz., "invalide state" arba atitinkamai "invalide outcome"
+        
+        ## grąžinti ligoninės pavadinimą pasirinktoje valstijoje su 
+        ## žemiausiu 30 dienų mirtingumo rodikliu pasirinktai ligai
+}
+```
+
+
+Pastaba: norint importuoti failą "best.R" naudoti funkciją `source(best.R)`
+PVZ: ką turėtų grąžinti funkcija `best.R`
+```{r, eval=TRUE, error=TRUE}
+source("best.R")
+best("TX", "heart attack")
+best("TX", "heart failure")
+best("MD", "heart attack")
+best("MD", "pneumonia")
+best("BB", "heart attack")
+best("NY", "hert attack")
+```
+  
+## Funkcija `rankhospital`
+
+Parašykite funkciją `rankhospital`, kuri priima tris argumentus: `state` - 2 ženklų ilgumo valstijos kodą, `outcome` ligos pavadinimą bei `num`, kuris gali būti arba "best", arba "worst" arba skaitinis reitingo vietos indekso numeris. Funkcija turi grąžinti ligoninės pavadinimą pasirinktoje valstijoje su pasirinktu 30 dienų mirtingumo reitingo rodikliu pasirinktai ligai.
+
+Galimos ligos yra:
+
+* `heart attack`
+* `heart failure`
+* `pneumonia`
+
+Vertinant ligonines, tos ligoninės, kurios neturi norimos ligos statistikos, turėtų būti pašalintos iš reitingavimo proceso. Jeigu nurodomas didesnis reitingo skaitinis numeris, funkcija turėtų grąžinti "NA". Jeigu dvi ligoninės turi identiškai gerą statistiką pateiktai ligai, tada funkcija turi grąžinti alfabetiškai pirmą ligoninę. Parašytą funkciją (script) išsaugokite kaip failą "rankhospital.R" Rašant šią funkciją Jums gali prireikti R funkcijos `order()`. Susipažinkite su ja savarankiškai, naudokitės internete esančiais resursais.
+
+
+Funkcijos prototipas:
+```{r, eval=FALSE}
+rankhospital <- function(state, outcome, num="best"){
+        ## nuskaityti duomenis iš .csv failo
+        
+        ## patikrinti ar valstijos ir ligos pavadinimas yra teisingas, jeigu ne, 
+        ## gražinti pranešimą apie klaidingą įvedimą, 
+        ## pvz., "invalid state" arba atitinkamai "invalid outcome"
+        
+        ## grąžinti ligoninės pavadinimą pasirinktoje valstijoje su 
+        ## pasirinktu 30 dienų mirtingumo reitingo rodikliu pasirinktai ligai 
+}
+```
+
+Pastaba: norint importuoti failą "rankhospital.R" naudoti funkciją `source(rankhospital.R)`
+PVZ: ką turėtų grąžinti funkcija `rankhospital.R`
+```{r, eval=TRUE, error=TRUE}
+source("rankhospital.R")
+rankhospital("TX", "heart failure", 4)
+rankhospital("MD", "heart attack", "worst")
+rankhospital("MN", "heart attack", 5000)
+```
+
+
+## Funkcija `rankall`
+Parašykite funkciją `rankall`, kuri priima du argumentus: `outcome` - ligos pavadinimą bei `num`, kuris gali būti arba "best", arba "worst" arba skaitinis reitingo vietos indekso numeris. Funkcija turi grąžinti `dataframe`, kur pirmame stulpelyje sureitinguotas ligonines pagal 30 dienų mirtingumo rodiklius pasirinktai ligai. Dataframe turi sudaryti du stulpeliai `hospital` ir `state`. 
+
+Galimos ligos yra:
+
+* `heart attack`
+* `heart failure`
+* `pneumonia`
+
+
+Vertinant ligonines, tos ligoninės, kurios neturi norimos ligos statistikos, turėtų būti pašalintos iš reitingavimo proceso. Jeigu dvi ligoninės turi identiškai gerą statistiką pateiktai ligai, tada funkcija turi grąžinti alfabetiškai pirmą ligoninę. Parašytą funkciją (script) išsaugokite kaip failą "rankall.R" Rašant šią funkciją Jums gali prireikti R funkcijos `order()` bei `rank()`. Susipažinkite su jomis savarankiškai, naudokitės internete esančiais resursais.
+
+Funkcijos prototipas:
+```{r, eval=FALSE}
+rankall <- function( outcome, num="best"){
+        ## nuskaityti duomenis iš .csv failo
+        
+        ## patikrinti ar ligos pavadinimas yra teisingas, jeigu ne, 
+        ## grąžinti pranešimą apie klaidingą įvedimą, "invalid outcome"
+        
+        ## kiekvienai valstijai surasti ligoninės pavadinimą 
+        ## pagal pasirinkta reitingo numerį
+        
+        ## grąžinti ligoninės pavadinimą ir valstijos trumpinį dataframe objekte 
+}
+```
+
+
+Pastaba: norint importuoti failą "best.R" naudoti funkciją `source(rankall.R)`
+PVZ: ka turėtų grąžinti funkcija `rankall.R`
+```{r, eval=FALSE}
+source("rankall.R")
+head(rankall("heart attack", 20), 10)
+tail(rankall("pneumonia", "worst"), 3)
+tail(rankall("heart failure"), 10)
+```
+
+## GitHub
+Sukurkite naują repozitoriją GitHube pavadinimu "3_seminaras" ir pushinkite direktorijos turinį į GitHubą naudodamiesi Git.

@@ -1,0 +1,169 @@
+---
+title: "Untitled"
+author: "Justas Mundeikis"
+institute: "Vilnius University (FEBA)"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+output:
+  html_document:
+    toc: true
+    df_print: paged
+    number_sections: true
+  pdf_document:
+    toc: true
+    number_sections: true
+    includes:
+      in_header: header.txt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Vektoriai
+
+## 
+Sukurkite vektorių
+
+```{r}
+x <- c(1,5,9,3)
+```
+
+Kokią reikšmę Jums gražins komanda? `x<7`
+
+```{r,eval=FALSE}
+a) TRUE  TRUE FALSE  TRUE
+b) TRUE  TRUE FALSE  FALSE
+c) TRUE  TRUE TRUE  TRUE
+d) FALSE FALSE TRUE TRUE
+```
+
+##
+
+Sukurkite du vektorius
+
+```{r}
+a <- c(1,2,3,4)
+b <- c(5,5,5)
+```
+
+Kokią reikšmę Jums gražins komanda? `a+b`
+
+```{r,eval=FALSE}
+a) 6 7 8 9
+b) 6 7 8 NA
+c) 6 7 8 9
+Warning message:
+In a + b : longer object length is not a multiple of shorter object length
+d) 6 7 8 11
+```
+
+##
+Sukurkite
+
+```{r}
+Amžius <- c(19,20,21,22,18)
+Vardas <- c("Jonas", "Marija", "Ana","Petras", "Margarita")
+Lytis <- c("V","M", "M","V","M" )
+```
+
+Koks kodas grąžintų
+
+```{r, echo=FALSE}
+df <- data.frame(Amžius, Vardas, Lytis)
+subset(df, Lytis=="M")
+```
+
+```{r,eval=FALSE, error=TRUE}
+a) df <- data.frame(c(Amžius), c(Vardas), c(Lytis))
+   subset(df, Lytis=="M")
+a) df <- data.frame(Amžius, Vardas, Lytis)
+   subset(Lytis=="M")
+c) df <- data.frame(c(Amžius, Vardas, Lytis))
+   subset(df, Lytis=="M")
+d) df <- data.frame(Amžius, Vardas, Lytis)
+   df[df[,3]=="M",]
+```
+
+##
+
+Ką grąžintų kodas?
+```{r, eval=FALSE}
+x <- seq(0:4)
+skaičiai <- as.character(x)
+as.integer(skaičiai)
+```
+
+```{r,eval=FALSE, error=TRUE}
+a) Error...
+b) "NA" "NA" "NA" "NA" "NA"
+c ) 1 2 3 4 5
+d) "1" "2" "3" "4" "5"
+```
+
+##
+Ką grąžintų kodas?
+```{r, eval=FALSE}
+x <- seq(1:4)
+(x+3)[(!is.na(x)) & x>2]
+```
+
+```{r,eval=FALSE, error=TRUE}
+a) 6 7
+b) 4 5 6 7
+c) 1 2 3 4
+d) numeric(0)
+```
+
+##
+Atsispaudinkite `AirPassengers` dataset.  Šio dataset klasė yra "time series". Daugiau info rasite `?ts`
+
+```{r}
+AirPassengers
+class(AirPassengers)
+```
+
+Koks kodas grąžintų 
+
+```{r, echo=FALSE}
+AirPassengers[time(AirPassengers)>=1949 & time(AirPassengers)<1950]
+```
+
+```{r,eval=FALSE, error=TRUE}
+a) AirPassengers[AirPassengers>=1949 & AirPassengers<1950,1]
+b) AirPassengers[AirPassengers >= 1949 & AirPassengers < 1950]
+c) AirPassengers[AirPassengers >= 1949 & AirPassengers < 1950, 12]
+d) AirPassengers[time(AirPassengers)>=1949 & time(AirPassengers)<1950]
+```
+
+##
+```{r}
+a <- c(1,2,3,4)
+b <- c(T,F,F,T)
+```
+Ką grąžintų kodas
+```{r, eval=FALSE}
+sum(a[b])
+```
+
+```{r,eval=FALSE, error=TRUE}
+a) 0
+b) 5
+c) NA
+d) 10
+```
+
+##
+Duotas vektorius
+```{r}
+x <- c(34, 56, 55, 87, NA, 4, 77, NA, 21, NA, 39)
+```
+
+Kuri komanda suskaičiuotų, kiek yra `NA` reikšmių vektoriuje x?
+
+```{r, eval=FALSE}
+a) count(is.na(x))
+b) length(is.na(x))
+c) sum(is.na(x))
+d) count(!is.na(x))
+e) sum(!is.na(x))
+```
