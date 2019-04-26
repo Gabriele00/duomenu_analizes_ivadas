@@ -4,15 +4,15 @@ author: "Justas Mundeikis"
 institute: "Vilnius University (FEBA)"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output:
-  html_document:
-    toc: true
-    df_print: paged
-    number_sections: true
   pdf_document:
     toc: true
     number_sections: true
     includes:
       in_header: header_lt_text.txt
+  html_document:
+    toc: true
+    df_print: paged
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -185,7 +185,7 @@ rankall <- function( outcome, num="best"){
 
 Pastaba: norint importuoti failą "best.R" naudoti funkciją `source(rankall.R)`
 PVZ: ka turėtų grąžinti funkcija `rankall.R`
-```{r, eval=FALSE}
+```{r, eval=TRUE, error=TRUE}
 source("rankall.R")
 head(rankall("heart attack", 20), 10)
 tail(rankall("pneumonia", "worst"), 3)

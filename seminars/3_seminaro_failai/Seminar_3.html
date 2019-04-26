@@ -11,7 +11,7 @@
 
 <meta name="author" content="Justas Mundeikis" />
 
-<meta name="date" content="2019-04-20" />
+<meta name="date" content="2019-04-26" />
 
 <title>Seminar 2</title>
 
@@ -194,7 +194,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Seminar 2</h1>
 <h4 class="author">Justas Mundeikis</h4>
-<h4 class="date">2019-04-20</h4>
+<h4 class="date">2019-04-26</h4>
 
 </div>
 
@@ -294,9 +294,9 @@ best(&quot;MD&quot;, &quot;heart attack&quot;)
 best(&quot;MD&quot;, &quot;pneumonia&quot;)
 ## [1] &quot;GREATER BALTIMORE MEDICAL CENTER&quot;
 best(&quot;BB&quot;, &quot;heart attack&quot;)
-## Error in best(&quot;BB&quot;, &quot;heart attack&quot;): invalid state
+## Error in best(&quot;BB&quot;, &quot;heart attack&quot;): invalide state
 best(&quot;NY&quot;, &quot;hert attack&quot;)
-## Error in best(&quot;NY&quot;, &quot;hert attack&quot;): invalid outcome</code></pre>
+## Error in best(&quot;NY&quot;, &quot;hert attack&quot;): invalide outcome</code></pre>
 </div>
 <div id="funkcija-rankhospital" class="section level2">
 <h2><span class="header-section-number">3.2</span> Funkcija <code>rankhospital</code></h2>
@@ -352,9 +352,24 @@ rankhospital(&quot;MN&quot;, &quot;heart attack&quot;, 5000)
 }</code></pre>
 <p>Pastaba: norint importuoti failą “best.R” naudoti funkciją <code>source(rankall.R)</code> PVZ: ka turėtų grąžinti funkcija <code>rankall.R</code></p>
 <pre class="r"><code>source(&quot;rankall.R&quot;)
-head(rankall(&quot;heart attack&quot;, 20), 10)
-tail(rankall(&quot;pneumonia&quot;, &quot;worst&quot;), 3)
-tail(rankall(&quot;heart failure&quot;), 10)</code></pre>
+head(rankall(&quot;heart attack&quot;, 20), 10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Hospital.Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["State"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"D W MCMILLAN MEMORIAL HOSPITAL","2":"AL","_rn_":"59"},{"1":"ARKANSAS METHODIST MEDICAL CENTER","2":"AR","_rn_":"211"},{"1":"JOHN C LINCOLN DEER VALLEY HOSPITAL","2":"AZ","_rn_":"154"},{"1":"SHERMAN OAKS HOSPITAL","2":"CA","_rn_":"564"},{"1":"SKY RIDGE MEDICAL CENTER","2":"CO","_rn_":"651"},{"1":"MIDSTATE MEDICAL CENTER","2":"CT","_rn_":"696"},{"1":"SOUTH FLORIDA BAPTIST HOSPITAL","2":"FL","_rn_":"808"},{"1":"UPSON REGIONAL MEDICAL CENTER","2":"GA","_rn_":"910"},{"1":"COVENANT MEDICAL CENTER","2":"IA","_rn_":"1412"},{"1":"JESSE BROWN VA MEDICAL CENTER - VA CHICAGO HEALTHCARE SYSTEM","2":"IL","_rn_":"1107"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>tail(rankall(&quot;pneumonia&quot;, &quot;worst&quot;), 3)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Hospital.name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["State"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"MAYO CLINIC HEALTH SYSTEM - NORTHLAND, INC","2":"WI","_rn_":"52"},{"1":"PLATEAU MEDICAL CENTER","2":"WV","_rn_":"53"},{"1":"NORTH BIG HORN HOSPITAL DISTRICT","2":"WY","_rn_":"54"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>tail(rankall(&quot;heart failure&quot;), 10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Hospital.Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["State"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"WELLMONT HAWKINS COUNTY MEMORIAL HOSPITAL","2":"TN","_rn_":"3797"},{"1":"FORT DUNCAN MEDICAL CENTER","2":"TX","_rn_":"3935"},{"1":"VA SALT LAKE CITY HEALTHCARE - GEORGE E. WAHLEN VA MEDICAL CENTER","2":"UT","_rn_":"4237"},{"1":"SENTARA POTOMAC HOSPITAL","2":"VA","_rn_":"4341"},{"1":"GOV JUAN F LUIS HOSPITAL & MEDICAL CTR","2":"VI","_rn_":"4278"},{"1":"SPRINGFIELD HOSPITAL","2":"VT","_rn_":"4275"},{"1":"HARBORVIEW MEDICAL CENTER","2":"WA","_rn_":"4399"},{"1":"AURORA ST LUKES MEDICAL CENTER","2":"WI","_rn_":"4561"},{"1":"FAIRMONT GENERAL HOSPITAL","2":"WV","_rn_":"4473"},{"1":"CHEYENNE VA MEDICAL CENTER","2":"WY","_rn_":"4644"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 <div id="github" class="section level2">
 <h2><span class="header-section-number">3.4</span> GitHub</h2>
