@@ -1,4 +1,11 @@
 ---
+editor_options:
+  chunk_output_type: console
+output:
+  pdf_document: default
+  html_document: default
+---
+  ---
 title: "Duomenų analizės įvadas"
 subtitle: '3.1.. dalis - R programavimas'
 author: "Justas Mundeikis"
@@ -14,18 +21,17 @@ editor_options:
 
 ```{r setup, include=FALSE, error=TRUE}
 knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
-library(kableExtra)
 ```
 
 ## Turinys
 \tableofcontents
 
-# natūralūs vs apdoroti duomenys
+# Natūralūs vs apdoroti duomenys
 ## Intro
 
-natūralūs duomenys (raw data) -> Aprodojimo skriptas -> tvarkingi duomenys -> duomenų analizė -> komunikacija
+Natūralūs duomenys (raw data) -> aprodojimo skriptas -> tvarkingi duomenys -> duomenų analizė -> komunikacija
 
-## natūralūs vs apdoroti duomenys
+## Natūralūs vs apdoroti duomenys
 
 Natūralūs duomenys:
 
@@ -76,6 +82,10 @@ Apdoroti duomenys:
 
 ## Kas būna kai...
 
+Does high public debt consistently stifle economic growth? A critique of Reinhart and Rogoff 
+
+We replicate Reinhart and Rogoff (2010A and 2010B) and find that selective exclusion of available data, coding errors and inappropriate weighting of summary statistics  lead  to  serious  miscalculations  that  inaccurately  represent  the  relationship  between public debt and GDP growth among 20 advanced economies. Over 1946–2009, countries with public debt/GDP ratios above 90% averaged 2.2% real annual GDP growth, not −0.1% as published...
+
 [Does high public debt consistently stifle economic growth? A critique of Reinhart and Rogoff](https://umassmed.edu/globalassets/quantitative-health-sciences/files/camb.-j.-econ.-2013-herndon-cje-bet075.pdf)
 
 ## Darbinė direktorija
@@ -84,6 +94,7 @@ Apdoroti duomenys:
 * relatyvus adresas `setwd("./data")`, `setwd("../data")`
 * absoliutus adresas `setwd(c:/users/studentas/desktop/test/data)` 
 * nenaudokite absoliučių adresų
+* INSTR: pakeisti darbinę direkrotiją į "Desktop"
 
 ## Darbinė direktorija
 
@@ -97,6 +108,17 @@ if(!file.exists("data")){
 }
 ```
 
+## `paste()`
+
+* `paste()` funkcija sujungia stringus / vectorius į vieną *character* string
+```{r}
+times <-"Times"; x <- 3
+paste("Hello", "World", x, times, sep=" ")
+paste("Hello", "World", x, times , sep = "_")
+a <- c(1,2,3,4); b <- c("a", "b", "c")
+paste(a,b, sep="&", collapse="%")
+```
+
 # Duomenys iš interneto
 ## Duomenys iš interneto
 
@@ -104,50 +126,65 @@ if(!file.exists("data")){
 * tinka duomenų failų parsiuntimui (.txt, .csv, etc)
 * Keliaujam į [http://atvira.sodra.lt/lt-eur/](http://atvira.sodra.lt/lt-eur/) - Apdraustieji - Vidutinių apdraustųjų pajamų analizė - CSV 
 * Nusikopijuojam url
+![Sodra](./figures/sodra_1.png)
+
+
+
+## Duomenys iš interneto
 ```{r, collapse=TRUE, eval=FALSE}
 URL <- "http://atvira.sodra.lt/csv/lt-eur/apdraustieji_3_1.csv"
 Sys.time()
 DownloadDate <- format(Sys.time(), format="%Y_%m_%d")
-download.file(
-        url = URL, 
-        destfile = paste("./data/apdraustieji_3_1_",
+filename <- paste("./data/apdraustieji_3_1_",
                          DownloadDate,
                          ".csv", 
-                         sep = ""), 
-        method = "curl")
+                         sep = "")
+filename
+# pastaba: method="curl" arba "wininet" kartais veikia geriau, svarbu išsibandyti
+download.file(
+        url = URL, 
+        destfile = filename, 
+        method = "auto")
 
 ```
 
 ## Duomenys iš interneto
 * Dabar visą zip failą "apdraustuju_pajamu_analize.zip"
 
-```{r, eval=FALSE}
+
+
+```{r, collapse=TRUE, eval=FALSE}
 URL <- "http://atvira.sodra.lt/downloads/lt-eur/apdraustuju_pajamu_analize.zip"
 DownloadDate <- format(Sys.time(), format="%Y_%m_%d")
-download.file(
-        url = URL, 
-        destfile = paste("./data/apdraustuju_pajamu_analize_",
+filename <- paste("./data/apdraustuju_pajamu_analize_",
                          DownloadDate,
                          ".zip", 
-                         sep = ""), 
-        method = "curl")
-unzip("./data/apdraustuju_pajamu_analize_2019_05_01.zip",
-      exdir="./data/",
-      files = "apdraustuju_pajamu_analize.csv") #jeigu daugiau nei vienas failas
+                         sep = "")
+filename
+download.file(
+        url = URL, 
+        destfile = filename,
+        method = "auto")
+
+# jeigu daugiau nei vienas failas, nurodyti tikslų failo pavadinimą
+unzip(filename,
+      exdir="data",
+      files = "apdraustuju_pajamu_analize.csv")
 ```
 
 ## Duomenys iš interneto
 * sukuriamas `temp()` failas
-* į jį nudownloadinamas failas, kai nebereikia `unlink(...)`
+* į jį nudownloadinamas failas
+* iš temp failo išsiekstrahuojame reikiamą turinį
+* kai nebereikia `unlink(...)` panaikina `temp()` failą
 
 ```{r, eval=FALSE}
 URL <- "http://atvira.sodra.lt/downloads/lt-eur/apdraustuju_pajamu_analize.zip"
 temp <- tempfile()
-download.file(url = URL, temp, method = "curl")
+download.file(url = URL, temp, method = "auto")
 GYV_PAJ <- read.csv(unzip(temp,"apdraustuju_pajamu_analize.csv"),
                  header=TRUE,
                  sep=";",
-                 fileEncoding = "ISO-8859-13",
                  stringsAsFactors = FALSE) 
 unlink(temp)
 ```
@@ -173,13 +210,12 @@ axis(side=1, at=seq(0,maximum, 100), labels=seq(0,maximum,100))
 ## Duomenys iš interneto
 * 100% tikrumo, koks failo `encoding` neduos niekas
 * Geras būdas, pabandyti atsidaryti su LibreOffice Calc, Sublime
-* Mažiau tiksli alternatyva `guess_encoding`
+* Mažiau tiksli alternatyva `guess_encoding` iš paketo `readr`
 * google
 ```{r, eval=TRUE}
 #install.packages("readr")
 library(readr)
-guess_encoding("./data/apdraustieji_3_1_2019_05_01.csv", n_max = 1000)
-guess_encoding("./data/data-table.csv", n_max = 1000)
+guess_encoding("./data/apdraustuju_pajamu_analize.csv", n_max = 1000)
 ```
 
 
@@ -188,21 +224,17 @@ guess_encoding("./data/data-table.csv", n_max = 1000)
 * `read.csv` , `read.csv2`, etc
 * `readr` importavimo tool'sas (generuoja R kodą)
 
-```{r, eval=FALSE}
-?read.table 
-df <- read.table("./data/apdraustieji_3_1_2019_05_01.csv",
+```{r, eval=TRUE}
+df <- read.table("./data/apdraustuju_pajamu_analize.csv",
                  header=TRUE,
                  sep=";",
                  fileEncoding = "ISO-8859-13",
                  stringsAsFactors = FALSE) 
-head(df)
-tail(df)
-str(df)
 ```
 
 ## Galvos skausmas Excel formatai
 * iš Sodros
-* parsipūčiam .xlsx failą
+* parsisiunčiam `.xlsx` failą
 ```{r, eval=FALSE}
 URL <- 
 "http://atvira.sodra.lt/downloads/lt-eur/apdraustuju_pajamu_analize.xlsx"
@@ -212,109 +244,72 @@ download.file(url = URL,
                                DownloadDate,
                                ".xlsx", 
                                sep = ""), 
-              method = "curl")
+              method = "auto")
 ```
 
 ## Galvos skausmas Excel formatai
 * `readxl` paketas
 * `xlsx` paketas
 * alternatyva atsidaryti su Excel, išsaugoti kaip `.csv`, importuoti kaip `.csv`
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 #install.packages("readxl")
 library(readxl)
 # su Excel pasitikriname, kurį sheet importuosime
-df2 <- read_excel("data/apdraustuju_pajamu_analize_2019_05_01.xlsx", 
+df2 <- read_excel(".data/apdraustuju_pajamu_analize_2019_05_08.xlsx", 
                   sheet = "Duomenys")
+str(df2)
 ```
+
 
 ## Galvos skausmas Excel formatai
 * `write_excel_csv()` su `readr` paketu
 * `write.xlsx` su `openxlsx` paketu
 * SVARBU! Excel neatidaro daugiau nei 
-* 1 048 57 eilučių ir 
-* 16 384 stulpelių
-*[info](https://www.askingbox.com/info/xls-and-xlsx-maximum-number-of-columns-and-rows)
+* 1 048 57 eilučių ir 16 384 stulpelių
 
 ```{r, eval=FALSE}
 install.packages("openxlsx")
 library(openxlsx)
 l<-list(iris=iris, mtcars=mtcars, quakes=quakes)
 write.xlsx(l, file = "./data/datasets.xlsx")
-
 ```
-
-## XML formatas
-* XML - Extensible markup language
-* Dažnai naudojama internetinių duomenų formavimui
-* Išgaunamas dažniausiai *web scraping* būdu
-* Susideda iš
-* Markup - labels, nustatančiais struktūrą (*Tags*, *attributes*)
-* Content - turiniu (tarp TAGS)
-* [https://en.wikipedia.org/wiki/XML](https://en.wikipedia.org/wiki/XML)
-
-## XML formatas
-* http://finmin.lrv.lt/lt/kontaktai --> Atviri duomenys
-* XML nuoroda
-* atsidarome su Sublime
-```{r, eval=FALSE}
-DownloadDate <- format(Sys.time(), format="%Y_%m_%d")
-URL <- 
-"http://finmin.lrv.lt/lt/kontaktai/exportPublicData?export_data_type=xml&download=1"
-download.file(url = URL, 
-              destfile = paste("./data/finmin_kontaktai_",
-                               DownloadDate,
-                               ".xml", 
-                               sep = ""), 
-              method = "curl")
-```
-
-## XML formatas
-* `XML` paketas
-
-```{r, eval=FALSE}
-install.packages("XML")
-library(XML)
-
-doc <-xmlTreeParse(URL, isURL = TRUE)
-
-root_node <- xmlRoot(doc)
-xmlName(root_node)
-names(root_node)
-root_node[[1]]
-root_node[[1]][[1]]
-xmlSApply(root_node,xmlValue)
-xmlSApply(root_node,xmlChildren)
-```
-
-## JSON
-
-* JSON
-* dažnai naudojmas API(*Application programming interface*) formatas
-* `jsonlite` paketas
 
 ## LSD
-* LSD sukelia daug galvos skausmų, tačiau LSD turi API
+* LSD sukelia daug galvos skausmų, tačiau LSD turi API 
+* ["RESTful žiniatinklio paslaugos"](https://osp.stat.gov.lt/rdb-rest)
 *`rsdmx` paketas sutvarko LSD failus
-```{r,eval=FALSE}
-library(rsdmx)
 
+```{r,eval=TRUE}
+#install.packages("rsdmx")
+library(rsdmx)
+```
+
+
+## LSD 
+Pavyzdžiai:
+* kai norima gauti duomenų rinkinių sąrašą
+* https://osp-rs.stat.gov.lt/rest_xml/dataflow/
+* kai norima gauti konkretaus duomenų rinkinio apibrėžimą 
+* https://osp-rs.stat.gov.lt/rest_xml/dataflow/LSD/S3R629_M3010217
+* kai norima gauti duomenų struktūros apibrėžimą 
+* https://osp-rs.stat.gov.lt/rest_xml/datastructure/lsd/M3010217/
+
+```{r, eval=FALSE}
 #metadata
 url_meta <- "https://osp-rs.stat.gov.lt/rest_xml/dataflow/"
+
 meta <- readSDMX(url_meta)
 meta <- as.data.frame(meta)
 
-DownloadDate <- format(Sys.time(), format="%Y_%m_%d")
-write.csv(meta, paste("./data/meta_", 
-                      DownloadDate,
-                      ".csv",
-                      sep = ))
+write.csv(meta, "./data/meta.csv")
+write.xlsx(meta, file = "./data/meta.xlsx")
 ```
 
 
 ## LSD
 * išsirinkus kokio kintamojo reikia
 
-```{r,eval=FALSE}
+```{r, eval=FALSE}
 # S3R838 - Deaths by cause of death
 # Age (5 year groups) | Causes of death (27) | Sex (2000 - 2016)
 S3R838_M3010608<- readSDMX(providerId = "LSD", 
@@ -326,12 +321,13 @@ S3R838_M3010608 <- as.data.frame(S3R838_M3010608 ,
 ```
 
 ## RSDMX
-* padeda imporuoti ir duomenis iš OECD
-* žr. Github 
+* padeda imporuoti ir duomenis iš OECD, Eurostat ir kitų šaltinių, kuriuose duomenys pateikiami XML formatu
+* žr. [https://github.com/opensdmx/rsdmx](https://github.com/opensdmx/rsdmx)
 
 ## Eurostat
 * `eurostat` paketas
 * google "eurostat cheatsheet"
+* einam į Eurostat database išsirinkt duomenų...
 
 ```{r, eval=FALSE}
 #install.packages("eurostat")
@@ -339,50 +335,67 @@ library(eurostat)
 nama_10_gdp <- get_eurostat("nama_10_gdp", stringsAsFactors = FALSE)
 ```
 
+# Duomenų inspektavimas
+## Inspection
+```{r, collapse=TRUE, eval=TRUE}
+head(df,2)
+tail(df,2)
+```
 
 ## Inspection
-```{r, eval=FALSE}
-head(df)
-tail(df)
+```{r, collapse=TRUE, eval=TRUE}
 str(df)
+```
+
+## Inspection
+```{r, collapse=TRUE, eval=TRUE}
 summary(df)
-quantile(df$Apdraustųjų.skaičius)
-quantile(df$Apdraustųjų.skaičius, probs = seq(0,1,0.1))
-table(df$Mėnesio.pajamos)
-table(df$Metai, df$Mėnuo)
-sum(is.na(df$Apdraustųjų.skaičius))
-table(df$Mėnesio.pajamos=="virš 5001 \u0080")
+```
+
+## Inspection
+```{r, collapse=TRUE, eval=TRUE}
+quantile(df$Mėnesio.pajamos)
+quantile(df$Mėnesio.pajamos, probs = seq(0,1,0.1))
+table(df$Lytis)
+
+sum(is.na(df$Mėnesio.pajamos))
+```
+
+
+## Inspection
+```{r, collapse=TRUE, eval=FALSE}
+table(df$Lytis, df$Amžius)
+```
+
+
+## Subsetting
+* užsiloadinam dataframe "mtcars"
+```{r, eval=FALSE}
+df <- mtcars
+df[c(1:3),]
+df[c(1:3),c("mpg", "cyl", "hp")]
 ```
 
 ## Subsetting
-
-```{r, eval=FALSE}
-df[c(1:5),]
-df[c(1:5),c("Amžius", "Apdraustųjų.skaičius")]
-df[(df$Metai==2019 & 
-            df$Mėnuo=="Sausis"& 
-            df$Amžius=="Visos amžiaus grupės"&
-            df$Lytis=="Visi apdraustieji"), ]
-
-
-df[(df$Metai>=2010 & 
-            df$Mėnuo=="Sausis"&
-            (df$Mėnesio.pajamos=="iki 400 \u0080 (MMA)" | 
-                     df$Mėnesio.pajamos=="iki 555 \u0080 (MMA)") &
-            df$Amžius=="Visos amžiaus grupės"&
-            df$Lytis=="Visi apdraustieji"), ]
+* užsiloadinam dataframe "mtcars"
+```{r, eval=TRUE}
+df <- mtcars
+df[(df$mpg>=10 &
+        df$mpg<=20& df$hp>=250 | df$qsec <=16), ]
 ```
 
 
 ## Subsetting
 * `which()` grąžina skaitinį vektorių priimdamas loginį vektorių
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 a <- c(1,NA,20,NA,40)
 which(is.na(a)) #
+which(!is.na(a))
 a[which(!is.na(a))]
 
-df[which(df$Apdraustųjų.skaičius>300),]
+which(df$mpg<=14)
+df[which(df$mpg<=14),1:3]
 ```
 
 ## Sorting
@@ -391,87 +404,104 @@ df[which(df$Apdraustųjų.skaičius>300),]
 * tačiau veikia tik su vienu kintamuoju
 * 2+ kintamųjų -> `order()`
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 a <- c(1,NA,20,NA,40)
 sort(a)
 sort(a, decreasing = TRUE)
 sort(a, decreasing = TRUE, na.last = TRUE)
-df[order(df$Metai, df$Mėnuo),]
+head(df[order(df$mpg,df$hp),],3)
 ```
 
 
 ## Naujų stulpelių sukūrimas
-* `ifelse(condition, value_true, value_false)`
+* `ifelse(condition, value_true, value_false)` 
+* priima vektorius! `if(){}else{}` vertina tik pirmą elementą
 
-```{r, eval=FALSE}
-df2 <- df[(df$Metai==2018 & 
-                   df$Mėnesio.pajamos=="401-450 \u0080"&
-                   df$Amžius=="Visos amžiaus grupės"&
-                   df$Lytis=="Visi apdraustieji"), ]
+```{r, eval=TRUE}
+mean(df$mpg)
+df$loginis <- ifelse(df$mpg>=mean(df$mpg),"daugiau","mažiau")
+head(df,3)
 
-mean(df2$Apdraustųjų.skaičius)
-
-df2$log <- 
-ifelse(df2$Apdraustųjų.skaičius>=mean(df2$Apdraustųjų.skaičius), 1,0)
-# alternatyva
-df2 <- 
-cbind(df2, 
-new=ifelse(df2$Apdraustųjų.skaičius>=mean(df2$Apdraustųjų.skaičius),1,0))
+# alternatyva su cbind
+# df <- cbind(df, loginis=ifelse(...)
 ```
 
 
 
 ## Cross tabs
+* Nusiskaitom kitą `df` ir `df2` priskiriame "susiaurintą" df versiją
+* Linuxe  ir MAC 
+```{r, eval=TRUE, collapse=TRUE}
+df <- read.csv("data/apdraustieji_3_1_2019_05_08.csv",
+                 header=TRUE,
+                 sep=";",
+                 stringsAsFactors = FALSE) 
 
-```{r, eval=FALSE}
 df2 <- df[(df$Metai==2018 & 
-                   df$Mėnesio.pajamos=="401-450 \u0080"&
+                   df$Mėnesio.pajamos=="401-450 €"&
                    df$Amžius=="Visos amžiaus grupės"&
                    df$Lytis!="Visi apdraustieji"), ]
+```
 
+## Cross tabs
+* Create a contingency table (optionally a sparse matrix) from cross-classifying factors, usually contained in a data frame, using a formula interface.
+```{r, eval=F}
+table <- xtabs(data=df2,
+               Apdraustųjų.skaičius ~ Lytis + Mėnuo,  
+               drop.unused.levels = TRUE)
+table
+```
+
+
+## Cross tabs
+* Create a contingency table (optionally a sparse matrix) from cross-classifying factors, usually contained in a data frame, using a formula interface.
+```{r, eval=F}
 table <- xtabs(data=df2,
                Apdraustųjų.skaičius ~ Lytis + Mėnuo,  
                drop.unused.levels = TRUE)
 barplot(table)
 ```
 
+
 ## Cross tabs
 
-```{r, eval=FALSE}
+```{r, eval=F}
 men <- c(Sausis=1,Vasaris=2,Kovas=3,
          Balandis=4,Gegužė=5,Birželis=6,
          Liepa=7,Rugpjūtis=8,Rugsėjis=9,
          Spalis=10,Lapkritis=11,Gruodis=12)
 df2$men <- men[df2$Mėnuo]
-# kur problema?
-df2$men <- men[as.character(df2$Mėnuo)]
-plot(df2$men, df2$Apdraustųjų.skaičius, 
-     ylim=c(0,105),
-     type="l", 
-     col="blue")
-plot(df2$men, df2$Apdraustųjų.skaičius-mean(df2$Apdraustųjų.skaičius),
-     type="l", 
-     col="blue")
+table <- xtabs(data=df2,
+               Apdraustųjų.skaičius ~ Lytis + men,  
+               drop.unused.levels = TRUE)
+```
+
+## Cross tabs
+```{r, eval=F}
+barplot(table)
 ```
 
 ## Cut
 * `cut()` - cut divides the range of x into intervals and codes the values in x according to which interval they fall.
 * `cut()` - sukuria faktorius
 
-```{r, eval=FALSE}
-cut(df$Apdraustųjų.skaičius, breaks=4)
-table(cut(df$Apdraustųjų.skaičius, breaks=quantile(df$Apdraustųjų.skaičius)))
+```{r, eval=F}
+# cut(GYV_PAJ$Mėnesio.pajamos)
+table(cut(GYV_PAJ$Mėnesio.pajamos, breaks=quantile(GYV_PAJ$Mėnesio.pajamos)))
 
+#install.packages("Hmisc")
 library(Hmisc)
-table(cut2(df$Apdraustųjų.skaičius, g=4))
+table(cut2(GYV_PAJ$Mėnesio.pajamos, g=4))
 ```
 
 ## Cut
 * `cut2()` iš `Hmisc`
-```{r, eval=FALSE}
+* sukuriame naują stulelį su kvantiliodydžio
+* bei kitą stulpelį su kvantilio numer išnauydojant `as.numeric`
+```{r, eval=F}
 library(Hmisc)
-df2$fact <-cut2(df2$Apdraustųjų.skaičius, g=4)
-df2$fact_num <-as.numeric(cut2(df2$Apdraustųjų.skaičius, g=4))
+GYV_PAJ$fact <-cut2(GYV_PAJ$Mėnesio.pajamos, g=4)
+GYV_PAJ$fact_num <-as.numeric(cut2(GYV_PAJ$Mėnesio.pajamos,, g=4))
 ```
 
 ## Kitos bazinės funkcijos
@@ -484,21 +514,19 @@ df2$fact_num <-as.numeric(cut2(df2$Apdraustųjų.skaičius, g=4))
 * `log(x)`, `log2(x)`, `log10(x)`
 * `exp(x)` e^x
 
-## reshape2
+
+## reshape2 - melt
 
 ```{r, eval=TRUE}
 library(reshape2)
-#View(mtcars)
-head(mtcars,4)
+
+mtcars$car_name <- rownames(mtcars)
+mtcars_melt <- melt(mtcars, id=c("car_name", "gear", "cyl"), measure.vars = c("mpg", "hp"))
 ```
 
 ## reshape2 - melt
-* `measure.vars =` sukuria factor
+
 ```{r, eval=TRUE}
-mtcars$car_name <- rownames(mtcars)
-
-mtcars_melt <- melt(mtcars, id=c("car_name", "gear", "cyl"), measure.vars = c("mpg", "hp"))
-
 head(mtcars_melt,3)
 tail(mtcars_melt,3)
 ```
@@ -532,7 +560,8 @@ tapply(mtcars_melt$value, mtcars_melt$variable, mean)
 set.seed(101)
 a <- data.frame(id=sample(1:10), name=sample(letters[1:10],10), val1=sample(3,10,replace = T))
 b <- data.frame(id=sample(1:10), name=sample(letters[1:10],10), val2=sample(3,10,replace = T))
-a;b
+a
+b
 ```
 
 ## merge
@@ -566,17 +595,10 @@ merge(a,b,by.x="id", by.y = "id")
 * summarize
 * pipe `%>%`
 
-## dplyr
-
-```{r, eval=FALSE}
-library(dplyr)
-dim(nama_10_gdp)
-str(nama_10_gdp)
-names(nama_10_gdp)
-```
-
 ## select
 ```{r, eval=FALSE}
+library(dplyr)
+
 head(nama_10_gdp)
 head(select(nama_10_gdp, 1:3))
 head(select(nama_10_gdp, unit, geo, values))
@@ -599,8 +621,8 @@ plot(df$values, type="l")
 df <- arrange(df, time)
 plot(df$values, type="l")
 
-df <- arrange(df, desc(time))
-plot(df$values, type="l")
+#df <- arrange(df, desc(time))
+#plot(df$values, type="l")
 ```
 
 ## rename
