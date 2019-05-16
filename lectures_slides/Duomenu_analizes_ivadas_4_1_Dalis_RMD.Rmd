@@ -28,7 +28,7 @@ library(dplyr)
 ## Analitinių grafikų principai
 
 1. Parodykite skirtumus
-    * Hypotzių įrodymai visada yra relatyvus alternatyviai hipotezei
+    * Hipotezių įrodymai visada yra reliatyvūs (alternatyviai hipotezei)
     * Ar grafikas atsako į klausimą: "Palyginus su kuo?"
 ```{r, fig.height=4}
 df <- data.frame(Control=rnorm(100,1), Experiment =rnorm(100,0))
