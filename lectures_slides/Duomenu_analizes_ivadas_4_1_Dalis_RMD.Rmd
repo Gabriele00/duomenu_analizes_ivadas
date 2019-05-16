@@ -1,0 +1,526 @@
+---
+title: "Duomenų analizės įvadas"
+subtitle: '4.1. dalis'
+author: "Justas Mundeikis"
+institute: "VU EVAF"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+output:
+ beamer_presentation:
+  includes:
+   in_header: header.txt
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, warning=FALSE)
+library(ggplot2)
+library(Hmisc)
+library(eurostat)
+library(dplyr)
+```
+
+## Turinys
+\tableofcontents
+
+# Analitinių grafikų principai
+
+## Analitinių grafikų principai
+
+1. Parodykite skirtumus
+    * Hypotzių įrodymai visada yra relatyvus alternatyviai hipotezei
+    * Ar grafikas atsako į klausimą: "Palyginus su kuo?"
+```{r, fig.height=4}
+df <- data.frame(Control=rnorm(100,1), Experiment =rnorm(100,0))
+boxplot(df)
+abline(h=0, col="red")
+```
+
+## Analitinių grafikų principai
+
+2. Parodykite priežastinius-pasekminius ryšius
+    * Nebūtinai tikras priežastinis ryšis, bet kaip Jūs / teorija mano
+
+```{r, fig.height=4}
+df <- data.frame(Control=rnorm(100,1), Experiment =rnorm(100,0), Control=rnorm(100,2), Experiment =rnorm(100,4))
+boxplot(df)
+abline(h=0, col="red")
+abline(h=2, col="green")
+```
+
+## Analitinių grafikų principai
+
+3. Parodykite *multivariate data*
+    * *multivariate* = daugiau nei 2 kintamieji
+    
+```{r, fig.height=5}
+with(airquality, plot(Ozone, Solar.R))
+with(airquality, abline(lm(Solar.R~Ozone)))
+```
+
+## Analitinių grafikų principai
+
+4. Integruokite skirtingus įrodymus
+    * dažnai grafikai yra iškalbingesni
+    * tačiau kartais lentelės gali būti naudingesnės
+    * grafikų, lentelių derinys
+    
+5. Tvarkingai aprašykite
+    * Pavadinimai, ašys
+    * Šaltiniai, geriausia nurodyti lentelės ID (pvz., Eurostat (nama_10_q))
+6. *Content is king*
+    * Jeigu neturite įdomios "istorijos", joks grafikas Jūsų neišgelbės
+
+Šaltinis [Edward Tufte (2006), Beutiful Evidence](https://www.edwardtufte.com/)
+
+## Kam naudojami grafikai
+
+* Suprasti duomenų savybes
+* Atrasti dėsningumus
+* Identifikuoti sąsajas, kurios kurtų prielaidas modeliavimui
+* Komunikuoti gautus rezultatus
+
+ ## EDA grafikai
+ 
+ * EDA - *exploratory data analysis*
+ * greitai ir paprastai sugeneruoti grafikai
+ * daug grafikų
+ * padeda analitikui suprasti sąsajas
+ * grožis kuriamas su `ggplot2` (vėliau)
+ 
+## Summary
+```{r, fig.height=5}
+summary(ChickWeight)
+```
+
+
+## Boxplot
+```{r, fig.height=5}
+with(subset(ChickWeight, Time==21), boxplot(weight~Diet))
+```
+
+
+## Histrogram
+* `rug` plottina pavienius elementus
+* stulpelių skaičius savo nuožiūrą
+```{r, fig.height=5}
+with(subset(ChickWeight, Time==21), hist(weight))
+with(subset(ChickWeight, Time==21), rug(weight))
+```
+
+## Histrogram
+* `abline` brėžia tieses
+* `v=..`
+* `h=..`
+```{r, fig.height=5}
+with(subset(ChickWeight, Time==21), hist(weight))
+abline(v=median(ChickWeight$weight[ChickWeight$Time==21]), col=2)
+```
+
+## Barplot
+```{r, fig.height=5}
+table(ChickWeight$Diet)
+barplot(table(ChickWeight$Diet))
+```
+
+## Scatterplot
+
+```{r, fig.height=5}
+plot(ChickWeight)
+```
+
+## Scatterplot
+
+```{r, fig.height=5}
+with(ChickWeight, plot(Time, weight))
+abline(with(ChickWeight, lm(weight~Time)), col=4)
+```
+
+## Scatterplot
+```{r, fig.height=5}
+par(mfrow=c(2,2))
+with(subset(ChickWeight, Diet==1), plot(Time, weight, main="Diet 1"))
+with(subset(ChickWeight, Diet==2), plot(Time, weight, main="Diet 2"))
+with(subset(ChickWeight, Diet==3), plot(Time, weight, main="Diet 3"))
+with(subset(ChickWeight, Diet==4), plot(Time, weight, main="Diet 4"))
+```
+
+## Base Graphics parametrai
+* pch - the plotting symbol
+* lty - the line type
+* lwd -  thje line width
+* col - color
+* xlab - charackter string x-axis label
+* ylab - charackter string y-axis label
+* main - charackter string main label
+
+## `par`
+* par - gloablūs parametrai
+* bg - the background color
+* mar - the margin size
+* oma - the outer margin size
+* mfrow - number of plots per row, column (filled row-wise)
+* mfcol - number of plots per row, column (filled col-wise)
+* pasitikrinti galima :
+```{r}
+par("bg")
+par("mar")
+```
+
+## Base plotting funkcijos
+* plot sukuria pagrinį grafika
+* lines - prideda linijas (vektorius)
+* points - prideda taškus
+* text - prideda tekstą
+* title - prideda anotacijas
+* axis - prideda ašių *ticks* ir *labels*
+
+## Scatterplot
+```{r, fig.height=4.5}
+with(ChickWeight, plot(Time, weight))
+with(subset(ChickWeight, Diet==3), points(Time, weight, col="red"))
+legend("topleft", pch=1, col=c("black", "red"), legend=c("ALL", "Diet 3"))
+```
+
+## Scatterplot
+* `type="n"` nepiešia nieko, tik sukuria bazę
+```{r, fig.height=4.5}
+with(ChickWeight, plot(Time, weight), type="n")
+with(subset(ChickWeight, Diet==1), points(Time, weight, main="Diet 1", col=5))
+with(subset(ChickWeight, Diet==2), points(Time, weight, main="Diet 2", col=2))
+with(subset(ChickWeight, Diet==3), points(Time, weight, main="Diet 3", col=3))
+with(subset(ChickWeight, Diet==4), points(Time, weight, main="Diet 4", col=4))
+legend("topleft", pch=1, col=c(5,2,3,4), legend=c("D1", "D2", "D3", "D4"))
+```
+
+## Tiesinė regresija
+```{r, fig.height=4.5}
+model <- lm(weight~Time, ChickWeight)
+with(ChickWeight, plot(Time, weight), type="n")
+abline(model, lwd=3, col=2)
+```
+
+## `mar` ir `oma`
+```{r, fig.height=4.5}
+par("mar")
+par("oma")
+```
+
+## `outer` ir `mtext`
+```{r, fig.height=3}
+par(mfrow=c(1,3),par=c(1,1,1,1),oma=c(0,0,2,0),bg="grey")
+with(airquality, {
+    plot(Wind, Ozone, main="Wind and Ozone", pch=1)
+    plot(Solar.R, Ozone, main="Solar.R and Ozone", pch=2)
+    plot(Temp, Ozone, main="Temp and Ozone", pch=3)
+    mtext("Weather in NY", outer = TRUE)
+})
+```
+
+## example(points)
+* išbandykite: example(points)
+
+## Graphics devices
+* ? Devices
+* Ekrane (windows(). quartz(), x11())
+* Vektoriniai formatai
+    * pdf
+    * svg
+    * ...
+* Bitmap formatai
+    * png
+    * jpeg
+    * tiff
+    * bmp
+* dev.copy()
+
+## Graphics devices
+```{r, eval=FALSE}
+pdf(file="plot.pdf") # įjungiamas device
+plot(airquality$Ozone) # kas siunčiama
+dev.off() # išjungiamas device
+```
+
+## Graphics devices
+```{r, eval=FALSE}
+plot(airquality$Ozone)
+dev.copy(png, file="plot.png")
+dev.off() # išjungiamas device
+```
+
+# ggplot2
+
+## ggplot2
+* gg - Grammer of Graphics (Leland Wilkinson)
+* parašyta Hadley Wickham (taip kur ir dplyr...)
+* `install.packages(ggplot2)`
+* [cheatsheet ggplot2](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+
+## ggplot2
+* gg - Grammer of Graphics (Leland Wilkinson)
+* parašyta Hadley Wickham (taip kur ir dplyr...)
+* duomenys turi būti `dataframe` objekte, geriausia `long` formatu
+* `install.packages(ggplot2)`
+* [cheatsheet ggplot2](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+
+## ggplot2
+* A data frame
+* aesthetic mappings - spalva, dydis
+* geoms - objektai (taškai, linijos...)
+* facets - kondicionalus plotai
+* stats - statistinės transormacijos
+* scales - kokias skales naudojamos
+* coordinate system 
+
+## ggplot2
+
+```{r, fig.height=4}
+# library(ggplot2)
+ggplot(mpg, aes(hwy, cty)) +  
+    geom_point(aes(color = cyl)) +  
+    geom_smooth(method ="lm") +  
+    coord_cartesian() +  
+    scale_color_gradient() +  
+    theme_bw()
+
+```
+
+## ggplot2
+
+```{r, fig.height=4}
+ggplot(mpg)+
+    geom_point(aes(displ, cty))
+```
+
+## ggplot2
+
+```{r, fig.height=4}
+ggplot(mpg)+
+    geom_point(aes(displ, cty, color=drv))
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg)+
+    geom_point(aes(displ, cty, color=drv))
+```
+
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(displ, cty))+
+    geom_point(aes(color=drv))
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(displ, cty))+
+    geom_point(aes(color=drv))+
+    geom_smooth()
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(displ, cty))+
+    geom_point(aes(color=drv))+
+    geom_smooth(aes(color=drv))
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(cty))+
+    geom_histogram()
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(cty))+
+    geom_histogram(aes(fill=drv))
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(displ, cty))+
+    geom_point()+
+    facet_grid(~ drv)
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(cty))+
+    geom_density()
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(cty))+
+    geom_density(aes(col=drv))
+```
+
+## ggplot2
+```{r, fig.height=4}
+ggplot(mpg, aes(cty))+
+    geom_density(aes(col=drv))
+```
+
+## Outlayeriai
+
+```{r}
+df<- data.frame(x=1:100, y=rnorm(100))
+df[50,2] <-100
+```
+
+## Outlayeriai
+```{r, fig.height=4}
+with(df, plot(x,y, type="l"))
+```
+
+## Outlayeriai
+```{r, fig.height=4}
+with(df, plot(x,y, type="l", ylim=c(-4,4)))
+```
+
+## Outlayeriai
+```{r, fig.height=4}
+ggplot(df, aes(x=x,y=y))+
+    geom_line()
+```
+
+## Outlayeriai
+```{r, fig.height=4}
+ggplot(df, aes(x=x,y=y))+
+    geom_line()+
+    scale_y_continuous(limits=c(-4,4))
+```
+
+## Outlayeriai
+```{r, fig.height=4}
+ggplot(df, aes(x=x,y=y))+
+    geom_line()+
+    coord_cartesian(ylim=c(-4,4))
+```
+
+## `labs()`
+```{r, fig.height=4}
+df<- data.frame(x=1:100, y=rnorm(100))
+ggplot(df, aes(x=x,y=y))+theme_bw()+
+    geom_line()+ geom_smooth(se=FALSE, method = "loess")+
+    coord_cartesian(ylim=c(-4,4))+
+    labs(x="Laikotapris", y="Įvertis", title= "Vidutinė grąža",
+         subtitle = "Šaltinis Eurostat (nama_10_q)")
+```
+
+## 1 Hands on... 
+* parašykite skirptą, kuris, importuoja duomenis iš Eurostat
+* apdoroja duomenis su dplyr
+* nubraižo grafiką geom_line()
+* Duomenys:
+    * namq_10_gdp
+    * Lietuvos, Latvijos ir Estijos duomenys
+    * Gross domestic product at market prices 
+    * Seasonally and calendar adjusted data 
+    * nuo 2004 m.
+    * Chain linked volumes, index 2010=100 
+
+## 1 Hands on... 
+
+```{r, fig.height=4, echo=FALSE,message=FALSE, warning=FALSE}
+namq_10_gdp <- get_eurostat("namq_10_gdp", stringsAsFactors = FALSE)
+df <- namq_10_gdp %>% filter(
+    geo %in% c("EE", "LV", "LT"),
+    na_item=="B1GQ",
+    s_adj=="SCA",
+    time>="2004-01-01",
+    unit=="CLV_I10"
+)
+
+ggplot(df, aes(x=time, y=values))+
+    geom_line(aes(col=geo))+
+    scale_x_date(breaks = seq(min(df$time), max(df$time), by= "12 months"), date_labels = "%Y")+
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))+
+    labs(title=paste("Real GDP in Lithuania, Latvia and Estonia, index 2010=100"), 
+             subtitle="Source: Eurostat (namq_10_gdp). Calculations: Lithuanian-Economy.net", 
+             x="Time", 
+             y="Index")
+
+
+```
+
+
+## 2 Hands on... 
+* parašykite skirptą, kuris, importuoja duomenis iš Eurostat
+* apdoroja duomenis su dplyr
+* nubraižo grafiką geom_bar()
+* Duomenys:
+    * gov_10a_exp
+    * visos ES šalys! (28)
+    * Total expenditure
+    * General government
+    * 2017m
+    * procentais nuo BVP
+
+## 2 Hands on... 
+```{r, fig.height=4, echo=FALSE,message=FALSE, warning=FALSE}
+gov_10a_exp <- get_eurostat("gov_10a_exp", stringsAsFactors = FALSE)
+df <- gov_10a_exp %>% filter(cofog99=="GF02",
+                             na_item=="TE",
+                             sector=="S13",
+                             geo %in% c("EU", "BE","BG","CZ","DK","DE","EE","IE","EL","ES","FR","HR","IT","CY","LV","LT","LU","HU","MT","NL","AT","PL","PT","RO","SI","SK","FI","SE","UK"),
+                             unit=="PC_GDP",
+                             time=="2017-01-01")
+
+ggplot(data=df, aes(x=reorder(geo, values), y=values))+
+    geom_bar(stat = "identity", 
+             position = "dodge", 
+             show.legend = FALSE,
+             fill="steelblue")+
+    geom_text(aes(label=values), vjust=-0.5, size=3.5)+
+    labs(title=paste("Total general government expenditure on defence, 2016 (% of GDP)"), 
+         subtitle="Source: Eurostat (gov_10a_exp). Calculations: Lithuanian-Economy.net", 
+         x="Countries", 
+         y="As % of GDP")
+
+```  
+
+## 3 Hands on
+KNITR
+
+## 3 Hands on
+* sukurkite 2 funkcijas bruto_neto
+* 2019 ir 2020 metais
+* apskaičiuokite jose ITR (visi mokesčiai / darbo vietos kaina)
+* nudownloadinkite Sodros draudžiamų pajamų duomenis
+* nubraižykite ITR_2019 ir ITR_2020
+
+## 3 Hands on
+Pagalba:
+* `min()` ir `max()` nepriima vektorių, juos reiktų pakeisti, žr ?min
+* funkcijos pabaigoje sukurkite list objektą, kuriam priskirkite norimus rodiklius
+* GPM įstyatymas
+    * https://e-seimas.lrs.lt/portal/legalActEditions/lt/TAD/TAIS.171369
+* 2019 prog VDU
+    * http://finmin.lrv.lt/lt/aktualus-valstybes-finansu-duomenys/ekonomines-raidos-scenariju
+
+## 3 Hands on
+```{r, eval=FALSE}
+bruto_neto <- function(x) {
+        GPM_1 <- 0.20
+        GPM_2 <- 0.27
+        PSD <- 0.0698
+        SODRA <- 0.1252
+        MMA <- 555
+        VDU <- 1283.2
+        lubos <- 10*VDU
+        NPD <- 300
+        NPD_coef <- 0.15
+        bruto <- x
+        npd <- max(NPD - NPD_coef* max(0,(bruto - MMA)),0)
+        mok_baz <- max(0,(bruto-npd))
+        gpm <- ifelse(bruto<=lubos, mok_baz*GPM_1, lubos *GPM_1+(bruto-lubos)*GPM_2) 
+        sodra <- min(bruto*SODRA, lubos * SODRA)
+        psd <- bruto*PSD
+        neto <- bruto - gpm - sodra - psd
+        neto
+}
+```
+
