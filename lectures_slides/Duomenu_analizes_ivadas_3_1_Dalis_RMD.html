@@ -207,7 +207,7 @@ $(document).ready(function () {
 <td>stitute: “VU EVAF”</td>
 </tr>
 <tr class="odd">
-<td>te: “2019-05-08”</td>
+<td>te: “2019-05-09”</td>
 </tr>
 <tr class="even">
 <td>tput:</td>
@@ -298,7 +298,7 @@ $(document).ready(function () {
 <div id="kas-buna-kai" class="section level2">
 <h2>Kas būna kai…</h2>
 <p>Does high public debt consistently stifle economic growth? A critique of Reinhart and Rogoff</p>
-<p>We replicate Reinhart and Rogoff (2010A and 2010B) and find that selective exclusion of available data, coding errors and inappropriate weighting of summary statistics lead to serious miscalculations that inaccurately represent the relationship between public debt and GDP growth among 20 advanced economies. Over 1946–2009, countries with public debt/GDP ratios above 90% averaged 2.2% real annual GDP growth, not −0.1% as published…</p>
+<p>We replicate Reinhart and Rogoff (2010A and 2010B) and find that selective exclusion of available data, coding errors and inappropriate weighting of summary statistics lead to serious miscalculations that inaccurately represent the relationship between public debt and GDP growth among 20 advanced economies. Over 1946-2009, countries with public debt/GDP ratios above 90% averaged 2.2% real annual GDP growth, not -0.1% as published</p>
 <p><a href="https://umassmed.edu/globalassets/quantitative-health-sciences/files/camb.-j.-econ.-2013-herndon-cje-bet075.pdf">Does high public debt consistently stifle economic growth? A critique of Reinhart and Rogoff</a></p>
 </div>
 <div id="darbine-direktorija" class="section level2">
@@ -430,6 +430,7 @@ axis(side=1, at=seq(0,maximum, 100), labels=seq(0,maximum,100))
 </ul>
 <pre class="r"><code>#install.packages(&quot;readr&quot;)
 library(readr)
+## Warning: package 'readr' was built under R version 3.5.3
 guess_encoding(&quot;./data/apdraustuju_pajamu_analize.csv&quot;, n_max = 1000)
 ## # A tibble: 3 x 2
 ##   encoding   confidence
@@ -501,7 +502,8 @@ write.xlsx(l, file = &quot;./data/datasets.xlsx&quot;)</code></pre>
 <li><a href="https://osp.stat.gov.lt/rdb-rest">“RESTful žiniatinklio paslaugos”</a> *<code>rsdmx</code> paketas sutvarko LSD failus</li>
 </ul>
 <pre class="r"><code>#install.packages(&quot;rsdmx&quot;)
-library(rsdmx)</code></pre>
+library(rsdmx)
+## Warning: package 'rsdmx' was built under R version 3.5.3</code></pre>
 </div>
 <div id="lsd-1" class="section level2">
 <h2>LSD</h2>
@@ -526,11 +528,6 @@ S3R838_M3010608&lt;- readSDMX(providerId = &quot;LSD&quot;,
                            resource = &quot;data&quot;, 
                            flowRef = &quot;S3R838_M3010608&quot;, 
                            dsd = TRUE)
-## -&gt; Fetching 'https://osp-rs.stat.gov.lt/rest_xml/data/S3R838_M3010608/all/'
-## -&gt; DSD ref identified in dataset = 'M3010608'
-## -&gt; Attempt to fetch &amp; bind DSD to dataset
-## -&gt; Fetching 'https://osp-rs.stat.gov.lt/rest_xml/datastructure/all/M3010608/latest/?references=children'
-## -&gt; DSD fetched and associated to dataset!
 S3R838_M3010608 &lt;- as.data.frame(S3R838_M3010608 , 
                                  labels = TRUE)</code></pre>
 </div>
@@ -558,11 +555,11 @@ nama_10_gdp &lt;- get_eurostat(&quot;nama_10_gdp&quot;, stringsAsFactors = FALSE
 <div id="inspection" class="section level2">
 <h2>Inspection</h2>
 <pre class="r"><code>head(df,2)
-##   Metai Menuo Amžius   Lytis Menesio.pajamos
+##   Metai Mėnuo Amžius   Lytis Mėnesio.pajamos
 ## 1  2019     3     39 Moteris         4124.80
 ## 2  2019     3     55 Moteris          861.56
 tail(df,2)
-##         Metai Menuo Amžius   Lytis Menesio.pajamos
+##         Metai Mėnuo Amžius   Lytis Mėnesio.pajamos
 ## 1108113  2019     3     36   Vyras         1528.95
 ## 1108114  2019     3     65 Moteris          555.00</code></pre>
 </div>
@@ -571,22 +568,22 @@ tail(df,2)
 <pre class="r"><code>str(df)
 ## 'data.frame':    1108114 obs. of  5 variables:
 ##  $ Metai          : num  2019 2019 2019 2019 2019 ...
-##  $ Menuo          : num  3 3 3 3 3 3 3 3 3 3 ...
+##  $ Mėnuo          : num  3 3 3 3 3 3 3 3 3 3 ...
 ##  $ Amžius         : num  39 55 34 68 53 30 57 39 56 69 ...
 ##  $ Lytis          : chr  &quot;Moteris&quot; &quot;Moteris&quot; &quot;Vyras&quot; &quot;Vyras&quot; ...
-##  $ Menesio.pajamos: num  4125 862 1463 1290 561 ...</code></pre>
+##  $ Mėnesio.pajamos: num  4125 862 1463 1290 561 ...</code></pre>
 </div>
 <div id="inspection-2" class="section level2">
 <h2>Inspection</h2>
 <pre class="r"><code>summary(df)
-##      Metai          Menuo       Amžius           Lytis          
+##      Metai          Mėnuo       Amžius           Lytis          
 ##  Min.   :2019   Min.   :3   Min.   :   1.00   Length:1108114    
 ##  1st Qu.:2019   1st Qu.:3   1st Qu.:  33.00   Class :character  
 ##  Median :2019   Median :3   Median :  45.00   Mode  :character  
 ##  Mean   :2019   Mean   :3   Mean   :  44.23                     
 ##  3rd Qu.:2019   3rd Qu.:3   3rd Qu.:  55.00                     
 ##  Max.   :2019   Max.   :3   Max.   :1824.00                     
-##  Menesio.pajamos    
+##  Mėnesio.pajamos    
 ##  Min.   :     0.16  
 ##  1st Qu.:   645.13  
 ##  Median :   965.82  
@@ -790,6 +787,7 @@ GYV_PAJ$fact_num &lt;-as.numeric(cut2(GYV_PAJ$Mėnesio.pajamos,, g=4))</code></p
 <div id="reshape2---melt" class="section level2">
 <h2>reshape2 - melt</h2>
 <pre class="r"><code>library(reshape2)
+## Warning: package 'reshape2' was built under R version 3.5.3
 
 mtcars$car_name &lt;- rownames(mtcars)
 mtcars_melt &lt;- melt(mtcars, id=c(&quot;car_name&quot;, &quot;gear&quot;, &quot;cyl&quot;), measure.vars = c(&quot;mpg&quot;, &quot;hp&quot;))</code></pre>
