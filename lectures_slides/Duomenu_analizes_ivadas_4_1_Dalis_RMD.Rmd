@@ -6,8 +6,8 @@ institute: "VU EVAF"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output:
  beamer_presentation:
-  includes:
-   in_header: header.txt
+   includes:
+     in_header: header.txt
 editor_options: 
   chunk_output_type: console
 ---
